@@ -1,0 +1,51 @@
+openapi: 3.0.3
+servers:
+  -
+    url: 'https://api.example.com'
+    description: 'Production server'
+  -
+    url: 'https://api.staging.example.com'
+    description: 'Staging server'
+  -
+    url: 'https://api.dev.example.com'
+    description: 'Dev server'
+info:
+  title: Playground CMS API
+  description: ''
+  termsOfService: ''
+  # contact:
+  #   email: support@example.com
+  version: 73.0.0
+externalDocs:
+  description: ''
+  url: ''
+tags:
+  -
+    name: Page
+    description: 'Manage pages in storage.'
+  -
+    name: Snippet
+    description: 'Manage snippets in storage.'
+paths:
+  '/api/snippets/{id}':
+    $ref: paths/snippets/id.yml
+  /api/snippets:
+    $ref: paths/snippets/index.yml
+  '/api/snippets/lock/{id}':
+    $ref: paths/snippets/lock.yml
+  '/api/snippets/restore/{id}':
+    $ref: paths/snippets/restore.yml
+  '/api/pages/{id}':
+    $ref: paths/pages/id.yml
+  /api/pages:
+    $ref: paths/pages/index.yml
+  '/api/pages/lock/{id}':
+    $ref: paths/pages/lock.yml
+  '/api/pages/restore/{id}':
+    $ref: paths/pages/restore.yml
+components:
+  schemas:
+    Page:
+      $ref: models/page.yml
+    Snippet:
+      $ref: models/snippet.yml

@@ -1,0 +1,2715 @@
+{
+  "openapi": "3.0.3",
+  "servers": [
+    {
+      "url": "https://api.example.com",
+      "description": "Production server"
+    },
+    {
+      "url": "https://api.staging.example.com",
+      "description": "Staging server"
+    },
+    {
+      "url": "https://api.dev.example.com",
+      "description": "Dev server"
+    }
+  ],
+  "info": {
+    "title": "Playground CMS API",
+    "description": "",
+    "termsOfService": "",
+    "version": "73.0.0"
+  },
+  "externalDocs": {
+    "description": "",
+    "url": ""
+  },
+  "tags": [
+    {
+      "name": "Page",
+      "description": "Manage pages in storage."
+    },
+    {
+      "name": "Snippet",
+      "description": "Manage snippets in storage."
+    }
+  ],
+  "paths": {
+    "/api/snippets/{id}": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "description": "The snippet id.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "get": {
+        "tags": [
+          "Snippet"
+        ],
+        "summary": "Get a snippet by id.",
+        "operationId": "get_snippet",
+        "responses": {
+          "200": {
+            "description": "The snippet data.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Snippet"
+                    },
+                    "meta": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Snippet"
+        ],
+        "summary": "Delete a snippet by id.",
+        "operationId": "delete_snippet",
+        "responses": {
+          "204": {
+            "description": "The snippet has been deleted."
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "423": {
+            "description": "The snippet is locked. Unlock to delete."
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Snippet"
+        ],
+        "summary": "Update a snippet by id.",
+        "operationId": "patch_snippet",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "The CMS Snippet fillable properties.",
+                "type": "object",
+                "properties": {
+                  "owned_by_id": {
+                    "description": "Foreign key: links an owned by user to this snippet.",
+                    "type": "string",
+                    "format": "uuid",
+                    "nullable": true
+                  },
+                  "parent_id": {
+                    "description": "Foreign key: links a parent to this snippet.",
+                    "type": "string",
+                    "format": "uuid",
+                    "nullable": true
+                  },
+                  "snippet_type": {
+                    "description": "The snippet type of this snippet.",
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "start_at": {
+                    "description": "The start at date for this snippet.",
+                    "type": "string",
+                    "format": "date-time",
+                    "nullable": true
+                  },
+                  "planned_start_at": {
+                    "description": "The planned start at date for this snippet.",
+                    "type": "string",
+                    "format": "date-time",
+                    "nullable": true
+                  },
+                  "end_at": {
+                    "description": "The end at date for this snippet.",
+                    "type": "string",
+                    "format": "date-time",
+                    "nullable": true
+                  },
+                  "planned_end_at": {
+                    "description": "The planned end at date for this snippet.",
+                    "type": "string",
+                    "format": "date-time",
+                    "nullable": true
+                  },
+                  "canceled_at": {
+                    "description": "The canceled at date for this snippet.",
+                    "type": "string",
+                    "format": "date-time",
+                    "nullable": true
+                  },
+                  "closed_at": {
+                    "description": "The closed at date for this snippet.",
+                    "type": "string",
+                    "format": "date-time",
+                    "nullable": true
+                  },
+                  "embargo_at": {
+                    "description": "The embargo at date for this snippet.",
+                    "type": "string",
+                    "format": "date-time",
+                    "nullable": true
+                  },
+                  "fixed_at": {
+                    "description": "The fixed at date for this snippet.",
+                    "type": "string",
+                    "format": "date-time",
+                    "nullable": true
+                  },
+                  "postponed_at": {
+                    "description": "The postponed at date for this snippet.",
+                    "type": "string",
+                    "format": "date-time",
+                    "nullable": true
+                  },
+                  "published_at": {
+                    "description": "The published at date for this snippet.",
+                    "type": "string",
+                    "format": "date-time",
+                    "nullable": true
+                  },
+                  "released_at": {
+                    "description": "The released at date for this snippet.",
+                    "type": "string",
+                    "format": "date-time",
+                    "nullable": true
+                  },
+                  "resumed_at": {
+                    "description": "The resumed at date for this snippet.",
+                    "type": "string",
+                    "format": "date-time",
+                    "nullable": true
+                  },
+                  "resolved_at": {
+                    "description": "The resolved at date for this snippet.",
+                    "type": "string",
+                    "format": "date-time",
+                    "nullable": true
+                  },
+                  "suspended_at": {
+                    "description": "The suspended at date for this snippet.",
+                    "type": "string",
+                    "format": "date-time",
+                    "nullable": true
+                  },
+                  "gids": {
+                    "description": "Permissions: gids",
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "po": {
+                    "description": "Permissions: po",
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "pg": {
+                    "description": "Permissions: pg",
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "pw": {
+                    "description": "Permissions: pw",
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "only_admin": {
+                    "description": "Permissions: only admin",
+                    "type": "boolean"
+                  },
+                  "only_user": {
+                    "description": "Permissions: only user",
+                    "type": "boolean"
+                  },
+                  "only_guest": {
+                    "description": "Permissions: only guest",
+                    "type": "boolean"
+                  },
+                  "allow_public": {
+                    "description": "Permissions: allow public",
+                    "type": "boolean"
+                  },
+                  "status": {
+                    "description": "The status of the snippet.",
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "rank": {
+                    "description": "Status: rank",
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "size": {
+                    "description": "Status: size",
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "icon": {
+                    "description": "Ui: icon",
+                    "type": "string",
+                    "maxLength": 128
+                  },
+                  "image": {
+                    "description": "Ui: image",
+                    "type": "string",
+                    "maxLength": 512
+                  },
+                  "avatar": {
+                    "description": "Ui: avatar",
+                    "type": "string",
+                    "maxLength": 512
+                  },
+                  "ui": {
+                    "description": "The ui of the snippet.",
+                    "type": "object",
+                    "nullable": true
+                  },
+                  "active": {
+                    "description": "Flags: active",
+                    "type": "boolean"
+                  },
+                  "canceled": {
+                    "description": "Flags: canceled",
+                    "type": "boolean"
+                  },
+                  "closed": {
+                    "description": "Flags: closed",
+                    "type": "boolean"
+                  },
+                  "completed": {
+                    "description": "Flags: completed",
+                    "type": "boolean"
+                  },
+                  "duplicate": {
+                    "description": "Flags: duplicate",
+                    "type": "boolean"
+                  },
+                  "fixed": {
+                    "description": "Flags: fixed",
+                    "type": "boolean"
+                  },
+                  "flagged": {
+                    "description": "Flags: flagged",
+                    "type": "boolean"
+                  },
+                  "internal": {
+                    "description": "Flags: internal",
+                    "type": "boolean"
+                  },
+                  "locked": {
+                    "description": "Flags: locked",
+                    "type": "boolean"
+                  },
+                  "pending": {
+                    "description": "Flags: pending",
+                    "type": "boolean"
+                  },
+                  "planned": {
+                    "description": "Flags: planned",
+                    "type": "boolean"
+                  },
+                  "problem": {
+                    "description": "Flags: problem",
+                    "type": "boolean"
+                  },
+                  "published": {
+                    "description": "Flags: published",
+                    "type": "boolean"
+                  },
+                  "released": {
+                    "description": "Flags: released",
+                    "type": "boolean"
+                  },
+                  "retired": {
+                    "description": "Flags: retired",
+                    "type": "boolean"
+                  },
+                  "resolved": {
+                    "description": "Flags: resolved",
+                    "type": "boolean"
+                  },
+                  "suspended": {
+                    "description": "Flags: suspended",
+                    "type": "boolean"
+                  },
+                  "unknown": {
+                    "description": "Flags: unknown",
+                    "type": "boolean"
+                  },
+                  "label": {
+                    "description": "The label of the snippet.",
+                    "type": "string",
+                    "maxLength": 128
+                  },
+                  "title": {
+                    "description": "The title of the snippet.",
+                    "type": "string",
+                    "maxLength": 255
+                  },
+                  "byline": {
+                    "description": "The byline of the snippet.",
+                    "type": "string",
+                    "maxLength": 255
+                  },
+                  "slug": {
+                    "description": "The slug of the snippet.",
+                    "type": "string",
+                    "maxLength": 128,
+                    "nullable": true
+                  },
+                  "url": {
+                    "description": "The url of the snippet.",
+                    "type": "string",
+                    "maxLength": 512
+                  },
+                  "description": {
+                    "description": "The description of the snippet.",
+                    "type": "string",
+                    "maxLength": 512
+                  },
+                  "introduction": {
+                    "description": "The introduction of the snippet.",
+                    "type": "string",
+                    "maxLength": 512
+                  },
+                  "content": {
+                    "description": "The content of the snippet. Allows HTML.",
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "summary": {
+                    "description": "The summary of the snippet. Allows HTML.",
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "assets": {
+                    "description": "JSON: assets",
+                    "type": "object",
+                    "nullable": true
+                  },
+                  "meta": {
+                    "description": "JSON: meta",
+                    "type": "object",
+                    "nullable": true
+                  },
+                  "options": {
+                    "description": "JSON: options",
+                    "type": "object",
+                    "nullable": true
+                  },
+                  "sources": {
+                    "description": "JSON: sources",
+                    "type": "object",
+                    "nullable": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The updated snippet.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Snippet"
+                    },
+                    "meta": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "422": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "object",
+                      "properties": {
+                        "label": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "example": "The label field is required."
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/snippets": {
+      "get": {
+        "tags": [
+          "Snippet"
+        ],
+        "summary": "Get snippets from the index.",
+        "operationId": "get_snippets_index",
+        "responses": {
+          "200": {
+            "description": "Get the snippets from the index.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Snippet"
+                      }
+                    },
+                    "meta": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Snippet"
+        ],
+        "summary": "Create a snippet.",
+        "operationId": "post_snippet",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "The CMS Snippet fillable properties.",
+                "type": "object",
+                "properties": {
+                  "owned_by_id": {
+                    "description": "Foreign key: links an owned by user to this snippet.",
+                    "type": "string",
+                    "format": "uuid",
+                    "nullable": true
+                  },
+                  "parent_id": {
+                    "description": "Foreign key: links a parent to this snippet.",
+                    "type": "string",
+                    "format": "uuid",
+                    "nullable": true
+                  },
+                  "snippet_type": {
+                    "description": "The snippet type of this snippet.",
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "start_at": {
+                    "description": "The start at date for this snippet.",
+                    "type": "string",
+                    "format": "date-time",
+                    "nullable": true
+                  },
+                  "planned_start_at": {
+                    "description": "The planned start at date for this snippet.",
+                    "type": "string",
+                    "format": "date-time",
+                    "nullable": true
+                  },
+                  "end_at": {
+                    "description": "The end at date for this snippet.",
+                    "type": "string",
+                    "format": "date-time",
+                    "nullable": true
+                  },
+                  "planned_end_at": {
+                    "description": "The planned end at date for this snippet.",
+                    "type": "string",
+                    "format": "date-time",
+                    "nullable": true
+                  },
+                  "canceled_at": {
+                    "description": "The canceled at date for this snippet.",
+                    "type": "string",
+                    "format": "date-time",
+                    "nullable": true
+                  },
+                  "closed_at": {
+                    "description": "The closed at date for this snippet.",
+                    "type": "string",
+                    "format": "date-time",
+                    "nullable": true
+                  },
+                  "embargo_at": {
+                    "description": "The embargo at date for this snippet.",
+                    "type": "string",
+                    "format": "date-time",
+                    "nullable": true
+                  },
+                  "fixed_at": {
+                    "description": "The fixed at date for this snippet.",
+                    "type": "string",
+                    "format": "date-time",
+                    "nullable": true
+                  },
+                  "postponed_at": {
+                    "description": "The postponed at date for this snippet.",
+                    "type": "string",
+                    "format": "date-time",
+                    "nullable": true
+                  },
+                  "published_at": {
+                    "description": "The published at date for this snippet.",
+                    "type": "string",
+                    "format": "date-time",
+                    "nullable": true
+                  },
+                  "released_at": {
+                    "description": "The released at date for this snippet.",
+                    "type": "string",
+                    "format": "date-time",
+                    "nullable": true
+                  },
+                  "resumed_at": {
+                    "description": "The resumed at date for this snippet.",
+                    "type": "string",
+                    "format": "date-time",
+                    "nullable": true
+                  },
+                  "resolved_at": {
+                    "description": "The resolved at date for this snippet.",
+                    "type": "string",
+                    "format": "date-time",
+                    "nullable": true
+                  },
+                  "suspended_at": {
+                    "description": "The suspended at date for this snippet.",
+                    "type": "string",
+                    "format": "date-time",
+                    "nullable": true
+                  },
+                  "gids": {
+                    "description": "Permissions: gids",
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "po": {
+                    "description": "Permissions: po",
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "pg": {
+                    "description": "Permissions: pg",
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "pw": {
+                    "description": "Permissions: pw",
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "only_admin": {
+                    "description": "Permissions: only admin",
+                    "type": "boolean"
+                  },
+                  "only_user": {
+                    "description": "Permissions: only user",
+                    "type": "boolean"
+                  },
+                  "only_guest": {
+                    "description": "Permissions: only guest",
+                    "type": "boolean"
+                  },
+                  "allow_public": {
+                    "description": "Permissions: allow public",
+                    "type": "boolean"
+                  },
+                  "status": {
+                    "description": "The status of the snippet.",
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "rank": {
+                    "description": "Status: rank",
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "size": {
+                    "description": "Status: size",
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "icon": {
+                    "description": "Ui: icon",
+                    "type": "string",
+                    "maxLength": 128
+                  },
+                  "image": {
+                    "description": "Ui: image",
+                    "type": "string",
+                    "maxLength": 512
+                  },
+                  "avatar": {
+                    "description": "Ui: avatar",
+                    "type": "string",
+                    "maxLength": 512
+                  },
+                  "ui": {
+                    "description": "The ui of the snippet.",
+                    "type": "object",
+                    "nullable": true
+                  },
+                  "active": {
+                    "description": "Flags: active",
+                    "type": "boolean"
+                  },
+                  "canceled": {
+                    "description": "Flags: canceled",
+                    "type": "boolean"
+                  },
+                  "closed": {
+                    "description": "Flags: closed",
+                    "type": "boolean"
+                  },
+                  "completed": {
+                    "description": "Flags: completed",
+                    "type": "boolean"
+                  },
+                  "duplicate": {
+                    "description": "Flags: duplicate",
+                    "type": "boolean"
+                  },
+                  "fixed": {
+                    "description": "Flags: fixed",
+                    "type": "boolean"
+                  },
+                  "flagged": {
+                    "description": "Flags: flagged",
+                    "type": "boolean"
+                  },
+                  "internal": {
+                    "description": "Flags: internal",
+                    "type": "boolean"
+                  },
+                  "locked": {
+                    "description": "Flags: locked",
+                    "type": "boolean"
+                  },
+                  "pending": {
+                    "description": "Flags: pending",
+                    "type": "boolean"
+                  },
+                  "planned": {
+                    "description": "Flags: planned",
+                    "type": "boolean"
+                  },
+                  "problem": {
+                    "description": "Flags: problem",
+                    "type": "boolean"
+                  },
+                  "published": {
+                    "description": "Flags: published",
+                    "type": "boolean"
+                  },
+                  "released": {
+                    "description": "Flags: released",
+                    "type": "boolean"
+                  },
+                  "retired": {
+                    "description": "Flags: retired",
+                    "type": "boolean"
+                  },
+                  "resolved": {
+                    "description": "Flags: resolved",
+                    "type": "boolean"
+                  },
+                  "suspended": {
+                    "description": "Flags: suspended",
+                    "type": "boolean"
+                  },
+                  "unknown": {
+                    "description": "Flags: unknown",
+                    "type": "boolean"
+                  },
+                  "label": {
+                    "description": "The label of the snippet.",
+                    "type": "string",
+                    "maxLength": 128
+                  },
+                  "title": {
+                    "description": "The title of the snippet.",
+                    "type": "string",
+                    "maxLength": 255
+                  },
+                  "byline": {
+                    "description": "The byline of the snippet.",
+                    "type": "string",
+                    "maxLength": 255
+                  },
+                  "slug": {
+                    "description": "The slug of the snippet.",
+                    "type": "string",
+                    "maxLength": 128,
+                    "nullable": true
+                  },
+                  "url": {
+                    "description": "The url of the snippet.",
+                    "type": "string",
+                    "maxLength": 512
+                  },
+                  "description": {
+                    "description": "The description of the snippet.",
+                    "type": "string",
+                    "maxLength": 512
+                  },
+                  "introduction": {
+                    "description": "The introduction of the snippet.",
+                    "type": "string",
+                    "maxLength": 512
+                  },
+                  "content": {
+                    "description": "The content of the snippet. Allows HTML.",
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "summary": {
+                    "description": "The summary of the snippet. Allows HTML.",
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "assets": {
+                    "description": "JSON: assets",
+                    "type": "object",
+                    "nullable": true
+                  },
+                  "meta": {
+                    "description": "JSON: meta",
+                    "type": "object",
+                    "nullable": true
+                  },
+                  "options": {
+                    "description": "JSON: options",
+                    "type": "object",
+                    "nullable": true
+                  },
+                  "sources": {
+                    "description": "JSON: sources",
+                    "type": "object",
+                    "nullable": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The created snippets.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Snippet"
+                    },
+                    "meta": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "422": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "object",
+                      "properties": {
+                        "label": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "example": "The label field is required."
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/snippets/lock/{id}": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "description": "The snippet id.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "delete": {
+        "tags": [
+          "Snippet"
+        ],
+        "summary": "Unlock a snippet by id.",
+        "operationId": "lock_snippet",
+        "responses": {
+          "204": {
+            "description": "The snippet has been unlocked."
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Snippet"
+        ],
+        "summary": "Lock a snippet by id.",
+        "operationId": "unlock_snippet",
+        "responses": {
+          "200": {
+            "description": "The unlocked snippet.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Snippet"
+                    },
+                    "meta": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/api/snippets/restore/{id}": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "description": "The snippet id.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "put": {
+        "tags": [
+          "Snippet"
+        ],
+        "summary": "Restore a snippet by id.",
+        "operationId": "restore_snippet",
+        "responses": {
+          "200": {
+            "description": "The restored snippet.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Snippet"
+                    },
+                    "meta": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/api/pages/{id}": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "description": "The page id.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "get": {
+        "tags": [
+          "Page"
+        ],
+        "summary": "Get a page by id.",
+        "operationId": "get_page",
+        "responses": {
+          "200": {
+            "description": "The page data.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Page"
+                    },
+                    "meta": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Page"
+        ],
+        "summary": "Delete a page by id.",
+        "operationId": "delete_page",
+        "responses": {
+          "204": {
+            "description": "The page has been deleted."
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "423": {
+            "description": "The page is locked. Unlock to delete."
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Page"
+        ],
+        "summary": "Update a page by id.",
+        "operationId": "patch_page",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "The CMS Page fillable properties.",
+                "type": "object",
+                "properties": {
+                  "owned_by_id": {
+                    "description": "Foreign key: links an owned by user to this page.",
+                    "type": "string",
+                    "format": "uuid",
+                    "nullable": true
+                  },
+                  "parent_id": {
+                    "description": "Foreign key: links a parent to this page.",
+                    "type": "string",
+                    "format": "uuid",
+                    "nullable": true
+                  },
+                  "page_type": {
+                    "description": "The page type of this page.",
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "start_at": {
+                    "description": "The start at date for this page.",
+                    "type": "string",
+                    "format": "date-time",
+                    "nullable": true
+                  },
+                  "planned_start_at": {
+                    "description": "The planned start at date for this page.",
+                    "type": "string",
+                    "format": "date-time",
+                    "nullable": true
+                  },
+                  "end_at": {
+                    "description": "The end at date for this page.",
+                    "type": "string",
+                    "format": "date-time",
+                    "nullable": true
+                  },
+                  "planned_end_at": {
+                    "description": "The planned end at date for this page.",
+                    "type": "string",
+                    "format": "date-time",
+                    "nullable": true
+                  },
+                  "canceled_at": {
+                    "description": "The canceled at date for this page.",
+                    "type": "string",
+                    "format": "date-time",
+                    "nullable": true
+                  },
+                  "closed_at": {
+                    "description": "The closed at date for this page.",
+                    "type": "string",
+                    "format": "date-time",
+                    "nullable": true
+                  },
+                  "embargo_at": {
+                    "description": "The embargo at date for this page.",
+                    "type": "string",
+                    "format": "date-time",
+                    "nullable": true
+                  },
+                  "fixed_at": {
+                    "description": "The fixed at date for this page.",
+                    "type": "string",
+                    "format": "date-time",
+                    "nullable": true
+                  },
+                  "postponed_at": {
+                    "description": "The postponed at date for this page.",
+                    "type": "string",
+                    "format": "date-time",
+                    "nullable": true
+                  },
+                  "published_at": {
+                    "description": "The published at date for this page.",
+                    "type": "string",
+                    "format": "date-time",
+                    "nullable": true
+                  },
+                  "released_at": {
+                    "description": "The released at date for this page.",
+                    "type": "string",
+                    "format": "date-time",
+                    "nullable": true
+                  },
+                  "resumed_at": {
+                    "description": "The resumed at date for this page.",
+                    "type": "string",
+                    "format": "date-time",
+                    "nullable": true
+                  },
+                  "resolved_at": {
+                    "description": "The resolved at date for this page.",
+                    "type": "string",
+                    "format": "date-time",
+                    "nullable": true
+                  },
+                  "suspended_at": {
+                    "description": "The suspended at date for this page.",
+                    "type": "string",
+                    "format": "date-time",
+                    "nullable": true
+                  },
+                  "gids": {
+                    "description": "Permissions: gids",
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "po": {
+                    "description": "Permissions: po",
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "pg": {
+                    "description": "Permissions: pg",
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "pw": {
+                    "description": "Permissions: pw",
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "only_admin": {
+                    "description": "Permissions: only admin",
+                    "type": "boolean"
+                  },
+                  "only_user": {
+                    "description": "Permissions: only user",
+                    "type": "boolean"
+                  },
+                  "only_guest": {
+                    "description": "Permissions: only guest",
+                    "type": "boolean"
+                  },
+                  "allow_public": {
+                    "description": "Permissions: allow public",
+                    "type": "boolean"
+                  },
+                  "status": {
+                    "description": "The status of the page.",
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "rank": {
+                    "description": "Status: rank",
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "size": {
+                    "description": "Status: size",
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "icon": {
+                    "description": "Ui: icon",
+                    "type": "string",
+                    "maxLength": 128
+                  },
+                  "image": {
+                    "description": "Ui: image",
+                    "type": "string",
+                    "maxLength": 512
+                  },
+                  "avatar": {
+                    "description": "Ui: avatar",
+                    "type": "string",
+                    "maxLength": 512
+                  },
+                  "ui": {
+                    "description": "The ui of the page.",
+                    "type": "object",
+                    "nullable": true
+                  },
+                  "active": {
+                    "description": "Flags: active",
+                    "type": "boolean"
+                  },
+                  "canceled": {
+                    "description": "Flags: canceled",
+                    "type": "boolean"
+                  },
+                  "closed": {
+                    "description": "Flags: closed",
+                    "type": "boolean"
+                  },
+                  "completed": {
+                    "description": "Flags: completed",
+                    "type": "boolean"
+                  },
+                  "duplicate": {
+                    "description": "Flags: duplicate",
+                    "type": "boolean"
+                  },
+                  "fixed": {
+                    "description": "Flags: fixed",
+                    "type": "boolean"
+                  },
+                  "flagged": {
+                    "description": "Flags: flagged",
+                    "type": "boolean"
+                  },
+                  "internal": {
+                    "description": "Flags: internal",
+                    "type": "boolean"
+                  },
+                  "locked": {
+                    "description": "Flags: locked",
+                    "type": "boolean"
+                  },
+                  "pending": {
+                    "description": "Flags: pending",
+                    "type": "boolean"
+                  },
+                  "planned": {
+                    "description": "Flags: planned",
+                    "type": "boolean"
+                  },
+                  "problem": {
+                    "description": "Flags: problem",
+                    "type": "boolean"
+                  },
+                  "published": {
+                    "description": "Flags: published",
+                    "type": "boolean"
+                  },
+                  "released": {
+                    "description": "Flags: released",
+                    "type": "boolean"
+                  },
+                  "retired": {
+                    "description": "Flags: retired",
+                    "type": "boolean"
+                  },
+                  "resolved": {
+                    "description": "Flags: resolved",
+                    "type": "boolean"
+                  },
+                  "suspended": {
+                    "description": "Flags: suspended",
+                    "type": "boolean"
+                  },
+                  "unknown": {
+                    "description": "Flags: unknown",
+                    "type": "boolean"
+                  },
+                  "label": {
+                    "description": "The label of the page.",
+                    "type": "string",
+                    "maxLength": 128
+                  },
+                  "title": {
+                    "description": "The title of the page.",
+                    "type": "string",
+                    "maxLength": 255
+                  },
+                  "byline": {
+                    "description": "The byline of the page.",
+                    "type": "string",
+                    "maxLength": 255
+                  },
+                  "slug": {
+                    "description": "The slug of the page.",
+                    "type": "string",
+                    "maxLength": 128,
+                    "nullable": true
+                  },
+                  "url": {
+                    "description": "The url of the page.",
+                    "type": "string",
+                    "maxLength": 512
+                  },
+                  "description": {
+                    "description": "The description of the page.",
+                    "type": "string",
+                    "maxLength": 512
+                  },
+                  "introduction": {
+                    "description": "The introduction of the page.",
+                    "type": "string",
+                    "maxLength": 512
+                  },
+                  "content": {
+                    "description": "The content of the page. Allows HTML.",
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "summary": {
+                    "description": "The summary of the page. Allows HTML.",
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "assets": {
+                    "description": "JSON: assets",
+                    "type": "object",
+                    "nullable": true
+                  },
+                  "meta": {
+                    "description": "JSON: meta",
+                    "type": "object",
+                    "nullable": true
+                  },
+                  "options": {
+                    "description": "JSON: options",
+                    "type": "object",
+                    "nullable": true
+                  },
+                  "sources": {
+                    "description": "JSON: sources",
+                    "type": "object",
+                    "nullable": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The updated page.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Page"
+                    },
+                    "meta": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "422": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "object",
+                      "properties": {
+                        "label": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "example": "The label field is required."
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/pages": {
+      "get": {
+        "tags": [
+          "Page"
+        ],
+        "summary": "Get pages from the index.",
+        "operationId": "get_pages_index",
+        "responses": {
+          "200": {
+            "description": "Get the pages from the index.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Page"
+                      }
+                    },
+                    "meta": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Page"
+        ],
+        "summary": "Create a page.",
+        "operationId": "post_page",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "The CMS Page fillable properties.",
+                "type": "object",
+                "properties": {
+                  "owned_by_id": {
+                    "description": "Foreign key: links an owned by user to this page.",
+                    "type": "string",
+                    "format": "uuid",
+                    "nullable": true
+                  },
+                  "parent_id": {
+                    "description": "Foreign key: links a parent to this page.",
+                    "type": "string",
+                    "format": "uuid",
+                    "nullable": true
+                  },
+                  "page_type": {
+                    "description": "The page type of this page.",
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "start_at": {
+                    "description": "The start at date for this page.",
+                    "type": "string",
+                    "format": "date-time",
+                    "nullable": true
+                  },
+                  "planned_start_at": {
+                    "description": "The planned start at date for this page.",
+                    "type": "string",
+                    "format": "date-time",
+                    "nullable": true
+                  },
+                  "end_at": {
+                    "description": "The end at date for this page.",
+                    "type": "string",
+                    "format": "date-time",
+                    "nullable": true
+                  },
+                  "planned_end_at": {
+                    "description": "The planned end at date for this page.",
+                    "type": "string",
+                    "format": "date-time",
+                    "nullable": true
+                  },
+                  "canceled_at": {
+                    "description": "The canceled at date for this page.",
+                    "type": "string",
+                    "format": "date-time",
+                    "nullable": true
+                  },
+                  "closed_at": {
+                    "description": "The closed at date for this page.",
+                    "type": "string",
+                    "format": "date-time",
+                    "nullable": true
+                  },
+                  "embargo_at": {
+                    "description": "The embargo at date for this page.",
+                    "type": "string",
+                    "format": "date-time",
+                    "nullable": true
+                  },
+                  "fixed_at": {
+                    "description": "The fixed at date for this page.",
+                    "type": "string",
+                    "format": "date-time",
+                    "nullable": true
+                  },
+                  "postponed_at": {
+                    "description": "The postponed at date for this page.",
+                    "type": "string",
+                    "format": "date-time",
+                    "nullable": true
+                  },
+                  "published_at": {
+                    "description": "The published at date for this page.",
+                    "type": "string",
+                    "format": "date-time",
+                    "nullable": true
+                  },
+                  "released_at": {
+                    "description": "The released at date for this page.",
+                    "type": "string",
+                    "format": "date-time",
+                    "nullable": true
+                  },
+                  "resumed_at": {
+                    "description": "The resumed at date for this page.",
+                    "type": "string",
+                    "format": "date-time",
+                    "nullable": true
+                  },
+                  "resolved_at": {
+                    "description": "The resolved at date for this page.",
+                    "type": "string",
+                    "format": "date-time",
+                    "nullable": true
+                  },
+                  "suspended_at": {
+                    "description": "The suspended at date for this page.",
+                    "type": "string",
+                    "format": "date-time",
+                    "nullable": true
+                  },
+                  "gids": {
+                    "description": "Permissions: gids",
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "po": {
+                    "description": "Permissions: po",
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "pg": {
+                    "description": "Permissions: pg",
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "pw": {
+                    "description": "Permissions: pw",
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "only_admin": {
+                    "description": "Permissions: only admin",
+                    "type": "boolean"
+                  },
+                  "only_user": {
+                    "description": "Permissions: only user",
+                    "type": "boolean"
+                  },
+                  "only_guest": {
+                    "description": "Permissions: only guest",
+                    "type": "boolean"
+                  },
+                  "allow_public": {
+                    "description": "Permissions: allow public",
+                    "type": "boolean"
+                  },
+                  "status": {
+                    "description": "The status of the page.",
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "rank": {
+                    "description": "Status: rank",
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "size": {
+                    "description": "Status: size",
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "icon": {
+                    "description": "Ui: icon",
+                    "type": "string",
+                    "maxLength": 128
+                  },
+                  "image": {
+                    "description": "Ui: image",
+                    "type": "string",
+                    "maxLength": 512
+                  },
+                  "avatar": {
+                    "description": "Ui: avatar",
+                    "type": "string",
+                    "maxLength": 512
+                  },
+                  "ui": {
+                    "description": "The ui of the page.",
+                    "type": "object",
+                    "nullable": true
+                  },
+                  "active": {
+                    "description": "Flags: active",
+                    "type": "boolean"
+                  },
+                  "canceled": {
+                    "description": "Flags: canceled",
+                    "type": "boolean"
+                  },
+                  "closed": {
+                    "description": "Flags: closed",
+                    "type": "boolean"
+                  },
+                  "completed": {
+                    "description": "Flags: completed",
+                    "type": "boolean"
+                  },
+                  "duplicate": {
+                    "description": "Flags: duplicate",
+                    "type": "boolean"
+                  },
+                  "fixed": {
+                    "description": "Flags: fixed",
+                    "type": "boolean"
+                  },
+                  "flagged": {
+                    "description": "Flags: flagged",
+                    "type": "boolean"
+                  },
+                  "internal": {
+                    "description": "Flags: internal",
+                    "type": "boolean"
+                  },
+                  "locked": {
+                    "description": "Flags: locked",
+                    "type": "boolean"
+                  },
+                  "pending": {
+                    "description": "Flags: pending",
+                    "type": "boolean"
+                  },
+                  "planned": {
+                    "description": "Flags: planned",
+                    "type": "boolean"
+                  },
+                  "problem": {
+                    "description": "Flags: problem",
+                    "type": "boolean"
+                  },
+                  "published": {
+                    "description": "Flags: published",
+                    "type": "boolean"
+                  },
+                  "released": {
+                    "description": "Flags: released",
+                    "type": "boolean"
+                  },
+                  "retired": {
+                    "description": "Flags: retired",
+                    "type": "boolean"
+                  },
+                  "resolved": {
+                    "description": "Flags: resolved",
+                    "type": "boolean"
+                  },
+                  "suspended": {
+                    "description": "Flags: suspended",
+                    "type": "boolean"
+                  },
+                  "unknown": {
+                    "description": "Flags: unknown",
+                    "type": "boolean"
+                  },
+                  "label": {
+                    "description": "The label of the page.",
+                    "type": "string",
+                    "maxLength": 128
+                  },
+                  "title": {
+                    "description": "The title of the page.",
+                    "type": "string",
+                    "maxLength": 255
+                  },
+                  "byline": {
+                    "description": "The byline of the page.",
+                    "type": "string",
+                    "maxLength": 255
+                  },
+                  "slug": {
+                    "description": "The slug of the page.",
+                    "type": "string",
+                    "maxLength": 128,
+                    "nullable": true
+                  },
+                  "url": {
+                    "description": "The url of the page.",
+                    "type": "string",
+                    "maxLength": 512
+                  },
+                  "description": {
+                    "description": "The description of the page.",
+                    "type": "string",
+                    "maxLength": 512
+                  },
+                  "introduction": {
+                    "description": "The introduction of the page.",
+                    "type": "string",
+                    "maxLength": 512
+                  },
+                  "content": {
+                    "description": "The content of the page. Allows HTML.",
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "summary": {
+                    "description": "The summary of the page. Allows HTML.",
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "assets": {
+                    "description": "JSON: assets",
+                    "type": "object",
+                    "nullable": true
+                  },
+                  "meta": {
+                    "description": "JSON: meta",
+                    "type": "object",
+                    "nullable": true
+                  },
+                  "options": {
+                    "description": "JSON: options",
+                    "type": "object",
+                    "nullable": true
+                  },
+                  "sources": {
+                    "description": "JSON: sources",
+                    "type": "object",
+                    "nullable": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The created pages.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Page"
+                    },
+                    "meta": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "422": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "object",
+                      "properties": {
+                        "label": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "example": "The label field is required."
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/pages/lock/{id}": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "description": "The page id.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "delete": {
+        "tags": [
+          "Page"
+        ],
+        "summary": "Unlock a page by id.",
+        "operationId": "lock_page",
+        "responses": {
+          "204": {
+            "description": "The page has been unlocked."
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Page"
+        ],
+        "summary": "Lock a page by id.",
+        "operationId": "unlock_page",
+        "responses": {
+          "200": {
+            "description": "The unlocked page.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Page"
+                    },
+                    "meta": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/api/pages/restore/{id}": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "description": "The page id.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "put": {
+        "tags": [
+          "Page"
+        ],
+        "summary": "Restore a page by id.",
+        "operationId": "restore_page",
+        "responses": {
+          "200": {
+            "description": "The restored page.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Page"
+                    },
+                    "meta": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Page": {
+        "description": "The CMS Page model.",
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "The primary key.",
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "created_by_id": {
+            "description": "Foreign key: links a created by user to this page.",
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "modified_by_id": {
+            "description": "Foreign key: links a modified by user to this page.",
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "owned_by_id": {
+            "description": "Foreign key: links an owned by user to this page.",
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "parent_id": {
+            "description": "Foreign key: links a parent to this page.",
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "page_type": {
+            "description": "The page type of this page.",
+            "type": "string",
+            "nullable": true
+          },
+          "created_at": {
+            "description": "Denotes the date and time, the page was created.",
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "updated_at": {
+            "description": "Denotes the date and time, the page was last modified.",
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "deleted_at": {
+            "description": "Denotes the date and time, the page was put in the trash.",
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "start_at": {
+            "description": "The start at date for this page.",
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "planned_start_at": {
+            "description": "The planned start at date for this page.",
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "end_at": {
+            "description": "The end at date for this page.",
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "planned_end_at": {
+            "description": "The planned end at date for this page.",
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "canceled_at": {
+            "description": "The canceled at date for this page.",
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "closed_at": {
+            "description": "The closed at date for this page.",
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "embargo_at": {
+            "description": "The embargo at date for this page.",
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fixed_at": {
+            "description": "The fixed at date for this page.",
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "postponed_at": {
+            "description": "The postponed at date for this page.",
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "published_at": {
+            "description": "The published at date for this page.",
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "released_at": {
+            "description": "The released at date for this page.",
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "resumed_at": {
+            "description": "The resumed at date for this page.",
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "resolved_at": {
+            "description": "The resolved at date for this page.",
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "suspended_at": {
+            "description": "The suspended at date for this page.",
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "gids": {
+            "description": "Permissions: gids",
+            "type": "integer",
+            "format": "int64"
+          },
+          "po": {
+            "description": "Permissions: po",
+            "type": "integer",
+            "format": "int32"
+          },
+          "pg": {
+            "description": "Permissions: pg",
+            "type": "integer",
+            "format": "int32"
+          },
+          "pw": {
+            "description": "Permissions: pw",
+            "type": "integer",
+            "format": "int32"
+          },
+          "only_admin": {
+            "description": "Permissions: only admin",
+            "type": "boolean"
+          },
+          "only_user": {
+            "description": "Permissions: only user",
+            "type": "boolean"
+          },
+          "only_guest": {
+            "description": "Permissions: only guest",
+            "type": "boolean"
+          },
+          "allow_public": {
+            "description": "Permissions: allow public",
+            "type": "boolean"
+          },
+          "status": {
+            "description": "The status of the page.",
+            "type": "integer",
+            "format": "int64"
+          },
+          "rank": {
+            "description": "Status: rank",
+            "type": "integer",
+            "format": "int64"
+          },
+          "size": {
+            "description": "Status: size",
+            "type": "integer",
+            "format": "int64"
+          },
+          "icon": {
+            "description": "Ui: icon",
+            "type": "string",
+            "maxLength": 128
+          },
+          "image": {
+            "description": "Ui: image",
+            "type": "string",
+            "maxLength": 512
+          },
+          "avatar": {
+            "description": "Ui: avatar",
+            "type": "string",
+            "maxLength": 512
+          },
+          "ui": {
+            "description": "The ui of the page.",
+            "type": "object",
+            "nullable": true
+          },
+          "active": {
+            "description": "Flags: active",
+            "type": "boolean"
+          },
+          "canceled": {
+            "description": "Flags: canceled",
+            "type": "boolean"
+          },
+          "closed": {
+            "description": "Flags: closed",
+            "type": "boolean"
+          },
+          "completed": {
+            "description": "Flags: completed",
+            "type": "boolean"
+          },
+          "duplicate": {
+            "description": "Flags: duplicate",
+            "type": "boolean"
+          },
+          "fixed": {
+            "description": "Flags: fixed",
+            "type": "boolean"
+          },
+          "flagged": {
+            "description": "Flags: flagged",
+            "type": "boolean"
+          },
+          "internal": {
+            "description": "Flags: internal",
+            "type": "boolean"
+          },
+          "locked": {
+            "description": "Flags: locked",
+            "type": "boolean"
+          },
+          "pending": {
+            "description": "Flags: pending",
+            "type": "boolean"
+          },
+          "planned": {
+            "description": "Flags: planned",
+            "type": "boolean"
+          },
+          "problem": {
+            "description": "Flags: problem",
+            "type": "boolean"
+          },
+          "published": {
+            "description": "Flags: published",
+            "type": "boolean"
+          },
+          "released": {
+            "description": "Flags: released",
+            "type": "boolean"
+          },
+          "retired": {
+            "description": "Flags: retired",
+            "type": "boolean"
+          },
+          "resolved": {
+            "description": "Flags: resolved",
+            "type": "boolean"
+          },
+          "suspended": {
+            "description": "Flags: suspended",
+            "type": "boolean"
+          },
+          "unknown": {
+            "description": "Flags: unknown",
+            "type": "boolean"
+          },
+          "label": {
+            "description": "The label of the page.",
+            "type": "string",
+            "maxLength": 128
+          },
+          "title": {
+            "description": "The title of the page.",
+            "type": "string",
+            "maxLength": 255
+          },
+          "byline": {
+            "description": "The byline of the page.",
+            "type": "string",
+            "maxLength": 255
+          },
+          "slug": {
+            "description": "The slug of the page.",
+            "type": "string",
+            "maxLength": 128,
+            "nullable": true
+          },
+          "url": {
+            "description": "The url of the page.",
+            "type": "string",
+            "maxLength": 512
+          },
+          "description": {
+            "description": "The description of the page.",
+            "type": "string",
+            "maxLength": 512
+          },
+          "introduction": {
+            "description": "The introduction of the page.",
+            "type": "string",
+            "maxLength": 512
+          },
+          "content": {
+            "description": "The content of the page. Allows HTML.",
+            "type": "string",
+            "nullable": true
+          },
+          "summary": {
+            "description": "The summary of the page. Allows HTML.",
+            "type": "string",
+            "nullable": true
+          },
+          "assets": {
+            "description": "JSON: assets",
+            "type": "object",
+            "nullable": true
+          },
+          "meta": {
+            "description": "JSON: meta",
+            "type": "object",
+            "nullable": true
+          },
+          "notes": {
+            "description": "JSON: notes",
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "nullable": true
+          },
+          "options": {
+            "description": "JSON: options",
+            "type": "object",
+            "nullable": true
+          },
+          "sources": {
+            "description": "JSON: sources",
+            "type": "object",
+            "nullable": true
+          }
+        }
+      },
+      "Snippet": {
+        "description": "The CMS Snippet model.",
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "The primary key.",
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "created_by_id": {
+            "description": "Foreign key: links a created by user to this snippet.",
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "modified_by_id": {
+            "description": "Foreign key: links a modified by user to this snippet.",
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "owned_by_id": {
+            "description": "Foreign key: links an owned by user to this snippet.",
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "parent_id": {
+            "description": "Foreign key: links a parent to this snippet.",
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "snippet_type": {
+            "description": "The snippet type of this snippet.",
+            "type": "string",
+            "nullable": true
+          },
+          "created_at": {
+            "description": "Denotes the date and time, the snippet was created.",
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "updated_at": {
+            "description": "Denotes the date and time, the snippet was last modified.",
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "deleted_at": {
+            "description": "Denotes the date and time, the snippet was put in the trash.",
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "start_at": {
+            "description": "The start at date for this snippet.",
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "planned_start_at": {
+            "description": "The planned start at date for this snippet.",
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "end_at": {
+            "description": "The end at date for this snippet.",
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "planned_end_at": {
+            "description": "The planned end at date for this snippet.",
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "canceled_at": {
+            "description": "The canceled at date for this snippet.",
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "closed_at": {
+            "description": "The closed at date for this snippet.",
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "embargo_at": {
+            "description": "The embargo at date for this snippet.",
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fixed_at": {
+            "description": "The fixed at date for this snippet.",
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "postponed_at": {
+            "description": "The postponed at date for this snippet.",
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "published_at": {
+            "description": "The published at date for this snippet.",
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "released_at": {
+            "description": "The released at date for this snippet.",
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "resumed_at": {
+            "description": "The resumed at date for this snippet.",
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "resolved_at": {
+            "description": "The resolved at date for this snippet.",
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "suspended_at": {
+            "description": "The suspended at date for this snippet.",
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "gids": {
+            "description": "Permissions: gids",
+            "type": "integer",
+            "format": "int64"
+          },
+          "po": {
+            "description": "Permissions: po",
+            "type": "integer",
+            "format": "int32"
+          },
+          "pg": {
+            "description": "Permissions: pg",
+            "type": "integer",
+            "format": "int32"
+          },
+          "pw": {
+            "description": "Permissions: pw",
+            "type": "integer",
+            "format": "int32"
+          },
+          "only_admin": {
+            "description": "Permissions: only admin",
+            "type": "boolean"
+          },
+          "only_user": {
+            "description": "Permissions: only user",
+            "type": "boolean"
+          },
+          "only_guest": {
+            "description": "Permissions: only guest",
+            "type": "boolean"
+          },
+          "allow_public": {
+            "description": "Permissions: allow public",
+            "type": "boolean"
+          },
+          "status": {
+            "description": "The status of the snippet.",
+            "type": "integer",
+            "format": "int64"
+          },
+          "rank": {
+            "description": "Status: rank",
+            "type": "integer",
+            "format": "int64"
+          },
+          "size": {
+            "description": "Status: size",
+            "type": "integer",
+            "format": "int64"
+          },
+          "icon": {
+            "description": "Ui: icon",
+            "type": "string",
+            "maxLength": 128
+          },
+          "image": {
+            "description": "Ui: image",
+            "type": "string",
+            "maxLength": 512
+          },
+          "avatar": {
+            "description": "Ui: avatar",
+            "type": "string",
+            "maxLength": 512
+          },
+          "ui": {
+            "description": "The ui of the snippet.",
+            "type": "object",
+            "nullable": true
+          },
+          "active": {
+            "description": "Flags: active",
+            "type": "boolean"
+          },
+          "canceled": {
+            "description": "Flags: canceled",
+            "type": "boolean"
+          },
+          "closed": {
+            "description": "Flags: closed",
+            "type": "boolean"
+          },
+          "completed": {
+            "description": "Flags: completed",
+            "type": "boolean"
+          },
+          "duplicate": {
+            "description": "Flags: duplicate",
+            "type": "boolean"
+          },
+          "fixed": {
+            "description": "Flags: fixed",
+            "type": "boolean"
+          },
+          "flagged": {
+            "description": "Flags: flagged",
+            "type": "boolean"
+          },
+          "internal": {
+            "description": "Flags: internal",
+            "type": "boolean"
+          },
+          "locked": {
+            "description": "Flags: locked",
+            "type": "boolean"
+          },
+          "pending": {
+            "description": "Flags: pending",
+            "type": "boolean"
+          },
+          "planned": {
+            "description": "Flags: planned",
+            "type": "boolean"
+          },
+          "problem": {
+            "description": "Flags: problem",
+            "type": "boolean"
+          },
+          "published": {
+            "description": "Flags: published",
+            "type": "boolean"
+          },
+          "released": {
+            "description": "Flags: released",
+            "type": "boolean"
+          },
+          "retired": {
+            "description": "Flags: retired",
+            "type": "boolean"
+          },
+          "resolved": {
+            "description": "Flags: resolved",
+            "type": "boolean"
+          },
+          "suspended": {
+            "description": "Flags: suspended",
+            "type": "boolean"
+          },
+          "unknown": {
+            "description": "Flags: unknown",
+            "type": "boolean"
+          },
+          "label": {
+            "description": "The label of the snippet.",
+            "type": "string",
+            "maxLength": 128
+          },
+          "title": {
+            "description": "The title of the snippet.",
+            "type": "string",
+            "maxLength": 255
+          },
+          "byline": {
+            "description": "The byline of the snippet.",
+            "type": "string",
+            "maxLength": 255
+          },
+          "slug": {
+            "description": "The slug of the snippet.",
+            "type": "string",
+            "maxLength": 128,
+            "nullable": true
+          },
+          "url": {
+            "description": "The url of the snippet.",
+            "type": "string",
+            "maxLength": 512
+          },
+          "description": {
+            "description": "The description of the snippet.",
+            "type": "string",
+            "maxLength": 512
+          },
+          "introduction": {
+            "description": "The introduction of the snippet.",
+            "type": "string",
+            "maxLength": 512
+          },
+          "content": {
+            "description": "The content of the snippet. Allows HTML.",
+            "type": "string",
+            "nullable": true
+          },
+          "summary": {
+            "description": "The summary of the snippet. Allows HTML.",
+            "type": "string",
+            "nullable": true
+          },
+          "assets": {
+            "description": "JSON: assets",
+            "type": "object",
+            "nullable": true
+          },
+          "meta": {
+            "description": "JSON: meta",
+            "type": "object",
+            "nullable": true
+          },
+          "notes": {
+            "description": "JSON: notes",
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "nullable": true
+          },
+          "options": {
+            "description": "JSON: options",
+            "type": "object",
+            "nullable": true
+          },
+          "sources": {
+            "description": "JSON: sources",
+            "type": "object",
+            "nullable": true
+          }
+        }
+      }
+    }
+  }
+}

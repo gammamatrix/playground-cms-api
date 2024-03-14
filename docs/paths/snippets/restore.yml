@@ -1,0 +1,30 @@
+parameters:
+  -
+    in: path
+    name: id
+    required: true
+    description: 'The snippet id.'
+    schema:
+      type: string
+      format: uuid
+put:
+  tags:
+    - Snippet
+  summary: 'Restore a snippet by id.'
+  operationId: restore_snippet
+  responses:
+    200:
+      description: 'The restored snippet.'
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: ../../models/snippet.yml
+              meta:
+                type: object
+    401:
+      description: Unauthorized
+    403:
+      description: Forbidden

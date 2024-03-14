@@ -1,0 +1,42 @@
+parameters:
+  -
+    in: path
+    name: id
+    required: true
+    description: 'The snippet id.'
+    schema:
+      type: string
+      format: uuid
+delete:
+  tags:
+    - Snippet
+  summary: 'Unlock a snippet by id.'
+  operationId: lock_snippet
+  responses:
+    204:
+      description: 'The snippet has been unlocked.'
+    401:
+      description: Unauthorized
+    403:
+      description: Forbidden
+put:
+  tags:
+    - Snippet
+  summary: 'Lock a snippet by id.'
+  operationId: unlock_snippet
+  responses:
+    200:
+      description: 'The unlocked snippet.'
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: ../../models/snippet.yml
+              meta:
+                type: object
+    401:
+      description: Unauthorized
+    403:
+      description: Forbidden

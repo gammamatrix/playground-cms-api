@@ -1,0 +1,85 @@
+parameters:
+  -
+    in: path
+    name: id
+    required: true
+    description: 'The page id.'
+    schema:
+      type: string
+      format: uuid
+get:
+  tags:
+    - Page
+  summary: 'Get a page by id.'
+  operationId: get_page
+  responses:
+    200:
+      description: 'The page data.'
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: ../../models/page.yml
+              meta:
+                type: object
+    401:
+      description: Unauthorized
+    403:
+      description: Forbidden
+delete:
+  tags:
+    - Page
+  summary: 'Delete a page by id.'
+  operationId: delete_page
+  responses:
+    204:
+      description: 'The page has been deleted.'
+    401:
+      description: Unauthorized
+    403:
+      description: Forbidden
+    423:
+      description: 'The page is locked. Unlock to delete.'
+patch:
+  tags:
+    - Page
+  summary: 'Update a page by id.'
+  operationId: patch_page
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../../requests/page/patch.yml
+  responses:
+    200:
+      description: 'The updated page.'
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: ../../models/page.yml
+              meta:
+                type: object
+    401:
+      description: Unauthorized
+    403:
+      description: Forbidden
+    422:
+      description: 'Validation error'
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              errors:
+                type: object
+                properties:
+                  label:
+                    type: array
+                    items:
+                      type: string
+                      example: 'The label field is required.'
