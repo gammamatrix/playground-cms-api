@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <title>Test Documentation</title>
+        <style>
+            body {
+                text-rendering: optimizeLegibility;
+                font-family: Source SansSerif Pro, Arial, sans-serif;
+                font-variant-ligatures: common-ligatures;
+                font-kerning: normal;
+                margin-left: 2rem;
+                background-color: #fff;
+                color: #000;
+            }
+
+            body > ul > li {
+                font-size: larger;
+            }
+
+            h2 {
+                font-size: larger;
+                text-decoration-line: underline;
+                text-decoration-thickness: 2px;
+                margin: 0;
+                padding: 0.5rem 0;
+            }
+
+            ul {
+                list-style: none;
+                margin: 0 0 2rem;
+                padding: 0 0 0 1rem;
+                text-indent: -1rem;
+            }
+
+            .success:before {
+                color: #4e9a06;
+                content: '✓';
+                padding-right: 0.5rem;
+            }
+
+            .defect {
+                color: #a40000;
+            }
+
+            .defect:before {
+                color: #a40000;
+                content: '✗';
+                padding-right: 0.5rem;
+            }
+        </style>
+    </head>
+    <body>
+        <h2>Command (Tests\Feature\Playground\Cms\Api\Console\Commands\About\Command)</h2>
+        <ul>
+            <li class="success">Command about displays package information and succeed with code 0</li>
+        </ul>
+        <h2>Create Request (Tests\Unit\Playground\Cms\Api\Http\Requests\Page\CreateRequest)</h2>
+        <ul>
+            <li class="success">Request instance</li>
+        </ul>
+        <h2>Create Request (Tests\Unit\Playground\Cms\Api\Http\Requests\Snippet\CreateRequest)</h2>
+        <ul>
+            <li class="success">Request instance</li>
+        </ul>
+        <h2>Instance (Tests\Feature\Playground\Cms\Api\Http\Requests\FormRequest\Instance)</h2>
+        <ul>
+            <li class="success">FormRequest authorize with admin</li>
+        </ul>
+        <h2>Instance (Tests\Unit\Playground\Cms\Api\Http\Requests\FormRequest\Instance)</h2>
+        <ul>
+            <li class="success">FormRequest authorize without user</li>
+            <li class="success">RULES is empty by default</li>
+            <li class="success">UserHasAdminPrivileges without user</li>
+            <li class="success">UserHasAdminPrivileges with admin</li>
+            <li class="success">UserHasAdminPrivileges with default laravel user</li>
+        </ul>
+        <h2>Instance (Tests\Unit\Playground\Cms\Api\ServiceProvider\Instance)</h2>
+        <ul>
+            <li class="success">Version matches</li>
+            <li class="success">SetPolicies with empty array</li>
+        </ul>
+        <h2>Page Route (Tests\Feature\Playground\Cms\Api\Http\Controllers\Playground\PageRoute)</h2>
+        <ul>
+            <li class="success">Json guest cannot see info</li>
+            <li class="success">Json guest cannot destroy</li>
+            <li class="success">Json guest cannot restore</li>
+            <li class="success">Json guest cannot get index</li>
+            <li class="success">Json guest cannot get revisions</li>
+            <li class="success">Json guest cannot lock</li>
+            <li class="success">Json guest cannot unlock</li>
+            <li class="success">Json guest cannot get create info</li>
+            <li class="success">Json guest cannot get edit info</li>
+            <li class="success">Json guest cannot render revision view</li>
+            <li class="success">Json guest cannot restore revision</li>
+            <li class="success">Json guest cannot store</li>
+            <li class="success">Json guest cannot update</li>
+            <li class="success">Json admin can get index</li>
+            <li class="success">Json show info for admin</li>
+            <li class="success">Json admin can get create info</li>
+            <li class="success">Json admin can get edit info</li>
+            <li class="success">Json destroy as admin and succeed</li>
+            <li class="success">Json admin can get revisions</li>
+            <li class="success">Json restore as admin and succeed</li>
+            <li class="success">Json update as admin without payload and fail validation</li>
+            <li class="success">Json lock as admin and succeed</li>
+            <li class="success">Json store as admin without payload and fail validation</li>
+            <li class="success">Json unlock as admin and succeed</li>
+            <li class="success">Json admin can get revision info</li>
+            <li class="success">Json get create info as admin with invalid parameter and fail validation</li>
+            <li class="success">Json restore revision as admin and succeed</li>
+            <li class="success">Json admin can get index with filters</li>
+            <li class="success">Json edit as admin and fail validation with invalid parameter</li>
+            <li class="success">Json admin can update</li>
+            <li class="success">Json store as admin and succeed</li>
+            <li class="success">Json lock as admin and succeed with no redirect</li>
+            <li class="success">Json destroy as admin and succeed with force delete</li>
+            <li class="success">Json restore as admin and succeed with no redirect</li>
+            <li class="success">Json admin can get revisions with filters</li>
+            <li class="success">Json unlock as admin and succeed with no redirect</li>
+            <li class="success">Json restore revision as admin and succeed without redirect</li>
+            <li class="success">Json destroy as admin and succeed with no content</li>
+            <li class="success">Json lock as user and get denied</li>
+            <li class="success">Json restore as user and get denied</li>
+            <li class="success">Json unlock as user and get denied</li>
+            <li class="success">Json destroy as admin and succeed and ignore redirect</li>
+            <li class="success">Json restore revision as user and get denied</li>
+            <li class="success">Json destroy as user and get denied and no force delete allowed</li>
+        </ul>
+        <h2>Policy (Tests\Unit\Playground\Cms\Api\Policies\PagePolicy\Policy)</h2>
+        <ul>
+            <li class="success">Policy instance</li>
+        </ul>
+        <h2>Policy (Tests\Unit\Playground\Cms\Api\Policies\SnippetPolicy\Policy)</h2>
+        <ul>
+            <li class="success">Policy instance</li>
+        </ul>
+        <h2>Snippet Route (Tests\Feature\Playground\Cms\Api\Http\Controllers\Playground\SnippetRoute)</h2>
+        <ul>
+            <li class="success">Json guest cannot see info</li>
+            <li class="success">Json guest cannot destroy</li>
+            <li class="success">Json guest cannot restore</li>
+            <li class="success">Json guest cannot get index</li>
+            <li class="success">Json guest cannot get revisions</li>
+            <li class="success">Json guest cannot lock</li>
+            <li class="success">Json guest cannot unlock</li>
+            <li class="success">Json guest cannot get create info</li>
+            <li class="success">Json guest cannot get edit info</li>
+            <li class="success">Json guest cannot render revision view</li>
+            <li class="success">Json guest cannot restore revision</li>
+            <li class="success">Json guest cannot store</li>
+            <li class="success">Json guest cannot update</li>
+            <li class="success">Json admin can get index</li>
+            <li class="success">Json show info for admin</li>
+            <li class="success">Json admin can get create info</li>
+            <li class="success">Json admin can get edit info</li>
+            <li class="success">Json destroy as admin and succeed</li>
+            <li class="success">Json admin can get revisions</li>
+            <li class="success">Json restore as admin and succeed</li>
+            <li class="success">Json update as admin without payload and fail validation</li>
+            <li class="success">Json lock as admin and succeed</li>
+            <li class="success">Json store as admin without payload and fail validation</li>
+            <li class="success">Json unlock as admin and succeed</li>
+            <li class="success">Json admin can get revision info</li>
+            <li class="success">Json get create info as admin with invalid parameter and fail validation</li>
+            <li class="success">Json restore revision as admin and succeed</li>
+            <li class="success">Json admin can get index with filters</li>
+            <li class="success">Json edit as admin and fail validation with invalid parameter</li>
+            <li class="success">Json admin can update</li>
+            <li class="success">Json store as admin and succeed</li>
+            <li class="success">Json lock as admin and succeed with no redirect</li>
+            <li class="success">Json destroy as admin and succeed with force delete</li>
+            <li class="success">Json restore as admin and succeed with no redirect</li>
+            <li class="success">Json admin can get revisions with filters</li>
+            <li class="success">Json unlock as admin and succeed with no redirect</li>
+            <li class="success">Json restore revision as admin and succeed without redirect</li>
+            <li class="success">Json destroy as admin and succeed with no content</li>
+            <li class="success">Json lock as user and get denied</li>
+            <li class="success">Json restore as user and get denied</li>
+            <li class="success">Json unlock as user and get denied</li>
+            <li class="success">Json destroy as admin and succeed and ignore redirect</li>
+            <li class="success">Json restore revision as user and get denied</li>
+            <li class="success">Json destroy as user and get denied and no force delete allowed</li>
+        </ul>
+    </body>
+</html>
