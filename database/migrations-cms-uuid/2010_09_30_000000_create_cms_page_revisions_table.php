@@ -71,6 +71,20 @@ return new class extends Migration
             $table->bigInteger('revision')->default(0);
             $table->bigInteger('size')->default(0);
 
+            // Matrix
+
+            $table->string('matrix')->default('');
+            $table->bigInteger('x')->nullable();
+            $table->bigInteger('y')->nullable();
+            $table->bigInteger('z')->nullable();
+            $table->decimal('r', 65, 10)->nullable()->default(null);
+            $table->decimal('theta', 10, 6)->nullable()->default(null);
+            $table->decimal('rho', 10, 6)->nullable()->default(null);
+            $table->decimal('phi', 10, 6)->nullable()->default(null);
+            $table->decimal('elevation', 65, 10)->nullable()->default(null);
+            $table->decimal('latitude', 8, 6)->nullable()->default(null);
+            $table->decimal('longitude', 9, 6)->nullable()->default(null);
+
             // Flags
 
             $table->boolean('active')->default(1)->index();
@@ -110,6 +124,7 @@ return new class extends Migration
             $table->mediumText('content')->nullable();
             $table->mediumText('summary')->nullable();
             $table->string('route')->default('');
+            $table->string('locale')->default('');
 
             // UI
 

@@ -12,7 +12,7 @@ If you need a CMS with a UI, then have a look at [Playground CMS Resource.](http
 
 ## Documentation
 
-Read more on using Playground CMS API [at the Read the Docs for Playground.](https://gammamatrix-playground.readthedocs.io/)
+Read more on using [Playground CMS API at Read the Docs: Playground Documentation.](https://gammamatrix-playground.readthedocs.io/en/develop/components/cms.html)
 
 ### Swagger
 
