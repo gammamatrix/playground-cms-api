@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
-<coverage line-rate="0.96504854368932" branch-rate="0" lines-covered="497" lines-valid="515" branches-covered="0" branches-valid="0" complexity="155" version="0.4" timestamp="1710662513">
+<coverage line-rate="0.96531791907514" branch-rate="0" lines-covered="501" lines-valid="519" branches-covered="0" branches-valid="0" complexity="155" version="0.4" timestamp="1711141365">
   <sources>
     <source>/app/src</source>
   </sources>
@@ -183,26 +183,28 @@
                 <line number="357" hits="1"/>
                 <line number="359" hits="1"/>
                 <line number="361" hits="1"/>
-                <line number="362" hits="1"/>
                 <line number="363" hits="1"/>
+                <line number="364" hits="1"/>
+                <line number="365" hits="1"/>
               </lines>
             </method>
             <method name="unlock" signature="Playground\Cms\Models\Page $page, Playground\Cms\Api\Http\Requests\Page\UnlockRequest $request" line-rate="1" branch-rate="0" complexity="1">
               <lines>
-                <line number="375" hits="2"/>
                 <line number="377" hits="2"/>
                 <line number="379" hits="2"/>
                 <line number="381" hits="2"/>
                 <line number="383" hits="2"/>
+                <line number="385" hits="2"/>
               </lines>
             </method>
             <method name="update" signature="Playground\Cms\Models\Page $page, Playground\Cms\Api\Http\Requests\Page\UpdateRequest $request" line-rate="1" branch-rate="0" complexity="1">
               <lines>
-                <line number="395" hits="1"/>
                 <line number="397" hits="1"/>
                 <line number="399" hits="1"/>
                 <line number="401" hits="1"/>
                 <line number="403" hits="1"/>
+                <line number="405" hits="1"/>
+                <line number="407" hits="1"/>
               </lines>
             </method>
           </methods>
@@ -327,18 +329,20 @@
             <line number="357" hits="1"/>
             <line number="359" hits="1"/>
             <line number="361" hits="1"/>
-            <line number="362" hits="1"/>
             <line number="363" hits="1"/>
-            <line number="375" hits="2"/>
+            <line number="364" hits="1"/>
+            <line number="365" hits="1"/>
             <line number="377" hits="2"/>
             <line number="379" hits="2"/>
             <line number="381" hits="2"/>
             <line number="383" hits="2"/>
-            <line number="395" hits="1"/>
+            <line number="385" hits="2"/>
             <line number="397" hits="1"/>
             <line number="399" hits="1"/>
             <line number="401" hits="1"/>
             <line number="403" hits="1"/>
+            <line number="405" hits="1"/>
+            <line number="407" hits="1"/>
           </lines>
         </class>
       </classes>
@@ -504,26 +508,28 @@
                 <line number="344" hits="1"/>
                 <line number="346" hits="1"/>
                 <line number="348" hits="1"/>
-                <line number="349" hits="1"/>
                 <line number="350" hits="1"/>
+                <line number="351" hits="1"/>
+                <line number="352" hits="1"/>
               </lines>
             </method>
             <method name="unlock" signature="Playground\Cms\Models\Snippet $snippet, Playground\Cms\Api\Http\Requests\Snippet\UnlockRequest $request" line-rate="1" branch-rate="0" complexity="1">
               <lines>
-                <line number="362" hits="2"/>
                 <line number="364" hits="2"/>
                 <line number="366" hits="2"/>
                 <line number="368" hits="2"/>
                 <line number="370" hits="2"/>
+                <line number="372" hits="2"/>
               </lines>
             </method>
             <method name="update" signature="Playground\Cms\Models\Snippet $snippet, Playground\Cms\Api\Http\Requests\Snippet\UpdateRequest $request" line-rate="1" branch-rate="0" complexity="1">
               <lines>
-                <line number="382" hits="1"/>
                 <line number="384" hits="1"/>
                 <line number="386" hits="1"/>
                 <line number="388" hits="1"/>
                 <line number="390" hits="1"/>
+                <line number="392" hits="1"/>
+                <line number="394" hits="1"/>
               </lines>
             </method>
           </methods>
@@ -639,18 +645,20 @@
             <line number="344" hits="1"/>
             <line number="346" hits="1"/>
             <line number="348" hits="1"/>
-            <line number="349" hits="1"/>
             <line number="350" hits="1"/>
-            <line number="362" hits="2"/>
+            <line number="351" hits="1"/>
+            <line number="352" hits="1"/>
             <line number="364" hits="2"/>
             <line number="366" hits="2"/>
             <line number="368" hits="2"/>
             <line number="370" hits="2"/>
-            <line number="382" hits="1"/>
+            <line number="372" hits="2"/>
             <line number="384" hits="1"/>
             <line number="386" hits="1"/>
             <line number="388" hits="1"/>
             <line number="390" hits="1"/>
+            <line number="392" hits="1"/>
+            <line number="394" hits="1"/>
           </lines>
         </class>
       </classes>
@@ -661,42 +669,42 @@
           <methods>
             <method name="authorize" signature="" line-rate="1" branch-rate="0" complexity="2">
               <lines>
-                <line number="28" hits="38"/>
-                <line number="30" hits="38"/>
-                <line number="31" hits="1"/>
-                <line number="34" hits="37"/>
+                <line number="27" hits="38"/>
+                <line number="29" hits="38"/>
+                <line number="30" hits="1"/>
+                <line number="33" hits="37"/>
               </lines>
             </method>
             <method name="rules" signature="" line-rate="1" branch-rate="0" complexity="2">
               <lines>
-                <line number="44" hits="37"/>
-                <line number="46" hits="37"/>
+                <line number="43" hits="37"/>
+                <line number="45" hits="37"/>
               </lines>
             </method>
             <method name="userHasAdminPrivileges" signature="Illuminate\Contracts\Auth\Authenticatable $user" line-rate="1" branch-rate="0" complexity="3">
               <lines>
+                <line number="50" hits="11"/>
                 <line number="51" hits="11"/>
-                <line number="52" hits="11"/>
-                <line number="53" hits="10"/>
-                <line number="54" hits="9"/>
-                <line number="57" hits="1"/>
-                <line number="61" hits="11"/>
+                <line number="52" hits="10"/>
+                <line number="53" hits="9"/>
+                <line number="56" hits="1"/>
+                <line number="60" hits="11"/>
               </lines>
             </method>
           </methods>
           <lines>
-            <line number="28" hits="38"/>
-            <line number="30" hits="38"/>
-            <line number="31" hits="1"/>
-            <line number="34" hits="37"/>
-            <line number="44" hits="37"/>
-            <line number="46" hits="37"/>
+            <line number="27" hits="38"/>
+            <line number="29" hits="38"/>
+            <line number="30" hits="1"/>
+            <line number="33" hits="37"/>
+            <line number="43" hits="37"/>
+            <line number="45" hits="37"/>
+            <line number="50" hits="11"/>
             <line number="51" hits="11"/>
-            <line number="52" hits="11"/>
-            <line number="53" hits="10"/>
-            <line number="54" hits="9"/>
-            <line number="57" hits="1"/>
-            <line number="61" hits="11"/>
+            <line number="52" hits="10"/>
+            <line number="53" hits="9"/>
+            <line number="56" hits="1"/>
+            <line number="60" hits="11"/>
           </lines>
         </class>
       </classes>
