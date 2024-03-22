@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <crap_result>
   <project/>
-  <timestamp>2024-03-22 21:02:45</timestamp>
+  <timestamp>2024-03-22 22:13:21</timestamp>
   <stats>
     <name>Method Crap Stats</name>
     <methodCount>69</methodCount>
-    <crapMethodCount>1</crapMethodCount>
-    <crapLoad>8</crapLoad>
-    <totalCrap>202.17</totalCrap>
-    <crapMethodPercent>1.45</crapMethodPercent>
+    <crapMethodCount>0</crapMethodCount>
+    <crapLoad>0</crapLoad>
+    <totalCrap>155.06</totalCrap>
+    <crapMethodPercent>0</crapMethodPercent>
   </stats>
   <methods>
     <method>
@@ -391,9 +391,9 @@
       <methodName>rules</methodName>
       <methodSignature>rules(): array</methodSignature>
       <fullMethod>rules(): array</fullMethod>
-      <crap>2.03</crap>
+      <crap>2</crap>
       <complexity>2</complexity>
-      <coverage>80</coverage>
+      <coverage>100</coverage>
       <crapLoad>0</crapLoad>
     </method>
     <method>
@@ -446,9 +446,9 @@
       <methodName>rules</methodName>
       <methodSignature>rules(): array</methodSignature>
       <fullMethod>rules(): array</fullMethod>
-      <crap>2.03</crap>
+      <crap>2</crap>
       <complexity>2</complexity>
-      <coverage>80</coverage>
+      <coverage>100</coverage>
       <crapLoad>0</crapLoad>
     </method>
     <method>
@@ -732,10 +732,10 @@
       <methodName>setPolicies</methodName>
       <methodSignature>setPolicies(array $policies): void</methodSignature>
       <fullMethod>setPolicies(array $policies): void</fullMethod>
-      <crap>57.05</crap>
+      <crap>10</crap>
       <complexity>10</complexity>
-      <coverage>22.22</coverage>
-      <crapLoad>8</crapLoad>
+      <coverage>100</coverage>
+      <crapLoad>0</crapLoad>
     </method>
     <method>
       <package>Playground\Cms\Api</package>

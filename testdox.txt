@@ -20,6 +20,8 @@ Instance (Tests\Unit\Playground\Cms\Api\Http\Requests\FormRequest\Instance)
 Instance (Tests\Unit\Playground\Cms\Api\ServiceProvider\Instance)
  [x] Version matches
  [x] SetPolicies with empty array
+ [x] SetPolicies with invalid model
+ [x] SetPolicies with invalid policy
 
 Page Route (Tests\Feature\Playground\Cms\Api\Http\Controllers\Playground\PageRoute)
  [x] Json guest cannot see info
@@ -118,4 +120,14 @@ Snippet Route (Tests\Feature\Playground\Cms\Api\Http\Controllers\Playground\Snip
  [x] Json destroy as admin and succeed and ignore redirect
  [x] Json restore revision as user and get denied
  [x] Json destroy as user and get denied and no force delete allowed
+
+Update Request (Tests\Unit\Playground\Cms\Api\Http\Requests\Page\UpdateRequest)
+ [x] Request instance
+ [x] UpdateRequest rules with optional revisions disabled
+ [x] UpdateRequest rules with optional revisions enabled
+
+Update Request (Tests\Unit\Playground\Cms\Api\Http\Requests\Snippet\UpdateRequest)
+ [x] Request instance
+ [x] UpdateRequest rules with optional revisions disabled
+ [x] UpdateRequest rules with optional revisions enabled
 
