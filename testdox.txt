@@ -121,6 +121,16 @@ Snippet Route (Tests\Feature\Playground\Cms\Api\Http\Controllers\Playground\Snip
  [x] Json restore revision as user and get denied
  [x] Json destroy as user and get denied and no force delete allowed
 
+Store Request (Tests\Unit\Playground\Cms\Api\Http\Requests\Page\StoreRequest)
+ [x] Request instance
+ [x] StoreRequest rules with optional revisions disabled
+ [x] StoreRequest rules with optional revisions enabled
+
+Store Request (Tests\Unit\Playground\Cms\Api\Http\Requests\Snippet\StoreRequest)
+ [x] Request instance
+ [x] StoreRequest rules with optional revisions disabled
+ [x] StoreRequest rules with optional revisions enabled
+
 Update Request (Tests\Unit\Playground\Cms\Api\Http\Requests\Page\UpdateRequest)
  [x] Request instance
  [x] UpdateRequest rules with optional revisions disabled
