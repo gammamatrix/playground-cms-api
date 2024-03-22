@@ -43,8 +43,7 @@ Route::group([
     Route::get('/edit/{snippet}', [
         'as' => 'playground.cms.api.snippets.edit',
         'uses' => 'SnippetController@edit',
-    ])->whereUuid('snippet')
-        ->can('edit', 'snippet');
+    ])->whereUuid('snippet')->can('edit', 'snippet');
 
     // Route::get('/go/{id}', [
     //     'as'   => 'playground.cms.api.snippets.go',
@@ -60,34 +59,29 @@ Route::group([
     Route::get('/{snippet}/revisions', [
         'as' => 'playground.cms.api.snippets.revisions',
         'uses' => 'SnippetController@revisions',
-    ])->whereUuid('snippet')
-        ->can('revisions', 'snippet');
+    ])->whereUuid('snippet')->can('revisions', 'snippet');
 
     Route::get('/revision/{snippet_revision}', [
         'as' => 'playground.cms.api.snippets.revision',
         'uses' => 'SnippetController@revision',
-    ])->whereUuid('snippet')
-        ->can('viewRevision', 'snippet_revision');
+    ])->whereUuid('snippet')->can('viewRevision', 'snippet_revision');
 
     Route::put('/revision/{snippet_revision}', [
         'as' => 'playground.cms.api.snippets.revision.restore',
         'uses' => 'SnippetController@restoreRevision',
-    ])->whereUuid('snippet_revision')
-        ->can('restoreRevision', 'snippet_revision');
+    ])->whereUuid('snippet_revision')->can('restoreRevision', 'snippet_revision');
 
     // API
 
     Route::put('/lock/{snippet}', [
         'as' => 'playground.cms.api.snippets.lock',
         'uses' => 'SnippetController@lock',
-    ])->whereUuid('snippet')
-        ->can('lock', 'snippet');
+    ])->whereUuid('snippet')->can('lock', 'snippet');
 
     Route::delete('/lock/{snippet}', [
         'as' => 'playground.cms.api.snippets.unlock',
         'uses' => 'SnippetController@unlock',
-    ])->whereUuid('snippet')
-        ->can('unlock', 'snippet');
+    ])->whereUuid('snippet')->can('unlock', 'snippet');
 
     Route::delete('/{snippet}', [
         'as' => 'playground.cms.api.snippets.destroy',

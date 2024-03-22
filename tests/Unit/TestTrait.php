@@ -6,6 +6,7 @@ declare(strict_types=1);
  */
 namespace Tests\Unit\Playground\Cms\Api;
 
+use Laravel\Sanctum\SanctumServiceProvider;
 use Playground\Auth\ServiceProvider as PlaygroundAuthServiceProvider;
 use Playground\Cms\Api\ServiceProvider;
 use Playground\Cms\ServiceProvider as PlaygroundCmsServiceProvider;
@@ -25,6 +26,7 @@ trait TestTrait
             PlaygroundCmsServiceProvider::class,
             PlaygroundServiceProvider::class,
             ServiceProvider::class,
+            SanctumServiceProvider::class,
         ];
     }
 }

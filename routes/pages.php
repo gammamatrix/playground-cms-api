@@ -43,8 +43,7 @@ Route::group([
     Route::get('/edit/{page}', [
         'as' => 'playground.cms.api.pages.edit',
         'uses' => 'PageController@edit',
-    ])->whereUuid('page')
-        ->can('edit', 'page');
+    ])->whereUuid('page')->can('edit', 'page');
 
     // Route::get('/go/{id}', [
     //     'as'   => 'playground.cms.api.pages.go',
@@ -54,14 +53,12 @@ Route::group([
     Route::get('/{page}', [
         'as' => 'playground.cms.api.pages.show',
         'uses' => 'PageController@show',
-    ])->whereUuid('page')
-        ->can('detail', 'page');
+    ])->whereUuid('page')->can('detail', 'page');
 
     Route::get('/{page}/revisions', [
         'as' => 'playground.cms.api.pages.revisions',
         'uses' => 'PageController@revisions',
-    ])->whereUuid('page')
-        ->can('revisions', 'page');
+    ])->whereUuid('page')->can('revisions', 'page');
 
     Route::get('/revision/{page_revision}', [
         'as' => 'playground.cms.api.pages.revision',
@@ -72,22 +69,19 @@ Route::group([
     Route::put('/revision/{page_revision}', [
         'as' => 'playground.cms.api.pages.revision.restore',
         'uses' => 'PageController@restoreRevision',
-    ])->whereUuid('page_revision')
-        ->can('restoreRevision', 'page_revision');
+    ])->whereUuid('page_revision')->can('restoreRevision', 'page_revision');
 
     // API
 
     Route::put('/lock/{page}', [
         'as' => 'playground.cms.api.pages.lock',
         'uses' => 'PageController@lock',
-    ])->whereUuid('page')
-        ->can('lock', 'page');
+    ])->whereUuid('page')->can('lock', 'page');
 
     Route::delete('/lock/{page}', [
         'as' => 'playground.cms.api.pages.unlock',
         'uses' => 'PageController@unlock',
-    ])->whereUuid('page')
-        ->can('unlock', 'page');
+    ])->whereUuid('page')->can('unlock', 'page');
 
     Route::delete('/{page}', [
         'as' => 'playground.cms.api.pages.destroy',
