@@ -4,9 +4,20 @@ declare(strict_types=1);
 
 return [
     'middleware' => [
-        'default' => env('PLAYGROUND_CMS_API_MIDDLEWARE_DEFAULT', ['web']),
-        'auth' => env('PLAYGROUND_CMS_API_MIDDLEWARE_AUTH', ['web', 'auth']),
-        'guest' => env('PLAYGROUND_CMS_API_MIDDLEWARE_GUEST', ['web']),
+        'default' => env('PLAYGROUND_CMS_API_MIDDLEWARE_DEFAULT', [
+            Illuminate\Routing\Middleware\SubstituteBindings::class,
+            'auth:sanctum',
+            Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+        ]),
+        'auth' => env('PLAYGROUND_CMS_API_MIDDLEWARE_AUTH', [
+            Illuminate\Routing\Middleware\SubstituteBindings::class,
+            'auth:sanctum',
+            Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+        ]),
+        'guest' => env('PLAYGROUND_CMS_API_MIDDLEWARE_GUEST', [
+            Illuminate\Routing\Middleware\SubstituteBindings::class,
+            Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+        ]),
     ],
     'policies' => [
         Playground\Cms\Models\Snippet::class => Playground\Cms\Api\Policies\SnippetPolicy::class,

@@ -24,7 +24,6 @@ class FormRequest extends BaseFormRequest
      */
     public function authorize(): bool
     {
-        // return true;
         $user = $this->user();
 
         if (empty($user)) {
@@ -51,7 +50,7 @@ class FormRequest extends BaseFormRequest
         $admin = false;
         if (! empty($user)) {
             if (method_exists($user, 'isAdmin')) {
-                $admin = $user->isAdmin();
+                $admin = ! empty($user->isAdmin());
             } else {
                 // standard user, no roles or privileges
                 $admin = true;
