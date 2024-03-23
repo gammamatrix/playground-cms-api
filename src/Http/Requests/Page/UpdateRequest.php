@@ -122,10 +122,6 @@ class UpdateRequest extends BaseUpdateRequest
         $this->filterStatus($input);
         $this->filterSystemFields($input);
 
-        if ($this->exists('label')) {
-            $input['label'] = isset($input['label']) ? $this->filterHtml($input['label']) : '';
-        }
-
         if (! empty($input)) {
             $this->merge($input);
         }
