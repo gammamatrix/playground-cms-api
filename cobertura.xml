@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
-<coverage line-rate="1" branch-rate="0" lines-covered="519" lines-valid="519" branches-covered="0" branches-valid="0" complexity="155" version="0.4" timestamp="1711148099">
+<coverage line-rate="1" branch-rate="0" lines-covered="511" lines-valid="511" branches-covered="0" branches-valid="0" complexity="147" version="0.4" timestamp="1711235724">
   <sources>
     <source>/app/src</source>
   </sources>
@@ -805,9 +805,9 @@
         </class>
       </classes>
     </package>
-    <package name="Http/Requests/Page/StoreRequest.php" line-rate="1" branch-rate="0" complexity="6">
+    <package name="Http/Requests/Page/StoreRequest.php" line-rate="1" branch-rate="0" complexity="4">
       <classes>
-        <class name="Playground\Cms\Api\Http\Requests\Page\StoreRequest" filename="Http/Requests/Page/StoreRequest.php" line-rate="1" branch-rate="0" complexity="6">
+        <class name="Playground\Cms\Api\Http\Requests\Page\StoreRequest" filename="Http/Requests/Page/StoreRequest.php" line-rate="1" branch-rate="0" complexity="4">
           <methods>
             <method name="rules" signature="" line-rate="1" branch-rate="0" complexity="2">
               <lines>
@@ -818,7 +818,7 @@
                 <line number="106" hits="4"/>
               </lines>
             </method>
-            <method name="prepareForValidation" signature="" line-rate="1" branch-rate="0" complexity="4">
+            <method name="prepareForValidation" signature="" line-rate="1" branch-rate="0" complexity="2">
               <lines>
                 <line number="116" hits="2"/>
                 <line number="118" hits="2"/>
@@ -828,8 +828,6 @@
                 <line number="123" hits="2"/>
                 <line number="125" hits="2"/>
                 <line number="126" hits="1"/>
-                <line number="129" hits="2"/>
-                <line number="130" hits="1"/>
               </lines>
             </method>
           </methods>
@@ -847,8 +845,6 @@
             <line number="123" hits="2"/>
             <line number="125" hits="2"/>
             <line number="126" hits="1"/>
-            <line number="129" hits="2"/>
-            <line number="130" hits="1"/>
           </lines>
         </class>
       </classes>
@@ -861,9 +857,9 @@
         </class>
       </classes>
     </package>
-    <package name="Http/Requests/Page/UpdateRequest.php" line-rate="1" branch-rate="0" complexity="6">
+    <package name="Http/Requests/Page/UpdateRequest.php" line-rate="1" branch-rate="0" complexity="4">
       <classes>
-        <class name="Playground\Cms\Api\Http\Requests\Page\UpdateRequest" filename="Http/Requests/Page/UpdateRequest.php" line-rate="1" branch-rate="0" complexity="6">
+        <class name="Playground\Cms\Api\Http\Requests\Page\UpdateRequest" filename="Http/Requests/Page/UpdateRequest.php" line-rate="1" branch-rate="0" complexity="4">
           <methods>
             <method name="rules" signature="" line-rate="1" branch-rate="0" complexity="2">
               <lines>
@@ -874,7 +870,7 @@
                 <line number="106" hits="4"/>
               </lines>
             </method>
-            <method name="prepareForValidation" signature="" line-rate="1" branch-rate="0" complexity="4">
+            <method name="prepareForValidation" signature="" line-rate="1" branch-rate="0" complexity="2">
               <lines>
                 <line number="116" hits="2"/>
                 <line number="118" hits="2"/>
@@ -884,8 +880,6 @@
                 <line number="123" hits="2"/>
                 <line number="125" hits="2"/>
                 <line number="126" hits="1"/>
-                <line number="129" hits="2"/>
-                <line number="130" hits="1"/>
               </lines>
             </method>
           </methods>
@@ -903,8 +897,6 @@
             <line number="123" hits="2"/>
             <line number="125" hits="2"/>
             <line number="126" hits="1"/>
-            <line number="129" hits="2"/>
-            <line number="130" hits="1"/>
           </lines>
         </class>
       </classes>
@@ -1005,9 +997,9 @@
         </class>
       </classes>
     </package>
-    <package name="Http/Requests/Snippet/StoreRequest.php" line-rate="1" branch-rate="0" complexity="6">
+    <package name="Http/Requests/Snippet/StoreRequest.php" line-rate="1" branch-rate="0" complexity="4">
       <classes>
-        <class name="Playground\Cms\Api\Http\Requests\Snippet\StoreRequest" filename="Http/Requests/Snippet/StoreRequest.php" line-rate="1" branch-rate="0" complexity="6">
+        <class name="Playground\Cms\Api\Http\Requests\Snippet\StoreRequest" filename="Http/Requests/Snippet/StoreRequest.php" line-rate="1" branch-rate="0" complexity="4">
           <methods>
             <method name="rules" signature="" line-rate="1" branch-rate="0" complexity="2">
               <lines>
@@ -1018,7 +1010,7 @@
                 <line number="105" hits="4"/>
               </lines>
             </method>
-            <method name="prepareForValidation" signature="" line-rate="1" branch-rate="0" complexity="4">
+            <method name="prepareForValidation" signature="" line-rate="1" branch-rate="0" complexity="2">
               <lines>
                 <line number="115" hits="2"/>
                 <line number="117" hits="2"/>
@@ -1028,8 +1020,6 @@
                 <line number="122" hits="2"/>
                 <line number="124" hits="2"/>
                 <line number="125" hits="1"/>
-                <line number="128" hits="2"/>
-                <line number="129" hits="1"/>
               </lines>
             </method>
           </methods>
@@ -1047,8 +1037,6 @@
             <line number="122" hits="2"/>
             <line number="124" hits="2"/>
             <line number="125" hits="1"/>
-            <line number="128" hits="2"/>
-            <line number="129" hits="1"/>
           </lines>
         </class>
       </classes>
@@ -1061,9 +1049,9 @@
         </class>
       </classes>
     </package>
-    <package name="Http/Requests/Snippet/UpdateRequest.php" line-rate="1" branch-rate="0" complexity="6">
+    <package name="Http/Requests/Snippet/UpdateRequest.php" line-rate="1" branch-rate="0" complexity="4">
       <classes>
-        <class name="Playground\Cms\Api\Http\Requests\Snippet\UpdateRequest" filename="Http/Requests/Snippet/UpdateRequest.php" line-rate="1" branch-rate="0" complexity="6">
+        <class name="Playground\Cms\Api\Http\Requests\Snippet\UpdateRequest" filename="Http/Requests/Snippet/UpdateRequest.php" line-rate="1" branch-rate="0" complexity="4">
           <methods>
             <method name="rules" signature="" line-rate="1" branch-rate="0" complexity="2">
               <lines>
@@ -1074,7 +1062,7 @@
                 <line number="106" hits="4"/>
               </lines>
             </method>
-            <method name="prepareForValidation" signature="" line-rate="1" branch-rate="0" complexity="4">
+            <method name="prepareForValidation" signature="" line-rate="1" branch-rate="0" complexity="2">
               <lines>
                 <line number="116" hits="2"/>
                 <line number="118" hits="2"/>
@@ -1084,8 +1072,6 @@
                 <line number="123" hits="2"/>
                 <line number="125" hits="2"/>
                 <line number="126" hits="1"/>
-                <line number="129" hits="2"/>
-                <line number="130" hits="1"/>
               </lines>
             </method>
           </methods>
@@ -1103,8 +1089,6 @@
             <line number="123" hits="2"/>
             <line number="125" hits="2"/>
             <line number="126" hits="1"/>
-            <line number="129" hits="2"/>
-            <line number="130" hits="1"/>
           </lines>
         </class>
       </classes>
