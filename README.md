@@ -14,6 +14,12 @@ If you need a CMS with a UI, then have a look at [Playground CMS Resource.](http
 
 Read more on using [Playground CMS API at Read the Docs: Playground Documentation.](https://gammamatrix-playground.readthedocs.io/en/develop/components/cms.html)
 
+### Postman
+
+A postman collection is provided in the repository: [postman-playground-cms-api.json.](postman-playground-cms-api.json)
+- This same collection is viewable on the [Postman: GammaMatrix Playground workspace.](https://www.postman.com/gammamatrix/workspace/playground/collection/1185343-bd35380d-6b9f-4ded-abe2-7dd36272f550)
+
+
 ### Swagger
 
 This application provides Swagger documentation: [swagger.json](swagger.json).

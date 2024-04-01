@@ -67,7 +67,9 @@ class PageController extends Controller
 
         $page = new Page($validated);
 
-        return (new PageResource($page))->response($request);
+        return (new PageResource($page))->additional(['meta' => [
+            'info' => $this->packageInfo,
+        ]])->response($request);
     }
 
     /**
@@ -79,7 +81,9 @@ class PageController extends Controller
         Page $page,
         EditRequest $request
     ): JsonResponse|PageResource {
-        return (new PageResource($page))->response($request);
+        return (new PageResource($page))->additional(['meta' => [
+            'info' => $this->packageInfo,
+        ]])->response($request);
     }
 
     /**
@@ -119,7 +123,9 @@ class PageController extends Controller
 
         $page->save();
 
-        return (new PageResource($page))->response($request);
+        return (new PageResource($page))->additional(['meta' => [
+            'info' => $this->packageInfo,
+        ]])->response($request);
     }
 
     /**
@@ -167,7 +173,9 @@ class PageController extends Controller
 
         $paginator->appends($validated);
 
-        return (new PageCollection($paginator))->response($request);
+        return (new PageCollection($paginator))->additional(['meta' => [
+            'info' => $this->packageInfo,
+        ]])->response($request);
 
     }
 
@@ -183,7 +191,9 @@ class PageController extends Controller
 
         $page->restore();
 
-        return (new PageResource($page))->response($request);
+        return (new PageResource($page))->additional(['meta' => [
+            'info' => $this->packageInfo,
+        ]])->response($request);
     }
 
     /**
@@ -218,7 +228,9 @@ class PageController extends Controller
 
         $page->save();
 
-        return (new PageResource($page))->response($request);
+        return (new PageResource($page))->additional(['meta' => [
+            'info' => $this->packageInfo,
+        ]])->response($request);
     }
 
     /**
@@ -242,7 +254,9 @@ class PageController extends Controller
             'info' => $this->packageInfo,
         ];
 
-        return (new PageRevisionResource($page_revision))->response($request);
+        return (new PageRevisionResource($page_revision))->additional(['meta' => [
+            'info' => $this->packageInfo,
+        ]])->response($request);
     }
 
     /**
@@ -291,7 +305,9 @@ class PageController extends Controller
 
         $paginator->appends($validated);
 
-        return (new PageRevisionCollection($paginator))->response($request);
+        return (new PageRevisionCollection($paginator))->additional(['meta' => [
+            'info' => $this->packageInfo,
+        ]])->response($request);
     }
 
     /**
@@ -339,7 +355,9 @@ class PageController extends Controller
             'info' => $this->packageInfo,
         ];
 
-        return (new PageResource($page))->response($request);
+        return (new PageResource($page))->additional(['meta' => [
+            'info' => $this->packageInfo,
+        ]])->response($request);
     }
 
     /**
@@ -361,6 +379,9 @@ class PageController extends Controller
         $page->save();
 
         return (new PageResource($page))
+            ->additional(['meta' => [
+                'info' => $this->packageInfo,
+            ]])
             ->response($request)
             ->setStatusCode(201);
     }
@@ -382,7 +403,9 @@ class PageController extends Controller
 
         $page->save();
 
-        return (new PageResource($page))->response($request);
+        return (new PageResource($page))->additional(['meta' => [
+            'info' => $this->packageInfo,
+        ]])->response($request);
     }
 
     /**
@@ -404,6 +427,8 @@ class PageController extends Controller
 
         $page->update($validated);
 
-        return (new PageResource($page))->response($request);
+        return (new PageResource($page))->additional(['meta' => [
+            'info' => $this->packageInfo,
+        ]])->response($request);
     }
 }

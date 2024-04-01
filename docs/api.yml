@@ -27,25 +27,45 @@ tags:
     name: Snippet
     description: 'Manage snippets in storage.'
 paths:
-  '/api/snippets/{id}':
+  '/api/cms/snippets/{id}':
     $ref: paths/snippets/id.yml
-  /api/snippets:
+  /api/cms/snippets:
     $ref: paths/snippets/index.yml
-  '/api/snippets/lock/{id}':
+  /api/cms/snippets/create:
+    $ref: paths/snippets/create.yml
+  '/api/cms/snippets/edit/{id}':
+    $ref: paths/snippets/edit.yml
+  '/api/cms/snippets/lock/{id}':
     $ref: paths/snippets/lock.yml
-  '/api/snippets/restore/{id}':
+  '/api/cms/snippets/restore/{id}':
     $ref: paths/snippets/restore.yml
-  '/api/pages/{id}':
+  '/api/cms/snippets/revision/{id}':
+    $ref: paths/snippets/revision.yml
+  '/api/cms/snippets/{id}/revisions':
+    $ref: paths/snippets/revisions.yml
+  '/api/cms/pages/{id}':
     $ref: paths/pages/id.yml
-  /api/pages:
+  /api/cms/pages:
     $ref: paths/pages/index.yml
-  '/api/pages/lock/{id}':
+  /api/cms/pages/create:
+    $ref: paths/pages/create.yml
+  '/api/cms/pages/edit/{id}':
+    $ref: paths/pages/edit.yml
+  '/api/cms/pages/lock/{id}':
     $ref: paths/pages/lock.yml
-  '/api/pages/restore/{id}':
+  '/api/cms/pages/restore/{id}':
     $ref: paths/pages/restore.yml
+  '/api/cms/pages/revision/{id}':
+    $ref: paths/pages/revision.yml
+  '/api/cms/pages/{id}/revisions':
+    $ref: paths/pages/revisions.yml
 components:
   schemas:
     Page:
       $ref: models/page.yml
+    PageRevision:
+      $ref: models/page-revision.yml
     Snippet:
       $ref: models/snippet.yml
+    SnippetRevision:
+      $ref: models/snippet-revision.yml

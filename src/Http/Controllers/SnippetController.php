@@ -67,7 +67,9 @@ class SnippetController extends Controller
 
         $snippet = new Snippet($validated);
 
-        return (new SnippetResource($snippet))->response($request);
+        return (new SnippetResource($snippet))->additional(['meta' => [
+            'info' => $this->packageInfo,
+        ]])->response($request);
     }
 
     /**
@@ -79,7 +81,9 @@ class SnippetController extends Controller
         Snippet $snippet,
         EditRequest $request
     ): JsonResponse {
-        return (new SnippetResource($snippet))->response($request);
+        return (new SnippetResource($snippet))->additional(['meta' => [
+            'info' => $this->packageInfo,
+        ]])->response($request);
     }
 
     /**
@@ -119,7 +123,9 @@ class SnippetController extends Controller
 
         $snippet->save();
 
-        return (new SnippetResource($snippet))->response($request);
+        return (new SnippetResource($snippet))->additional(['meta' => [
+            'info' => $this->packageInfo,
+        ]])->response($request);
     }
 
     /**
@@ -167,7 +173,9 @@ class SnippetController extends Controller
 
         $paginator->appends($validated);
 
-        return (new SnippetCollection($paginator))->response($request);
+        return (new SnippetCollection($paginator))->additional(['meta' => [
+            'info' => $this->packageInfo,
+        ]])->response($request);
     }
 
     /**
@@ -182,7 +190,9 @@ class SnippetController extends Controller
 
         $snippet->restore();
 
-        return (new SnippetResource($snippet))->response($request);
+        return (new SnippetResource($snippet))->additional(['meta' => [
+            'info' => $this->packageInfo,
+        ]])->response($request);
     }
 
     /**
@@ -217,7 +227,9 @@ class SnippetController extends Controller
 
         $snippet->save();
 
-        return (new SnippetResource($snippet))->response($request);
+        return (new SnippetResource($snippet))->additional(['meta' => [
+            'info' => $this->packageInfo,
+        ]])->response($request);
     }
 
     /**
@@ -229,7 +241,9 @@ class SnippetController extends Controller
         SnippetRevision $snippet_revision,
         ShowRevisionRequest $request
     ): JsonResponse|SnippetRevisionResource {
-        return (new SnippetRevisionResource($snippet_revision))->response($request);
+        return (new SnippetRevisionResource($snippet_revision))->additional(['meta' => [
+            'info' => $this->packageInfo,
+        ]])->response($request);
     }
 
     /**
@@ -278,7 +292,9 @@ class SnippetController extends Controller
 
         $paginator->appends($validated);
 
-        return (new SnippetRevisionCollection($paginator))->response($request);
+        return (new SnippetRevisionCollection($paginator))->additional(['meta' => [
+            'info' => $this->packageInfo,
+        ]])->response($request);
     }
 
     /**
@@ -326,7 +342,9 @@ class SnippetController extends Controller
             'info' => $this->packageInfo,
         ];
 
-        return (new SnippetResource($snippet))->response($request);
+        return (new SnippetResource($snippet))->additional(['meta' => [
+            'info' => $this->packageInfo,
+        ]])->response($request);
     }
 
     /**
@@ -348,6 +366,9 @@ class SnippetController extends Controller
         $snippet->save();
 
         return (new SnippetResource($snippet))
+            ->additional(['meta' => [
+                'info' => $this->packageInfo,
+            ]])
             ->response($request)
             ->setStatusCode(201);
     }
@@ -369,7 +390,9 @@ class SnippetController extends Controller
 
         $snippet->save();
 
-        return (new SnippetResource($snippet))->response($request);
+        return (new SnippetResource($snippet))->additional(['meta' => [
+            'info' => $this->packageInfo,
+        ]])->response($request);
     }
 
     /**
@@ -391,6 +414,8 @@ class SnippetController extends Controller
 
         $snippet->update($validated);
 
-        return (new SnippetResource($snippet))->response($request);
+        return (new SnippetResource($snippet))->additional(['meta' => [
+            'info' => $this->packageInfo,
+        ]])->response($request);
     }
 }

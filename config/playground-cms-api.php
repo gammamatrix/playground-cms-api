@@ -5,16 +5,19 @@ declare(strict_types=1);
 return [
     'middleware' => [
         'default' => env('PLAYGROUND_CMS_API_MIDDLEWARE_DEFAULT', [
+            'web',
             Illuminate\Routing\Middleware\SubstituteBindings::class,
             'auth:sanctum',
             Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
         ]),
         'auth' => env('PLAYGROUND_CMS_API_MIDDLEWARE_AUTH', [
+            'web',
             Illuminate\Routing\Middleware\SubstituteBindings::class,
             'auth:sanctum',
             Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
         ]),
         'guest' => env('PLAYGROUND_CMS_API_MIDDLEWARE_GUEST', [
+            'web',
             Illuminate\Routing\Middleware\SubstituteBindings::class,
             Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
         ]),

@@ -1,0 +1,3202 @@
+{
+	"info": {
+		"_postman_id": "bd35380d-6b9f-4ded-abe2-7dd36272f550",
+		"name": "API: CMS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1185343",
+		"_collection_link": "https://www.postman.com/gammamatrix/workspace/playground/collection/1185343-bd35380d-6b9f-4ded-abe2-7dd36272f550?action=share&source=collection_link&creator=1185343"
+	},
+	"item": [
+		{
+			"name": "Sanctum",
+			"item": [
+				{
+					"name": "Authentication Steps",
+					"item": [
+						{
+							"name": "1. Clear session",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Logout should be successful', function() {",
+											"    pm.response.to.have.status(200);",
+											"    pm.response.to.not.be.error;",
+											"    pm.response.to.be.ok;",
+											"    pm.response.to.be.withBody;",
+											"    pm.response.to.be.json;",
+											"    pm.response.to.have.jsonBody('message');",
+											"    pm.response.to.have.jsonBody('session_token');",
+											"    pm.response.to.not.have.jsonBody('error');",
+											"",
+											"    pm.expect(pm.cookies.has('XSRF-TOKEN')).to.be.string;",
+											"    pm.expect(pm.cookies.has('_session')).to.be.string;",
+											"",
+											"    const responseJson = pm.response.json();",
+											"",
+											"    pm.expect(responseJson.message).to.be.a('string');",
+											"    pm.expect(responseJson.message).to.eql('logout');",
+											"",
+											"    pm.expect(responseJson.session_token).to.be.a('string');",
+											"    pm.expect(responseJson.session_token).to.not.be.empty;",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Requested-With",
+										"value": "XMLHttpRequest",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"{{EMAIL_ADMIN}}\",\n    \"password\": \"{{PASSWORD_TESTING}}\",\n    \"_token\": \"{{TOKEN_CSFR}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL_APP}}/logout",
+									"host": [
+										"{{URL_APP}}"
+									],
+									"path": [
+										"logout"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "2. Issue a CSRF Token",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Find CSRF token in meta', function() {",
+											"    pm.response.to.have.status(200);",
+											"    pm.response.to.not.be.error;",
+											"    pm.response.to.be.ok;",
+											"    pm.response.to.be.withBody;",
+											"    pm.response.to.be.json;",
+											"    pm.response.to.have.jsonBody('meta');",
+											"    pm.response.to.not.have.jsonBody('error');",
+											"",
+											"    pm.expect(pm.cookies.has('XSRF-TOKEN')).to.be.string;",
+											"    pm.expect(pm.cookies.has('_session')).to.be.string;",
+											"",
+											"    const responseJson = pm.response.json();",
+											"",
+											"    pm.expect(responseJson.meta).to.be.a('object');",
+											"",
+											"    pm.expect(responseJson.meta.token).to.be.a('string');",
+											"",
+											"    pm.expect(responseJson.meta.token).to.not.be.empty;",
+											"",
+											"    pm.environment.set('TOKEN_CSRF', responseJson.meta.token);",
+											"    console.log('TOKEN_CSRF', pm.environment.get('TOKEN_CSRF'));",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL_APP}}/token",
+									"host": [
+										"{{URL_APP}}"
+									],
+									"path": [
+										"token"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "3. Issue a CSRF Cookie",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Verify cookie and no content response', function() {",
+											"    pm.response.to.have.status(204);",
+											"    pm.response.to.not.be.error;",
+											"    pm.response.to.not.be.withBody;",
+											"    pm.expect(pm.cookies.has('XSRF-TOKEN')).to.be.string;",
+											"    pm.expect(pm.cookies.has('_session')).to.be.string;",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL_APP}}/sanctum/csrf-cookie",
+									"host": [
+										"{{URL_APP}}"
+									],
+									"path": [
+										"sanctum",
+										"csrf-cookie"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "4. Authenticate as Admin",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Login as admin and find Sanctum token.', function() {",
+											"    pm.response.to.have.status(200);",
+											"    pm.response.to.not.be.error;",
+											"    pm.response.to.be.ok;",
+											"    pm.response.to.be.withBody;",
+											"    pm.response.to.be.json;",
+											"    pm.response.to.have.jsonBody('message');",
+											"    pm.response.to.have.jsonBody('tokens');",
+											"    pm.response.to.not.have.jsonBody('error');",
+											"",
+											"    pm.expect(pm.cookies.has('XSRF-TOKEN')).to.be.string;",
+											"    pm.expect(pm.cookies.has('_session')).to.be.string;",
+											"",
+											"    const responseJson = pm.response.json();",
+											"",
+											"    pm.expect(responseJson.message).to.be.a('string');",
+											"    pm.expect(responseJson.message).to.equal('authenticated');",
+											"",
+											"    pm.expect(responseJson.tokens).to.be.a('object');",
+											"",
+											"    pm.expect(responseJson.tokens).to.be.a('object');",
+											"    pm.expect(responseJson.tokens.app).to.be.a('string');",
+											"    pm.expect(responseJson.tokens.session).to.be.a('string');",
+											"    pm.environment.set('TOKEN_CSRF', responseJson.tokens.session);",
+											"",
+											"    pm.environment.set('TOKEN_ADMIN', responseJson.tokens.app);",
+											"    console.info('TOKEN_ADMIN', pm.environment.get('TOKEN_ADMIN'));",
+											"    console.info('TOKEN_CSRF', pm.environment.get('TOKEN_CSRF'));",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Requested-With",
+										"value": "XMLHttpRequest",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"{{EMAIL_ADMIN}}\",\n    \"password\": \"{{PASSWORD_TESTING}}\",\n    \"_token\": \"{{TOKEN_CSRF}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL_APP}}/login",
+									"host": [
+										"{{URL_APP}}"
+									],
+									"path": [
+										"login"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "1. Clear the session to initialize Postman test script variables.\n2. Issue a CSRF token for the session.\n3. Authentication as a user\n4. Reissue the CSRF token after authentication.\n    \n\n| User | Variable |\n| --- | --- |\n| Admin | `{{EMAIL_ADMIN}}` |\n| Guest | `{{EMAIL_GUEST}}` |\n| Manager | `{{EMAIL_MANAGER}}` |\n| Publisher | `{{EMAIL_PUBLISHER}}` |\n| Root | `{{EMAIL_ROOT}}` |\n| User | `{{EMAIL_USER}}` |"
+				},
+				{
+					"name": "Pages",
+					"item": [
+						{
+							"name": "index",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('See an index response from CMS Pages', function() {",
+											"    pm.response.to.have.status(200);",
+											"    pm.response.to.not.be.error;",
+											"    pm.response.to.be.ok;",
+											"    pm.response.to.be.withBody;",
+											"    pm.response.to.be.json;",
+											"    pm.response.to.have.jsonBody('data');",
+											"    pm.response.to.have.jsonBody('meta');",
+											"    pm.response.to.not.have.jsonBody('error');",
+											"",
+											"    pm.expect(pm.cookies.has('XSRF-TOKEN')).to.be.string;",
+											"    pm.expect(pm.cookies.has('_session')).to.be.string;",
+											"",
+											"    const responseJson = pm.response.json();",
+											"",
+											"    pm.expect(responseJson.data).to.be.a('array');",
+											"    pm.expect(responseJson.meta).to.be.a('object');",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "XMLHttpRequest",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{URL_RESOURCE}}{{URI_API_CMS}}/pages",
+									"host": [
+										"{{URL_RESOURCE}}{{URI_API_CMS}}"
+									],
+									"path": [
+										"pages"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get create info and verify model information in meta",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Get the create information for a CMS Page', function() {",
+											"    pm.response.to.have.status(200);",
+											"    pm.response.to.not.be.error;",
+											"    pm.response.to.be.ok;",
+											"    pm.response.to.be.withBody;",
+											"    pm.response.to.be.json;",
+											"    pm.response.to.have.jsonBody('data');",
+											"    pm.response.to.have.jsonBody('meta');",
+											"    pm.response.to.not.have.jsonBody('error');",
+											"",
+											"    pm.expect(pm.cookies.has('XSRF-TOKEN')).to.be.string;",
+											"    pm.expect(pm.cookies.has('_session')).to.be.string;",
+											"",
+											"    const responseJson = pm.response.json();",
+											"",
+											"    pm.expect(responseJson.data).to.be.a('object');",
+											"",
+											"    pm.expect(responseJson.data.title).to.be.a('string');",
+											"    pm.expect(responseJson.data.slug).to.be.null;",
+											"    pm.expect(responseJson.data.content).to.be.null;",
+											"    pm.expect(responseJson.data.created_at).to.be.null;",
+											"    pm.expect(responseJson.data.active).to.be.true;",
+											"",
+											"    pm.expect(responseJson.meta).to.be.a('object');",
+											"    pm.expect(responseJson.meta.info).to.be.a('object');",
+											"    pm.expect(responseJson.meta.info.model_label).to.be.a('string');",
+											"    pm.expect(responseJson.meta.info.model_label).to.be.equal('Page');",
+											"    pm.expect(responseJson.meta.info.model_route).to.be.a('string');",
+											"    pm.expect(responseJson.meta.info.model_route).to.be.equal('playground.cms.api.pages');",
+											"    pm.expect(responseJson.meta.info.privilege).to.be.a('string');",
+											"    pm.expect(responseJson.meta.info.privilege).to.be.equal('playground-cms-api:page');",
+											"    pm.expect(responseJson.meta.info.table).to.be.a('string');",
+											"    pm.expect(responseJson.meta.info.table).to.be.equal('cms_pages');",
+											"    pm.expect(responseJson.meta.info.view).to.not.exist;",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "XMLHttpRequest",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{URL_RESOURCE}}{{URI_API_CMS}}/pages/create",
+									"host": [
+										"{{URL_RESOURCE}}{{URI_API_CMS}}"
+									],
+									"path": [
+										"pages",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "store - CMS_API_PAGE_SLUG",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('See an index response from CMS Pages', function() {",
+											"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+											"    pm.response.to.not.be.error;",
+											"    pm.response.to.be.withBody;",
+											"    pm.response.to.be.json;",
+											"    pm.response.to.have.jsonBody('data');",
+											"    pm.response.to.have.jsonBody('meta');",
+											"    pm.response.to.not.have.jsonBody('error');",
+											"",
+											"    pm.expect(pm.cookies.has('XSRF-TOKEN')).to.be.string;",
+											"    pm.expect(pm.cookies.has('_session')).to.be.string;",
+											"",
+											"    const responseJson = pm.response.json();",
+											"",
+											"    pm.expect(responseJson.data).to.be.a('object');",
+											"    pm.expect(responseJson.meta).to.be.a('object');",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.test('Require CMS_API_PAGE_SLUG', function() {",
+											"    const CMS_API_PAGE_SLUG = pm.environment.get('CMS_API_PAGE_SLUG');",
+											"    console.info('store - CMS_API_PAGE_SLUG', CMS_API_PAGE_SLUG);",
+											"    pm.expect(CMS_API_PAGE_SLUG).to.be.string;",
+											"    pm.expect(CMS_API_PAGE_SLUG).to.not.be.empty;",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "XMLHttpRequest",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\": \"{{CMS_RESOURCE_PAGE_SLUG}}\",\n    \"slug\": \"{{CMS_RESOURCE_PAGE_SLUG}}\",\n    \"content\": \"Original: Lorem impsum\",\n    \"_token\": \"{{TOKEN_CSRF}}\",\n    \"published\": true,\n    \"active\": true,\n    \"allow_public\": true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL_RESOURCE}}{{URI_API_CMS}}/pages",
+									"host": [
+										"{{URL_RESOURCE}}{{URI_API_CMS}}"
+									],
+									"path": [
+										"pages"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "index filter slug",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Filter the index by slug from CMS Pages', function() {",
+											"    pm.response.to.have.status(200);",
+											"    pm.response.to.not.be.error;",
+											"    pm.response.to.be.ok;",
+											"    pm.response.to.be.withBody;",
+											"    pm.response.to.be.json;",
+											"    pm.response.to.have.jsonBody('data');",
+											"    pm.response.to.have.jsonBody('meta');",
+											"    pm.response.to.not.have.jsonBody('error');",
+											"",
+											"    pm.expect(pm.cookies.has('XSRF-TOKEN')).to.be.string;",
+											"    pm.expect(pm.cookies.has('_session')).to.be.string;",
+											"",
+											"    const responseJson = pm.response.json();",
+											"",
+											"    pm.expect(responseJson.data).to.be.a('array');",
+											"    pm.expect(responseJson.meta).to.be.a('object');",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "XMLHttpRequest",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{URL_RESOURCE}}{{URI_API_CMS}}/pages",
+									"host": [
+										"{{URL_RESOURCE}}{{URI_API_CMS}}"
+									],
+									"path": [
+										"pages"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Initialize - CMS_API_PAGE_SLUG",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Initialize CMS_RESOURCE_PAGE_SLUG for testing the API', function() {",
+											"    pm.response.to.have.status(200);",
+											"    pm.response.to.not.be.error;",
+											"    pm.response.to.be.ok;",
+											"    pm.response.to.be.withBody;",
+											"    pm.response.to.be.json;",
+											"",
+											"    pm.expect(pm.cookies.has('XSRF-TOKEN')).to.be.string;",
+											"    pm.expect(pm.cookies.has('_session')).to.be.string;",
+											"",
+											"    const responseJson = pm.response.json();",
+											"",
+											"    pm.expect(responseJson.data).to.be.a('object');",
+											"    pm.expect(responseJson.meta).to.be.a('object');",
+											"",
+											"    pm.expect(responseJson.data).to.be.a('object');",
+											"    pm.expect(responseJson.data.id).to.be.a('string');",
+											"    pm.expect(responseJson.data.slug).to.be.a('string');",
+											"",
+											"    pm.environment.set('CMS_API_PAGE_SLUG', responseJson.data.slug);",
+											"    console.info('CMS_API_PAGE_SLUG', pm.environment.get('CMS_API_PAGE_SLUG'));",
+											"",
+											"    pm.environment.set('CMS_API_PAGE_ID', responseJson.data.id);",
+											"    console.info('CMS_API_PAGE_ID', pm.environment.get('CMS_API_PAGE_ID'));",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.test('Require CMS_API_PAGE_SLUG', function() {",
+											"    const CMS_API_PAGE_SLUG = pm.environment.get('CMS_API_PAGE_SLUG');",
+											"    console.info('CMS_API_PAGE_SLUG', CMS_API_PAGE_SLUG);",
+											"    pm.expect(CMS_API_PAGE_SLUG).to.be.string;",
+											"    pm.expect(CMS_API_PAGE_SLUG).to.not.be.empty;",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "XMLHttpRequest",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{URL_RESOURCE}}{{URI_API_CMS}}/page/{{CMS_API_PAGE_SLUG}}",
+									"host": [
+										"{{URL_RESOURCE}}{{URI_API_CMS}}"
+									],
+									"path": [
+										"page",
+										"{{CMS_API_PAGE_SLUG}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "detail",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Show a CMS Page', function() {",
+											"    pm.response.to.have.status(200);",
+											"    pm.response.to.not.be.error;",
+											"    pm.response.to.be.ok;",
+											"    pm.response.to.be.withBody;",
+											"    pm.response.to.be.json;",
+											"    pm.response.to.have.jsonBody('data');",
+											"    pm.response.to.have.jsonBody('meta');",
+											"    pm.response.to.not.have.jsonBody('error');",
+											"",
+											"    pm.expect(pm.cookies.has('XSRF-TOKEN')).to.be.string;",
+											"    pm.expect(pm.cookies.has('_session')).to.be.string;",
+											"",
+											"    const responseJson = pm.response.json();",
+											"",
+											"    pm.expect(responseJson.meta).to.be.a('object');",
+											"",
+											"    pm.expect(responseJson.data).to.be.a('object');",
+											"",
+											"    pm.expect(responseJson.data.id).to.be.a('string');",
+											"    pm.expect(responseJson.data.id).to.be.equal(pm.environment.get('CMS_API_PAGE_ID'));",
+											"",
+											"    pm.expect(responseJson.data.title).to.be.a('string');",
+											"    pm.expect(responseJson.data.slug).to.be.a('string');",
+											"    pm.expect(responseJson.data.content).to.be.a('string');",
+											"    pm.expect(responseJson.data.created_at).to.be.a('string');",
+											"    pm.expect(responseJson.data.active).to.be.true;",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.test('Require CMS_API_PAGE_ID', function() {",
+											"    const CMS_API_PAGE_ID = pm.environment.get('CMS_API_PAGE_ID');",
+											"    console.info('CMS_API_PAGE_ID', CMS_API_PAGE_ID);",
+											"    pm.expect(CMS_API_PAGE_ID).to.be.string;",
+											"    pm.expect(CMS_API_PAGE_ID).to.not.be.empty;",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "XMLHttpRequest",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{URL_RESOURCE}}{{URI_API_CMS}}/pages/{{CMS_API_PAGE_ID}}",
+									"host": [
+										"{{URL_RESOURCE}}{{URI_API_CMS}}"
+									],
+									"path": [
+										"pages",
+										"{{CMS_API_PAGE_ID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "edit",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Get the edit information for a CMS Page', function() {",
+											"    pm.response.to.have.status(200);",
+											"    pm.response.to.not.be.error;",
+											"    pm.response.to.be.ok;",
+											"    pm.response.to.be.withBody;",
+											"    pm.response.to.be.json;",
+											"    pm.response.to.have.jsonBody('data');",
+											"    pm.response.to.have.jsonBody('meta');",
+											"    pm.response.to.not.have.jsonBody('error');",
+											"",
+											"    pm.expect(pm.cookies.has('XSRF-TOKEN')).to.be.string;",
+											"    pm.expect(pm.cookies.has('_session')).to.be.string;",
+											"",
+											"    const responseJson = pm.response.json();",
+											"",
+											"    pm.expect(responseJson.data).to.be.a('object');",
+											"",
+											"    pm.expect(responseJson.data.id).to.be.a('string');",
+											"    pm.expect(responseJson.data.id).to.be.equal(pm.environment.get('CMS_API_PAGE_ID'));",
+											"",
+											"    pm.expect(responseJson.data.title).to.be.a('string');",
+											"    pm.expect(responseJson.data.slug).to.be.a('string');",
+											"    pm.expect(responseJson.data.content).to.be.a('string');",
+											"    pm.expect(responseJson.data.created_at).to.be.a('string');",
+											"    pm.expect(responseJson.data.active).to.be.true;",
+											"",
+											"    pm.expect(responseJson.meta).to.be.a('object');",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.test('Require CMS_API_PAGE_ID', function() {",
+											"    const CMS_API_PAGE_ID = pm.environment.get('CMS_API_PAGE_ID');",
+											"    console.info('CMS_API_PAGE_ID', CMS_API_PAGE_ID);",
+											"    pm.expect(CMS_API_PAGE_ID).to.be.string;",
+											"    pm.expect(CMS_API_PAGE_ID).to.not.be.empty;",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "XMLHttpRequest",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{URL_RESOURCE}}{{URI_API_CMS}}/pages/edit/{{CMS_API_PAGE_ID}}",
+									"host": [
+										"{{URL_RESOURCE}}{{URI_API_CMS}}"
+									],
+									"path": [
+										"pages",
+										"edit",
+										"{{CMS_API_PAGE_ID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Update a CMS Page\", function() {",
+											"    pm.response.to.have.status(200);",
+											"    pm.response.to.not.be.error;",
+											"    pm.response.to.be.ok;",
+											"    pm.response.to.be.withBody;",
+											"    pm.response.to.be.json;",
+											"    pm.response.to.have.jsonBody(\"data\");",
+											"    pm.response.to.have.jsonBody(\"meta\");",
+											"    pm.response.to.not.have.jsonBody(\"error\");",
+											"",
+											"    pm.expect(pm.cookies.has('XSRF-TOKEN')).to.be.string;",
+											"    pm.expect(pm.cookies.has('_session')).to.be.string;",
+											"",
+											"    const responseJson = pm.response.json();",
+											"",
+											"    pm.expect(responseJson.data).to.be.a('object');",
+											"",
+											"    pm.expect(responseJson.data.id).to.be.a('string');",
+											"    pm.expect(responseJson.data.id).to.be.equal(pm.environment.get('CMS_API_PAGE_ID'));",
+											"",
+											"    pm.expect(responseJson.data.title).to.be.a('string');",
+											"    pm.expect(responseJson.data.slug).to.be.a('string');",
+											"    pm.expect(responseJson.data.slug).to.be.equal(pm.environment.get('CMS_API_PAGE_SLUG'));",
+											"    pm.expect(responseJson.data.content).to.be.a('string');",
+											"    pm.expect(responseJson.data.created_at).to.be.a('string');",
+											"    pm.expect(responseJson.data.active).to.be.true;",
+											"",
+											"    pm.expect(responseJson.meta).to.be.a('object');",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.test('Require CMS_API_PAGE_ID', function() {",
+											"    const CMS_API_PAGE_ID = pm.environment.get('CMS_API_PAGE_ID');",
+											"    console.info('CMS_API_PAGE_ID', CMS_API_PAGE_ID);",
+											"    pm.expect(CMS_API_PAGE_ID).to.be.string;",
+											"    pm.expect(CMS_API_PAGE_ID).to.not.be.empty;",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "XMLHttpRequest",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\": \"{{CMS_RESOURCE_PAGE_SLUG}}\",\n    \"slug\": \"{{CMS_RESOURCE_PAGE_SLUG}}\",\n    \"content\": \"Updated: Lorem impsum\",\n    \"_token\": \"{{TOKEN_CSRF}}\",\n    \"published\": true,\n    \"active\": true,\n    \"allow_public\": true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL_RESOURCE}}{{URI_API_CMS}}/pages/{{CMS_API_PAGE_ID}}",
+									"host": [
+										"{{URL_RESOURCE}}{{URI_API_CMS}}"
+									],
+									"path": [
+										"pages",
+										"{{CMS_API_PAGE_ID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "revisions",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Get the revisions for a CMS Page', function() {",
+											"    pm.response.to.have.status(200);",
+											"    pm.response.to.not.be.error;",
+											"    pm.response.to.be.ok;",
+											"    pm.response.to.be.withBody;",
+											"    pm.response.to.be.json;",
+											"    pm.response.to.have.jsonBody('data');",
+											"    pm.response.to.have.jsonBody('meta');",
+											"    pm.response.to.not.have.jsonBody('error');",
+											"",
+											"    pm.expect(pm.cookies.has('XSRF-TOKEN')).to.be.string;",
+											"    pm.expect(pm.cookies.has('_session')).to.be.string;",
+											"",
+											"    const responseJson = pm.response.json();",
+											"",
+											"    pm.expect(responseJson.data).to.be.a('array');",
+											"    pm.expect(responseJson.data[0]).to.be.a('object');",
+											"",
+											"    pm.expect(responseJson.data[0].id).to.be.a('string');",
+											"    pm.expect(responseJson.data[0].id).to.not.be.empty;",
+											"",
+											"    pm.environment.set('CMS_API_PAGE_REVISION_ID', responseJson.data[0].id);",
+											"    console.info('CMS_API_PAGE_REVISION_ID', pm.environment.get('CMS_API_PAGE_REVISION_ID'));",
+											"",
+											"    pm.expect(responseJson.data[0].page_id).to.be.a('string');",
+											"    pm.expect(responseJson.data[0].page_id).to.not.be.empty;",
+											"    pm.expect(responseJson.data[0].page_id).to.be.equal(pm.environment.get('CMS_API_PAGE_ID'));",
+											"",
+											"    pm.expect(responseJson.data[0].title).to.be.a('string');",
+											"    pm.expect(responseJson.data[0].slug).to.be.a('string');",
+											"    pm.expect(responseJson.data[0].content).to.be.a('string');",
+											"    pm.expect(responseJson.data[0].created_at).to.be.a('string');",
+											"    pm.expect(responseJson.data[0].active).to.be.true;",
+											"",
+											"    pm.expect(responseJson.meta).to.be.a('object');",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.test('Require CMS_API_PAGE_ID', function() {",
+											"    const CMS_API_PAGE_ID = pm.environment.get('CMS_API_PAGE_ID');",
+											"    console.info('CMS_API_PAGE_ID', CMS_API_PAGE_ID);",
+											"    pm.expect(CMS_API_PAGE_ID).to.be.string;",
+											"    pm.expect(CMS_API_PAGE_ID).to.not.be.empty;",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "XMLHttpRequest",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{URL_RESOURCE}}{{URI_API_CMS}}/pages/{{CMS_API_PAGE_ID}}/revisions",
+									"host": [
+										"{{URL_RESOURCE}}{{URI_API_CMS}}"
+									],
+									"path": [
+										"pages",
+										"{{CMS_API_PAGE_ID}}",
+										"revisions"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "revision",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Get a revision for a CMS Page', function() {",
+											"    pm.response.to.have.status(200);",
+											"    pm.response.to.not.be.error;",
+											"    pm.response.to.be.ok;",
+											"    pm.response.to.be.withBody;",
+											"    pm.response.to.be.json;",
+											"    pm.response.to.have.jsonBody('data');",
+											"    pm.response.to.have.jsonBody('meta');",
+											"    pm.response.to.not.have.jsonBody('error');",
+											"",
+											"    pm.expect(pm.cookies.has('XSRF-TOKEN')).to.be.string;",
+											"    pm.expect(pm.cookies.has('_session')).to.be.string;",
+											"",
+											"    const responseJson = pm.response.json();",
+											"",
+											"    pm.expect(responseJson.data).to.be.a('object');",
+											"",
+											"    pm.expect(responseJson.data.id).to.be.a('string');",
+											"    pm.expect(responseJson.data.id).to.be.equal(pm.environment.get('CMS_API_PAGE_REVISION_ID'));",
+											"",
+											"    pm.expect(responseJson.data.page_id).to.be.a('string');",
+											"    pm.expect(responseJson.data.page_id).to.be.equal(pm.environment.get('CMS_API_PAGE_ID'));",
+											"",
+											"    pm.expect(responseJson.data.title).to.be.a('string');",
+											"    pm.expect(responseJson.data.slug).to.be.a('string');",
+											"    pm.expect(responseJson.data.content).to.be.a('string');",
+											"    pm.expect(responseJson.data.created_at).to.be.a('string');",
+											"    pm.expect(responseJson.data.active).to.be.true;",
+											"",
+											"    pm.expect(responseJson.meta).to.be.a('object');",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.test('Require CMS_API_PAGE_REVISION_ID', function() {",
+											"    const CMS_API_PAGE_REVISION_ID = pm.environment.get('CMS_API_PAGE_REVISION_ID');",
+											"    console.info('CMS_API_PAGE_REVISION_ID', CMS_API_PAGE_REVISION_ID);",
+											"    pm.expect(CMS_API_PAGE_REVISION_ID).to.be.string;",
+											"    pm.expect(CMS_API_PAGE_REVISION_ID).to.not.be.empty;",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "XMLHttpRequest",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{URL_RESOURCE}}{{URI_API_CMS}}/pages/revision/{{CMS_API_PAGE_REVISION_ID}}",
+									"host": [
+										"{{URL_RESOURCE}}{{URI_API_CMS}}"
+									],
+									"path": [
+										"pages",
+										"revision",
+										"{{CMS_API_PAGE_REVISION_ID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "restore revision",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Restore a CMS Page to a previous revision\", function() {",
+											"    pm.response.to.have.status(200);",
+											"    pm.response.to.not.be.error;",
+											"    pm.response.to.be.ok;",
+											"    pm.response.to.be.withBody;",
+											"    pm.response.to.be.json;",
+											"    pm.response.to.have.jsonBody(\"data\");",
+											"    pm.response.to.have.jsonBody(\"meta\");",
+											"    pm.response.to.not.have.jsonBody(\"error\");",
+											"",
+											"    pm.expect(pm.cookies.has('XSRF-TOKEN')).to.be.string;",
+											"    pm.expect(pm.cookies.has('_session')).to.be.string;",
+											"",
+											"    const responseJson = pm.response.json();",
+											"",
+											"    pm.expect(responseJson.data).to.be.a('object');",
+											"",
+											"    pm.expect(responseJson.data.id).to.be.a('string');",
+											"    pm.expect(responseJson.data.id).to.be.equal(pm.environment.get('CMS_API_PAGE_ID'));",
+											"",
+											"    pm.expect(responseJson.data.title).to.be.a('string');",
+											"    pm.expect(responseJson.data.slug).to.be.a('string');",
+											"    pm.expect(responseJson.data.slug).to.be.equal(pm.environment.get('CMS_API_PAGE_SLUG'));",
+											"    pm.expect(responseJson.data.content).to.be.a('string');",
+											"    pm.expect(responseJson.data.created_at).to.be.a('string');",
+											"    pm.expect(responseJson.data.active).to.be.true;",
+											"",
+											"    pm.expect(responseJson.meta).to.be.a('object');",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.test('Require CMS_API_PAGE_REVISION_ID', function() {",
+											"    const CMS_API_PAGE_REVISION_ID = pm.environment.get('CMS_API_PAGE_REVISION_ID');",
+											"    console.info('CMS_API_PAGE_REVISION_ID', CMS_API_PAGE_REVISION_ID);",
+											"    pm.expect(CMS_API_PAGE_REVISION_ID).to.be.string;",
+											"    pm.expect(CMS_API_PAGE_REVISION_ID).to.not.be.empty;",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "XMLHttpRequest",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"_token\": \"{{TOKEN_CSRF}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL_RESOURCE}}{{URI_API_CMS}}/pages/revision/{{CMS_API_PAGE_REVISION_ID}}",
+									"host": [
+										"{{URL_RESOURCE}}{{URI_API_CMS}}"
+									],
+									"path": [
+										"pages",
+										"revision",
+										"{{CMS_API_PAGE_REVISION_ID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "trash",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Trash a CMS Page', function() {",
+											"    pm.response.to.have.status(204);",
+											"    pm.response.to.not.be.error;",
+											"    pm.response.to.not.be.withBody;",
+											"",
+											"    pm.expect(pm.cookies.has('XSRF-TOKEN')).to.be.string;",
+											"    pm.expect(pm.cookies.has('_session')).to.be.string;",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.test('Require CMS_API_PAGE_ID', function() {",
+											"    const CMS_API_PAGE_ID = pm.environment.get('CMS_API_PAGE_ID');",
+											"    console.info('CMS_API_PAGE_ID', CMS_API_PAGE_ID);",
+											"    pm.expect(CMS_API_PAGE_ID).to.be.string;",
+											"    pm.expect(CMS_API_PAGE_ID).to.not.be.empty;",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "XMLHttpRequest",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"_token\": \"{{TOKEN_CSRF}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL_RESOURCE}}{{URI_RESOURCE_CMS}}/pages/{{CMS_API_PAGE_ID}}",
+									"host": [
+										"{{URL_RESOURCE}}{{URI_RESOURCE_CMS}}"
+									],
+									"path": [
+										"pages",
+										"{{CMS_API_PAGE_ID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "restore",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Restore a CMS Page from the trash', function() {",
+											"    pm.response.to.have.status(200);",
+											"    pm.response.to.not.be.error;",
+											"    pm.response.to.be.ok;",
+											"    pm.response.to.be.withBody;",
+											"    pm.response.to.be.json;",
+											"    pm.response.to.have.jsonBody('data');",
+											"    pm.response.to.have.jsonBody('meta');",
+											"    pm.response.to.not.have.jsonBody('error');",
+											"",
+											"    pm.expect(pm.cookies.has('XSRF-TOKEN')).to.be.string;",
+											"    pm.expect(pm.cookies.has('_session')).to.be.string;",
+											"",
+											"    const responseJson = pm.response.json();",
+											"",
+											"    pm.expect(responseJson.meta).to.be.a('object');",
+											"",
+											"    pm.expect(responseJson.data).to.be.a('object');",
+											"",
+											"    pm.expect(responseJson.data.id).to.be.a('string');",
+											"    pm.expect(responseJson.data.id).to.be.equal(pm.environment.get('CMS_API_PAGE_ID'));",
+											"",
+											"    pm.expect(responseJson.data.title).to.be.a('string');",
+											"    pm.expect(responseJson.data.slug).to.be.a('string');",
+											"    pm.expect(responseJson.data.content).to.be.a('string');",
+											"    pm.expect(responseJson.data.created_at).to.be.a('string');",
+											"    pm.expect(responseJson.data.active).to.be.true;",
+											"    pm.expect(responseJson.data.deleted_at).to.be.null;",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.test('Require CMS_API_PAGE_ID', function() {",
+											"    const CMS_API_PAGE_ID = pm.environment.get('CMS_API_PAGE_ID');",
+											"    console.info('CMS_API_PAGE_ID', CMS_API_PAGE_ID);",
+											"    pm.expect(CMS_API_PAGE_ID).to.be.string;",
+											"    pm.expect(CMS_API_PAGE_ID).to.not.be.empty;",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "XMLHttpRequest",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"_token\": \"{{TOKEN_CSRF}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL_RESOURCE}}{{URI_API_CMS}}/pages/restore/{{CMS_API_PAGE_ID}}",
+									"host": [
+										"{{URL_RESOURCE}}{{URI_API_CMS}}"
+									],
+									"path": [
+										"pages",
+										"restore",
+										"{{CMS_API_PAGE_ID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "lock",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Lock a CMS Page', function() {",
+											"    pm.response.to.have.status(200);",
+											"    pm.response.to.not.be.error;",
+											"    pm.response.to.be.ok;",
+											"    pm.response.to.be.withBody;",
+											"    pm.response.to.be.json;",
+											"    pm.response.to.have.jsonBody('data');",
+											"    pm.response.to.have.jsonBody('meta');",
+											"    pm.response.to.not.have.jsonBody('error');",
+											"",
+											"    pm.expect(pm.cookies.has('XSRF-TOKEN')).to.be.string;",
+											"    pm.expect(pm.cookies.has('_session')).to.be.string;",
+											"",
+											"    const responseJson = pm.response.json();",
+											"",
+											"    pm.expect(responseJson.meta).to.be.a('object');",
+											"",
+											"    pm.expect(responseJson.data).to.be.a('object');",
+											"",
+											"    pm.expect(responseJson.data.id).to.be.a('string');",
+											"    pm.expect(responseJson.data.id).to.be.equal(pm.environment.get('CMS_API_PAGE_ID'));",
+											"",
+											"    pm.expect(responseJson.data.title).to.be.a('string');",
+											"    pm.expect(responseJson.data.slug).to.be.a('string');",
+											"    pm.expect(responseJson.data.content).to.be.a('string');",
+											"    pm.expect(responseJson.data.created_at).to.be.a('string');",
+											"    pm.expect(responseJson.data.active).to.be.true;",
+											"    pm.expect(responseJson.data.locked).to.be.true;",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.test('Require CMS_API_PAGE_ID', function() {",
+											"    const CMS_API_PAGE_ID = pm.environment.get('CMS_API_PAGE_ID');",
+											"    console.info('CMS_API_PAGE_ID', CMS_API_PAGE_ID);",
+											"    pm.expect(CMS_API_PAGE_ID).to.be.string;",
+											"    pm.expect(CMS_API_PAGE_ID).to.not.be.empty;",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "XMLHttpRequest",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"_token\": \"{{TOKEN_CSRF}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL_RESOURCE}}{{URI_API_CMS}}/pages/lock/{{CMS_API_PAGE_ID}}",
+									"host": [
+										"{{URL_RESOURCE}}{{URI_API_CMS}}"
+									],
+									"path": [
+										"pages",
+										"lock",
+										"{{CMS_API_PAGE_ID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "trash when locked and get 423",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Trash a CMS Page when locked and get 423', function() {",
+											"    pm.response.to.have.status(423);",
+											"    pm.response.to.be.error;",
+											"    pm.response.to.not.be.ok;",
+											"    pm.response.to.be.withBody;",
+											"",
+											"    pm.expect(pm.cookies.has('XSRF-TOKEN')).to.be.string;",
+											"    pm.expect(pm.cookies.has('_session')).to.be.string;",
+											"",
+											"    const responseJson = pm.response.json();",
+											"",
+											"    pm.expect(responseJson.message).to.be.a('string');",
+											"    pm.expect(responseJson.message).to.be.equal('The page record is locked. You must unlock it to make changes.');",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.test('Require CMS_API_PAGE_ID', function() {",
+											"    const CMS_API_PAGE_ID = pm.environment.get('CMS_API_PAGE_ID');",
+											"    console.info('CMS_API_PAGE_ID', CMS_API_PAGE_ID);",
+											"    pm.expect(CMS_API_PAGE_ID).to.be.string;",
+											"    pm.expect(CMS_API_PAGE_ID).to.not.be.empty;",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "XMLHttpRequest",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"_token\": \"{{TOKEN_CSRF}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL_RESOURCE}}{{URI_API_CMS}}/pages/{{CMS_API_PAGE_ID}}",
+									"host": [
+										"{{URL_RESOURCE}}{{URI_API_CMS}}"
+									],
+									"path": [
+										"pages",
+										"{{CMS_API_PAGE_ID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "unlock",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Unlock a CMS Page', function() {",
+											"    pm.response.to.have.status(200);",
+											"    pm.response.to.not.be.error;",
+											"    pm.response.to.be.ok;",
+											"    pm.response.to.be.withBody;",
+											"    pm.response.to.be.json;",
+											"    pm.response.to.have.jsonBody('data');",
+											"    pm.response.to.have.jsonBody('meta');",
+											"    pm.response.to.not.have.jsonBody('error');",
+											"",
+											"    pm.expect(pm.cookies.has('XSRF-TOKEN')).to.be.string;",
+											"    pm.expect(pm.cookies.has('_session')).to.be.string;",
+											"",
+											"    const responseJson = pm.response.json();",
+											"",
+											"    pm.expect(responseJson.meta).to.be.a('object');",
+											"",
+											"    pm.expect(responseJson.data).to.be.a('object');",
+											"",
+											"    pm.expect(responseJson.data.id).to.be.a('string');",
+											"    pm.expect(responseJson.data.id).to.be.equal(pm.environment.get('CMS_API_PAGE_ID'));",
+											"",
+											"    pm.expect(responseJson.data.title).to.be.a('string');",
+											"    pm.expect(responseJson.data.slug).to.be.a('string');",
+											"    pm.expect(responseJson.data.content).to.be.a('string');",
+											"    pm.expect(responseJson.data.created_at).to.be.a('string');",
+											"    pm.expect(responseJson.data.active).to.be.true;",
+											"    pm.expect(responseJson.data.locked).to.be.false;",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.test('Require CMS_API_PAGE_ID', function() {",
+											"    const CMS_API_PAGE_ID = pm.environment.get('CMS_API_PAGE_ID');",
+											"    console.info('CMS_API_PAGE_ID', CMS_API_PAGE_ID);",
+											"    pm.expect(CMS_API_PAGE_ID).to.be.string;",
+											"    pm.expect(CMS_API_PAGE_ID).to.not.be.empty;",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "XMLHttpRequest",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"_token\": \"{{TOKEN_CSRF}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL_RESOURCE}}{{URI_API_CMS}}/pages/lock/{{CMS_API_PAGE_ID}}",
+									"host": [
+										"{{URL_RESOURCE}}{{URI_API_CMS}}"
+									],
+									"path": [
+										"pages",
+										"lock",
+										"{{CMS_API_PAGE_ID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "slug",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Show a CMS Page by slug', function() {",
+											"    pm.response.to.have.status(200);",
+											"    pm.response.to.not.be.error;",
+											"    pm.response.to.be.ok;",
+											"    pm.response.to.be.withBody;",
+											"    pm.response.to.be.json;",
+											"    pm.response.to.have.jsonBody('data');",
+											"    pm.response.to.have.jsonBody('meta');",
+											"    pm.response.to.not.have.jsonBody('error');",
+											"",
+											"    pm.expect(pm.cookies.has('XSRF-TOKEN')).to.be.string;",
+											"    pm.expect(pm.cookies.has('_session')).to.be.string;",
+											"",
+											"    const responseJson = pm.response.json();",
+											"",
+											"    pm.expect(responseJson.meta).to.be.a('object');",
+											"",
+											"    pm.expect(responseJson.data).to.be.a('object');",
+											"",
+											"    pm.expect(responseJson.data.id).to.be.a('string');",
+											"    pm.expect(responseJson.data.id).to.be.equal(pm.environment.get('CMS_API_PAGE_ID'));",
+											"",
+											"    pm.expect(responseJson.data.title).to.be.a('string');",
+											"    pm.expect(responseJson.data.slug).to.be.a('string');",
+											"    pm.expect(responseJson.data.slug).to.be.equal(pm.environment.get('CMS_API_PAGE_SLUG'));",
+											"    pm.expect(responseJson.data.content).to.be.a('string');",
+											"    pm.expect(responseJson.data.created_at).to.be.a('string');",
+											"    pm.expect(responseJson.data.active).to.be.true;",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.test('Require CMS_API_PAGE_SLUG', function() {",
+											"    const CMS_API_PAGE_SLUG = pm.environment.get('CMS_API_PAGE_SLUG');",
+											"    console.info('CMS_API_PAGE_SLUG', CMS_API_PAGE_SLUG);",
+											"    pm.expect(CMS_API_PAGE_SLUG).to.be.string;",
+											"    pm.expect(CMS_API_PAGE_SLUG).to.not.be.empty;",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "XMLHttpRequest",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{URL_RESOURCE}}{{URI_API_CMS}}/page/{{CMS_API_PAGE_SLUG}}",
+									"host": [
+										"{{URL_RESOURCE}}{{URI_API_CMS}}"
+									],
+									"path": [
+										"page",
+										"{{CMS_API_PAGE_SLUG}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Force delete a CMS Page', function() {",
+											"    pm.response.to.have.status(204);",
+											"    pm.response.to.not.be.error;",
+											"    pm.response.to.not.be.withBody;",
+											"",
+											"    pm.expect(pm.cookies.has('XSRF-TOKEN')).to.be.string;",
+											"    pm.expect(pm.cookies.has('_session')).to.be.string;",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.test('Require CMS_API_PAGE_ID', function() {",
+											"    const CMS_API_PAGE_ID = pm.environment.get('CMS_API_PAGE_ID');",
+											"    console.info('CMS_API_PAGE_ID', CMS_API_PAGE_ID);",
+											"    pm.expect(CMS_API_PAGE_ID).to.be.string;",
+											"    pm.expect(CMS_API_PAGE_ID).to.not.be.empty;",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "XMLHttpRequest",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"_token\": \"{{TOKEN_CSRF}}\",\n    \"force\": true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL_RESOURCE}}{{URI_API_CMS}}/pages/{{CMS_API_PAGE_ID}}",
+									"host": [
+										"{{URL_RESOURCE}}{{URI_API_CMS}}"
+									],
+									"path": [
+										"pages",
+										"{{CMS_API_PAGE_ID}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Snippets",
+					"item": [
+						{
+							"name": "index",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('See an index response from CMS Snippets', function() {",
+											"    pm.response.to.have.status(200);",
+											"    pm.response.to.not.be.error;",
+											"    pm.response.to.be.ok;",
+											"    pm.response.to.be.withBody;",
+											"    pm.response.to.be.json;",
+											"    pm.response.to.have.jsonBody('data');",
+											"    pm.response.to.have.jsonBody('meta');",
+											"    pm.response.to.not.have.jsonBody('error');",
+											"",
+											"    pm.expect(pm.cookies.has('XSRF-TOKEN')).to.be.string;",
+											"    pm.expect(pm.cookies.has('_session')).to.be.string;",
+											"",
+											"    const responseJson = pm.response.json();",
+											"",
+											"    pm.expect(responseJson.data).to.be.a('array');",
+											"    pm.expect(responseJson.meta).to.be.a('object');",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "XMLHttpRequest",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{URL_RESOURCE}}{{URI_API_CMS}}/snippets",
+									"host": [
+										"{{URL_RESOURCE}}{{URI_API_CMS}}"
+									],
+									"path": [
+										"snippets"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get create info and verify model information in meta",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Get the create information for a CMS Snippet', function() {",
+											"    pm.response.to.have.status(200);",
+											"    pm.response.to.not.be.error;",
+											"    pm.response.to.be.ok;",
+											"    pm.response.to.be.withBody;",
+											"    pm.response.to.be.json;",
+											"    pm.response.to.have.jsonBody('data');",
+											"    pm.response.to.have.jsonBody('meta');",
+											"    pm.response.to.not.have.jsonBody('error');",
+											"",
+											"    pm.expect(pm.cookies.has('XSRF-TOKEN')).to.be.string;",
+											"    pm.expect(pm.cookies.has('_session')).to.be.string;",
+											"",
+											"    const responseJson = pm.response.json();",
+											"",
+											"    pm.expect(responseJson.data).to.be.a('object');",
+											"",
+											"    pm.expect(responseJson.data.title).to.be.a('string');",
+											"    pm.expect(responseJson.data.slug).to.be.null;",
+											"    pm.expect(responseJson.data.content).to.be.null;",
+											"    pm.expect(responseJson.data.created_at).to.be.null;",
+											"    pm.expect(responseJson.data.active).to.be.true;",
+											"",
+											"    pm.expect(responseJson.meta).to.be.a('object');",
+											"    pm.expect(responseJson.meta.info).to.be.a('object');",
+											"    pm.expect(responseJson.meta.info.model_label).to.be.a('string');",
+											"    pm.expect(responseJson.meta.info.model_label).to.be.equal('Snippet');",
+											"    pm.expect(responseJson.meta.info.model_route).to.be.a('string');",
+											"    pm.expect(responseJson.meta.info.model_route).to.be.equal('playground.cms.api.snippets');",
+											"    pm.expect(responseJson.meta.info.privilege).to.be.a('string');",
+											"    pm.expect(responseJson.meta.info.privilege).to.be.equal('playground-cms-api:snippet');",
+											"    pm.expect(responseJson.meta.info.table).to.be.a('string');",
+											"    pm.expect(responseJson.meta.info.table).to.be.equal('cms_snippets');",
+											"    pm.expect(responseJson.meta.info.view).to.not.exist;",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "XMLHttpRequest",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{URL_RESOURCE}}{{URI_API_CMS}}/snippets/create",
+									"host": [
+										"{{URL_RESOURCE}}{{URI_API_CMS}}"
+									],
+									"path": [
+										"snippets",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "store - CMS_API_PAGE_SLUG",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('See an index response from CMS Snippets', function() {",
+											"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+											"    pm.response.to.not.be.error;",
+											"    pm.response.to.be.withBody;",
+											"    pm.response.to.be.json;",
+											"    pm.response.to.have.jsonBody('data');",
+											"    pm.response.to.have.jsonBody('meta');",
+											"    pm.response.to.not.have.jsonBody('error');",
+											"",
+											"    pm.expect(pm.cookies.has('XSRF-TOKEN')).to.be.string;",
+											"    pm.expect(pm.cookies.has('_session')).to.be.string;",
+											"",
+											"    const responseJson = pm.response.json();",
+											"",
+											"    pm.expect(responseJson.data).to.be.a('object');",
+											"    pm.expect(responseJson.meta).to.be.a('object');",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.test('Require CMS_API_PAGE_SLUG', function() {",
+											"    const CMS_API_PAGE_SLUG = pm.environment.get('CMS_API_PAGE_SLUG');",
+											"    console.info('CMS_API_PAGE_SLUG', CMS_API_PAGE_SLUG);",
+											"    pm.expect(CMS_API_PAGE_SLUG).to.be.string;",
+											"    pm.expect(CMS_API_PAGE_SLUG).to.not.be.empty;",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "XMLHttpRequest",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\": \"{{CMS_RESOURCE_PAGE_SLUG}}\",\n    \"slug\": \"{{CMS_RESOURCE_PAGE_SLUG}}\",\n    \"content\": \"Original: Lorem impsum\",\n    \"_token\": \"{{TOKEN_CSRF}}\",\n    \"published\": true,\n    \"active\": true,\n    \"allow_public\": true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL_RESOURCE}}{{URI_API_CMS}}/snippets",
+									"host": [
+										"{{URL_RESOURCE}}{{URI_API_CMS}}"
+									],
+									"path": [
+										"snippets"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "index filter slug",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Filter the index by slug from CMS Snippets', function() {",
+											"    pm.response.to.have.status(200);",
+											"    pm.response.to.not.be.error;",
+											"    pm.response.to.be.ok;",
+											"    pm.response.to.be.withBody;",
+											"    pm.response.to.be.json;",
+											"    pm.response.to.have.jsonBody('data');",
+											"    pm.response.to.have.jsonBody('meta');",
+											"    pm.response.to.not.have.jsonBody('error');",
+											"",
+											"    pm.expect(pm.cookies.has('XSRF-TOKEN')).to.be.string;",
+											"    pm.expect(pm.cookies.has('_session')).to.be.string;",
+											"",
+											"    const responseJson = pm.response.json();",
+											"",
+											"    pm.expect(responseJson.data).to.be.a('array');",
+											"    pm.expect(responseJson.meta).to.be.a('object');",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "XMLHttpRequest",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{URL_RESOURCE}}{{URI_API_CMS}}/snippets",
+									"host": [
+										"{{URL_RESOURCE}}{{URI_API_CMS}}"
+									],
+									"path": [
+										"snippets"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Initialize - CMS_API_PAGE_SLUG",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Initialize CMS_API_SNIPPET_SLUG for testing the API', function() {",
+											"    pm.response.to.have.status(200);",
+											"    pm.response.to.not.be.error;",
+											"    pm.response.to.be.ok;",
+											"    pm.response.to.be.withBody;",
+											"    pm.response.to.be.json;",
+											"",
+											"    pm.expect(pm.cookies.has('XSRF-TOKEN')).to.be.string;",
+											"    pm.expect(pm.cookies.has('_session')).to.be.string;",
+											"",
+											"    const responseJson = pm.response.json();",
+											"",
+											"    pm.expect(responseJson.data).to.be.a('object');",
+											"    pm.expect(responseJson.meta).to.be.a('object');",
+											"",
+											"    pm.expect(responseJson.data).to.be.a('object');",
+											"    pm.expect(responseJson.data.id).to.be.a('string');",
+											"    pm.expect(responseJson.data.slug).to.be.a('string');",
+											"",
+											"    pm.environment.set('CMS_API_SNIPPET_SLUG', responseJson.data.slug);",
+											"    console.info('CMS_API_SNIPPET_SLUG', pm.environment.get('CMS_API_SNIPPET_SLUG'));",
+											"",
+											"    pm.environment.set('CMS_API_SNIPPET_ID', responseJson.data.id);",
+											"    console.info('CMS_API_SNIPPET_ID', pm.environment.get('CMS_API_SNIPPET_ID'));",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.test('Require CMS_API_SNIPPET_SLUG', function() {",
+											"    const CMS_API_SNIPPET_SLUG = pm.environment.get('CMS_API_SNIPPET_SLUG');",
+											"    console.info('CMS_API_SNIPPET_SLUG', CMS_API_SNIPPET_SLUG);",
+											"    pm.expect(CMS_API_SNIPPET_SLUG).to.be.string;",
+											"    pm.expect(CMS_API_SNIPPET_SLUG).to.not.be.empty;",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "XMLHttpRequest",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{URL_RESOURCE}}{{URI_API_CMS}}/snippet/{{CMS_API_SNIPPET_SLUG}}",
+									"host": [
+										"{{URL_RESOURCE}}{{URI_API_CMS}}"
+									],
+									"path": [
+										"snippet",
+										"{{CMS_API_SNIPPET_SLUG}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "detail",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Show a CMS snippet', function() {",
+											"    pm.response.to.have.status(200);",
+											"    pm.response.to.not.be.error;",
+											"    pm.response.to.be.ok;",
+											"    pm.response.to.be.withBody;",
+											"    pm.response.to.be.json;",
+											"    pm.response.to.have.jsonBody('data');",
+											"    pm.response.to.have.jsonBody('meta');",
+											"    pm.response.to.not.have.jsonBody('error');",
+											"",
+											"    pm.expect(pm.cookies.has('XSRF-TOKEN')).to.be.string;",
+											"    pm.expect(pm.cookies.has('_session')).to.be.string;",
+											"",
+											"    const responseJson = pm.response.json();",
+											"",
+											"    pm.expect(responseJson.meta).to.be.a('object');",
+											"",
+											"    pm.expect(responseJson.data).to.be.a('object');",
+											"",
+											"    pm.expect(responseJson.data.id).to.be.a('string');",
+											"    pm.expect(responseJson.data.id).to.be.equal(pm.environment.get('CMS_API_SNIPPET_ID'));",
+											"",
+											"    pm.expect(responseJson.data.title).to.be.a('string');",
+											"    pm.expect(responseJson.data.slug).to.be.a('string');",
+											"    pm.expect(responseJson.data.content).to.be.a('string');",
+											"    pm.expect(responseJson.data.created_at).to.be.a('string');",
+											"    pm.expect(responseJson.data.active).to.be.true;",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.test('Require CMS_API_SNIPPET_ID', function() {",
+											"    const CMS_API_SNIPPET_ID = pm.environment.get('CMS_API_SNIPPET_ID');",
+											"    console.info('CMS_API_SNIPPET_ID', CMS_API_SNIPPET_ID);",
+											"    pm.expect(CMS_API_SNIPPET_ID).to.be.string;",
+											"    pm.expect(CMS_API_SNIPPET_ID).to.not.be.empty;",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "XMLHttpRequest",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{URL_RESOURCE}}{{URI_API_CMS}}/snippets/{{CMS_API_SNIPPET_ID}}",
+									"host": [
+										"{{URL_RESOURCE}}{{URI_API_CMS}}"
+									],
+									"path": [
+										"snippets",
+										"{{CMS_API_SNIPPET_ID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "edit",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Get the edit information for a CMS Snippet', function() {",
+											"    pm.response.to.have.status(200);",
+											"    pm.response.to.not.be.error;",
+											"    pm.response.to.be.ok;",
+											"    pm.response.to.be.withBody;",
+											"    pm.response.to.be.json;",
+											"    pm.response.to.have.jsonBody('data');",
+											"    pm.response.to.have.jsonBody('meta');",
+											"    pm.response.to.not.have.jsonBody('error');",
+											"",
+											"    pm.expect(pm.cookies.has('XSRF-TOKEN')).to.be.string;",
+											"    pm.expect(pm.cookies.has('_session')).to.be.string;",
+											"",
+											"    const responseJson = pm.response.json();",
+											"",
+											"    pm.expect(responseJson.data).to.be.a('object');",
+											"",
+											"    pm.expect(responseJson.data.id).to.be.a('string');",
+											"    pm.expect(responseJson.data.id).to.be.equal(pm.environment.get('CMS_API_SNIPPET_ID'));",
+											"",
+											"    pm.expect(responseJson.data.title).to.be.a('string');",
+											"    pm.expect(responseJson.data.slug).to.be.a('string');",
+											"    pm.expect(responseJson.data.content).to.be.a('string');",
+											"    pm.expect(responseJson.data.created_at).to.be.a('string');",
+											"    pm.expect(responseJson.data.active).to.be.true;",
+											"",
+											"    pm.expect(responseJson.meta).to.be.a('object');",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.test('Require CMS_API_SNIPPET_ID', function() {",
+											"    const CMS_API_SNIPPET_ID = pm.environment.get('CMS_API_SNIPPET_ID');",
+											"    console.info('CMS_API_SNIPPET_ID', CMS_API_SNIPPET_ID);",
+											"    pm.expect(CMS_API_SNIPPET_ID).to.be.string;",
+											"    pm.expect(CMS_API_SNIPPET_ID).to.not.be.empty;",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "XMLHttpRequest",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{URL_RESOURCE}}{{URI_API_CMS}}/snippets/edit/{{CMS_API_SNIPPET_ID}}",
+									"host": [
+										"{{URL_RESOURCE}}{{URI_API_CMS}}"
+									],
+									"path": [
+										"snippets",
+										"edit",
+										"{{CMS_API_SNIPPET_ID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Update a CMS Snippet\", function() {",
+											"    pm.response.to.have.status(200);",
+											"    pm.response.to.not.be.error;",
+											"    pm.response.to.be.ok;",
+											"    pm.response.to.be.withBody;",
+											"    pm.response.to.be.json;",
+											"    pm.response.to.have.jsonBody(\"data\");",
+											"    pm.response.to.have.jsonBody(\"meta\");",
+											"    pm.response.to.not.have.jsonBody(\"error\");",
+											"",
+											"    pm.expect(pm.cookies.has('XSRF-TOKEN')).to.be.string;",
+											"    pm.expect(pm.cookies.has('_session')).to.be.string;",
+											"",
+											"    const responseJson = pm.response.json();",
+											"",
+											"    pm.expect(responseJson.data).to.be.a('object');",
+											"",
+											"    pm.expect(responseJson.data.id).to.be.a('string');",
+											"    pm.expect(responseJson.data.id).to.be.equal(pm.environment.get('CMS_API_SNIPPET_ID'));",
+											"",
+											"    pm.expect(responseJson.data.title).to.be.a('string');",
+											"    pm.expect(responseJson.data.slug).to.be.a('string');",
+											"    pm.expect(responseJson.data.slug).to.be.equal(pm.environment.get('CMS_API_SNIPPET_SLUG'));",
+											"    pm.expect(responseJson.data.content).to.be.a('string');",
+											"    pm.expect(responseJson.data.created_at).to.be.a('string');",
+											"    pm.expect(responseJson.data.active).to.be.true;",
+											"",
+											"    pm.expect(responseJson.meta).to.be.a('object');",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.test('Require CMS_API_SNIPPET_ID', function() {",
+											"    const CMS_API_SNIPPET_ID = pm.environment.get('CMS_API_SNIPPET_ID');",
+											"    console.info('CMS_API_SNIPPET_ID', CMS_API_SNIPPET_ID);",
+											"    pm.expect(CMS_API_SNIPPET_ID).to.be.string;",
+											"    pm.expect(CMS_API_SNIPPET_ID).to.not.be.empty;",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "XMLHttpRequest",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\": \"{{CMS_RESOURCE_PAGE_SLUG}}\",\n    \"slug\": \"{{CMS_RESOURCE_PAGE_SLUG}}\",\n    \"content\": \"Updated: Lorem impsum\",\n    \"_token\": \"{{TOKEN_CSRF}}\",\n    \"published\": true,\n    \"active\": true,\n    \"allow_public\": true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL_RESOURCE}}{{URI_API_CMS}}/snippets/{{CMS_API_SNIPPET_ID}}",
+									"host": [
+										"{{URL_RESOURCE}}{{URI_API_CMS}}"
+									],
+									"path": [
+										"snippets",
+										"{{CMS_API_SNIPPET_ID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "revisions",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Get the revisions for a CMS Snippet', function() {",
+											"    pm.response.to.have.status(200);",
+											"    pm.response.to.not.be.error;",
+											"    pm.response.to.be.ok;",
+											"    pm.response.to.be.withBody;",
+											"    pm.response.to.be.json;",
+											"    pm.response.to.have.jsonBody('data');",
+											"    pm.response.to.have.jsonBody('meta');",
+											"    pm.response.to.not.have.jsonBody('error');",
+											"",
+											"    pm.expect(pm.cookies.has('XSRF-TOKEN')).to.be.string;",
+											"    pm.expect(pm.cookies.has('_session')).to.be.string;",
+											"",
+											"    const responseJson = pm.response.json();",
+											"",
+											"    pm.expect(responseJson.data).to.be.a('array');",
+											"    pm.expect(responseJson.data[0]).to.be.a('object');",
+											"",
+											"    pm.expect(responseJson.data[0].id).to.be.a('string');",
+											"    pm.expect(responseJson.data[0].id).to.not.be.empty;",
+											"",
+											"    pm.environment.set('CMS_API_SNIPPET_REVISION_ID', responseJson.data[0].id);",
+											"    console.info('CMS_API_SNIPPET_REVISION_ID', pm.environment.get('CMS_API_SNIPPET_REVISION_ID'));",
+											"",
+											"    pm.expect(responseJson.data[0].snippet_id).to.be.a('string');",
+											"    pm.expect(responseJson.data[0].snippet_id).to.not.be.empty;",
+											"    pm.expect(responseJson.data[0].snippet_id).to.be.equal(pm.environment.get('CMS_API_SNIPPET_ID'));",
+											"",
+											"    pm.expect(responseJson.data[0].title).to.be.a('string');",
+											"    pm.expect(responseJson.data[0].slug).to.be.a('string');",
+											"    pm.expect(responseJson.data[0].content).to.be.a('string');",
+											"    pm.expect(responseJson.data[0].created_at).to.be.a('string');",
+											"    pm.expect(responseJson.data[0].active).to.be.true;",
+											"",
+											"    pm.expect(responseJson.meta).to.be.a('object');",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.test('Require CMS_API_SNIPPET_ID', function() {",
+											"    const CMS_API_SNIPPET_ID = pm.environment.get('CMS_API_SNIPPET_ID');",
+											"    console.info('CMS_API_SNIPPET_ID', CMS_API_SNIPPET_ID);",
+											"    pm.expect(CMS_API_SNIPPET_ID).to.be.string;",
+											"    pm.expect(CMS_API_SNIPPET_ID).to.not.be.empty;",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "XMLHttpRequest",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{URL_RESOURCE}}{{URI_API_CMS}}/snippets/{{CMS_API_SNIPPET_ID}}/revisions",
+									"host": [
+										"{{URL_RESOURCE}}{{URI_API_CMS}}"
+									],
+									"path": [
+										"snippets",
+										"{{CMS_API_SNIPPET_ID}}",
+										"revisions"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "revision",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Get a revision for a CMS Snippet', function() {",
+											"    pm.response.to.have.status(200);",
+											"    pm.response.to.not.be.error;",
+											"    pm.response.to.be.ok;",
+											"    pm.response.to.be.withBody;",
+											"    pm.response.to.be.json;",
+											"    pm.response.to.have.jsonBody('data');",
+											"    pm.response.to.have.jsonBody('meta');",
+											"    pm.response.to.not.have.jsonBody('error');",
+											"",
+											"    pm.expect(pm.cookies.has('XSRF-TOKEN')).to.be.string;",
+											"    pm.expect(pm.cookies.has('_session')).to.be.string;",
+											"",
+											"    const responseJson = pm.response.json();",
+											"",
+											"    pm.expect(responseJson.data).to.be.a('object');",
+											"",
+											"    pm.expect(responseJson.data.id).to.be.a('string');",
+											"    pm.expect(responseJson.data.id).to.be.equal(pm.environment.get('CMS_API_SNIPPET_REVISION_ID'));",
+											"",
+											"    pm.expect(responseJson.data.snippet_id).to.be.a('string');",
+											"    pm.expect(responseJson.data.snippet_id).to.be.equal(pm.environment.get('CMS_API_SNIPPET_ID'));",
+											"",
+											"    pm.expect(responseJson.data.title).to.be.a('string');",
+											"    pm.expect(responseJson.data.slug).to.be.a('string');",
+											"    pm.expect(responseJson.data.content).to.be.a('string');",
+											"    pm.expect(responseJson.data.created_at).to.be.a('string');",
+											"    pm.expect(responseJson.data.active).to.be.true;",
+											"",
+											"    pm.expect(responseJson.meta).to.be.a('object');",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.test('Require CMS_API_SNIPPET_REVISION_ID', function() {",
+											"    const CMS_API_SNIPPET_REVISION_ID = pm.environment.get('CMS_API_SNIPPET_REVISION_ID');",
+											"    console.info('CMS_API_SNIPPET_REVISION_ID', CMS_API_SNIPPET_REVISION_ID);",
+											"    pm.expect(CMS_API_SNIPPET_REVISION_ID).to.be.string;",
+											"    pm.expect(CMS_API_SNIPPET_REVISION_ID).to.not.be.empty;",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "XMLHttpRequest",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{URL_RESOURCE}}{{URI_API_CMS}}/snippets/revision/{{CMS_API_SNIPPET_REVISION_ID}}",
+									"host": [
+										"{{URL_RESOURCE}}{{URI_API_CMS}}"
+									],
+									"path": [
+										"snippets",
+										"revision",
+										"{{CMS_API_SNIPPET_REVISION_ID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "restore revision",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Restore a CMS Snippet to a previous revision\", function() {",
+											"    pm.response.to.have.status(200);",
+											"    pm.response.to.not.be.error;",
+											"    pm.response.to.be.ok;",
+											"    pm.response.to.be.withBody;",
+											"    pm.response.to.be.json;",
+											"    pm.response.to.have.jsonBody(\"data\");",
+											"    pm.response.to.have.jsonBody(\"meta\");",
+											"    pm.response.to.not.have.jsonBody(\"error\");",
+											"",
+											"    pm.expect(pm.cookies.has('XSRF-TOKEN')).to.be.string;",
+											"    pm.expect(pm.cookies.has('_session')).to.be.string;",
+											"",
+											"    const responseJson = pm.response.json();",
+											"",
+											"    pm.expect(responseJson.data).to.be.a('object');",
+											"",
+											"    pm.expect(responseJson.data.id).to.be.a('string');",
+											"    pm.expect(responseJson.data.id).to.be.equal(pm.environment.get('CMS_API_SNIPPET_ID'));",
+											"",
+											"    pm.expect(responseJson.data.title).to.be.a('string');",
+											"    pm.expect(responseJson.data.slug).to.be.a('string');",
+											"    pm.expect(responseJson.data.slug).to.be.equal(pm.environment.get('CMS_API_SNIPPET_SLUG'));",
+											"    pm.expect(responseJson.data.content).to.be.a('string');",
+											"    pm.expect(responseJson.data.created_at).to.be.a('string');",
+											"    pm.expect(responseJson.data.active).to.be.true;",
+											"",
+											"    pm.expect(responseJson.meta).to.be.a('object');",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.test('Require CMS_API_SNIPPET_REVISION_ID', function() {",
+											"    const CMS_API_SNIPPET_REVISION_ID = pm.environment.get('CMS_API_SNIPPET_REVISION_ID');",
+											"    console.info('CMS_API_SNIPPET_REVISION_ID', CMS_API_SNIPPET_REVISION_ID);",
+											"    pm.expect(CMS_API_SNIPPET_REVISION_ID).to.be.string;",
+											"    pm.expect(CMS_API_SNIPPET_REVISION_ID).to.not.be.empty;",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "XMLHttpRequest",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"_token\": \"{{TOKEN_CSRF}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL_RESOURCE}}{{URI_API_CMS}}/snippets/revision/{{CMS_API_SNIPPET_REVISION_ID}}",
+									"host": [
+										"{{URL_RESOURCE}}{{URI_API_CMS}}"
+									],
+									"path": [
+										"snippets",
+										"revision",
+										"{{CMS_API_SNIPPET_REVISION_ID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "trash",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Trash a CMS Snippet', function() {",
+											"    pm.response.to.have.status(204);",
+											"    pm.response.to.not.be.error;",
+											"    pm.response.to.not.be.withBody;",
+											"",
+											"    pm.expect(pm.cookies.has('XSRF-TOKEN')).to.be.string;",
+											"    pm.expect(pm.cookies.has('_session')).to.be.string;",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.test('Require CMS_API_SNIPPET_ID', function() {",
+											"    const CMS_API_SNIPPET_ID = pm.environment.get('CMS_API_SNIPPET_ID');",
+											"    console.info('CMS_API_SNIPPET_ID', CMS_API_SNIPPET_ID);",
+											"    pm.expect(CMS_API_SNIPPET_ID).to.be.string;",
+											"    pm.expect(CMS_API_SNIPPET_ID).to.not.be.empty;",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "XMLHttpRequest",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"_token\": \"{{TOKEN_CSRF}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL_RESOURCE}}{{URI_API_CMS}}/snippets/{{CMS_API_SNIPPET_ID}}",
+									"host": [
+										"{{URL_RESOURCE}}{{URI_API_CMS}}"
+									],
+									"path": [
+										"snippets",
+										"{{CMS_API_SNIPPET_ID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "restore",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Restore a CMS Snippet from the trash', function() {",
+											"    pm.response.to.have.status(200);",
+											"    pm.response.to.not.be.error;",
+											"    pm.response.to.be.ok;",
+											"    pm.response.to.be.withBody;",
+											"    pm.response.to.be.json;",
+											"    pm.response.to.have.jsonBody('data');",
+											"    pm.response.to.have.jsonBody('meta');",
+											"    pm.response.to.not.have.jsonBody('error');",
+											"",
+											"    pm.expect(pm.cookies.has('XSRF-TOKEN')).to.be.string;",
+											"    pm.expect(pm.cookies.has('_session')).to.be.string;",
+											"",
+											"    const responseJson = pm.response.json();",
+											"",
+											"    pm.expect(responseJson.meta).to.be.a('object');",
+											"",
+											"    pm.expect(responseJson.data).to.be.a('object');",
+											"",
+											"    pm.expect(responseJson.data.id).to.be.a('string');",
+											"    pm.expect(responseJson.data.id).to.be.equal(pm.environment.get('CMS_API_SNIPPET_ID'));",
+											"",
+											"    pm.expect(responseJson.data.title).to.be.a('string');",
+											"    pm.expect(responseJson.data.slug).to.be.a('string');",
+											"    pm.expect(responseJson.data.content).to.be.a('string');",
+											"    pm.expect(responseJson.data.created_at).to.be.a('string');",
+											"    pm.expect(responseJson.data.active).to.be.true;",
+											"    pm.expect(responseJson.data.deleted_at).to.be.null;",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.test('Require CMS_API_SNIPPET_ID', function() {",
+											"    const CMS_API_SNIPPET_ID = pm.environment.get('CMS_API_SNIPPET_ID');",
+											"    console.info('CMS_API_SNIPPET_ID', CMS_API_SNIPPET_ID);",
+											"    pm.expect(CMS_API_SNIPPET_ID).to.be.string;",
+											"    pm.expect(CMS_API_SNIPPET_ID).to.not.be.empty;",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "XMLHttpRequest",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"_token\": \"{{TOKEN_CSRF}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL_RESOURCE}}{{URI_API_CMS}}/snippets/restore/{{CMS_API_SNIPPET_ID}}",
+									"host": [
+										"{{URL_RESOURCE}}{{URI_API_CMS}}"
+									],
+									"path": [
+										"snippets",
+										"restore",
+										"{{CMS_API_SNIPPET_ID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "lock",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Lock a CMS Snippet', function() {",
+											"    pm.response.to.have.status(200);",
+											"    pm.response.to.not.be.error;",
+											"    pm.response.to.be.ok;",
+											"    pm.response.to.be.withBody;",
+											"    pm.response.to.be.json;",
+											"    pm.response.to.have.jsonBody('data');",
+											"    pm.response.to.have.jsonBody('meta');",
+											"    pm.response.to.not.have.jsonBody('error');",
+											"",
+											"    pm.expect(pm.cookies.has('XSRF-TOKEN')).to.be.string;",
+											"    pm.expect(pm.cookies.has('_session')).to.be.string;",
+											"",
+											"    const responseJson = pm.response.json();",
+											"",
+											"    pm.expect(responseJson.meta).to.be.a('object');",
+											"",
+											"    pm.expect(responseJson.data).to.be.a('object');",
+											"",
+											"    pm.expect(responseJson.data.id).to.be.a('string');",
+											"    pm.expect(responseJson.data.id).to.be.equal(pm.environment.get('CMS_API_SNIPPET_ID'));",
+											"",
+											"    pm.expect(responseJson.data.title).to.be.a('string');",
+											"    pm.expect(responseJson.data.slug).to.be.a('string');",
+											"    pm.expect(responseJson.data.content).to.be.a('string');",
+											"    pm.expect(responseJson.data.created_at).to.be.a('string');",
+											"    pm.expect(responseJson.data.active).to.be.true;",
+											"    pm.expect(responseJson.data.locked).to.be.true;",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.test('Require CMS_API_SNIPPET_ID', function() {",
+											"    const CMS_API_SNIPPET_ID = pm.environment.get('CMS_API_SNIPPET_ID');",
+											"    console.info('CMS_API_SNIPPET_ID', CMS_API_SNIPPET_ID);",
+											"    pm.expect(CMS_API_SNIPPET_ID).to.be.string;",
+											"    pm.expect(CMS_API_SNIPPET_ID).to.not.be.empty;",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "XMLHttpRequest",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"_token\": \"{{TOKEN_CSRF}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL_RESOURCE}}{{URI_API_CMS}}/snippets/lock/{{CMS_API_SNIPPET_ID}}",
+									"host": [
+										"{{URL_RESOURCE}}{{URI_API_CMS}}"
+									],
+									"path": [
+										"snippets",
+										"lock",
+										"{{CMS_API_SNIPPET_ID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "trash when locked and get 423",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Trash a CMS Snippet when locked and get 423', function() {",
+											"    pm.response.to.have.status(423);",
+											"    pm.response.to.be.error;",
+											"    pm.response.to.not.be.ok;",
+											"    pm.response.to.be.withBody;",
+											"",
+											"    pm.expect(pm.cookies.has('XSRF-TOKEN')).to.be.string;",
+											"    pm.expect(pm.cookies.has('_session')).to.be.string;",
+											"",
+											"    const responseJson = pm.response.json();",
+											"",
+											"    pm.expect(responseJson.message).to.be.a('string');",
+											"    pm.expect(responseJson.message).to.be.equal('The snippet record is locked. You must unlock it to make changes.');",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.test('Require CMS_API_SNIPPET_ID', function() {",
+											"    const CMS_API_SNIPPET_ID = pm.environment.get('CMS_API_SNIPPET_ID');",
+											"    console.info('CMS_API_SNIPPET_ID', CMS_API_SNIPPET_ID);",
+											"    pm.expect(CMS_API_SNIPPET_ID).to.be.string;",
+											"    pm.expect(CMS_API_SNIPPET_ID).to.not.be.empty;",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "XMLHttpRequest",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"_token\": \"{{TOKEN_CSRF}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL_RESOURCE}}{{URI_API_CMS}}/snippets/{{CMS_API_SNIPPET_ID}}",
+									"host": [
+										"{{URL_RESOURCE}}{{URI_API_CMS}}"
+									],
+									"path": [
+										"snippets",
+										"{{CMS_API_SNIPPET_ID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "unlock",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Unlock a CMS Snippet', function() {",
+											"    pm.response.to.have.status(200);",
+											"    pm.response.to.not.be.error;",
+											"    pm.response.to.be.ok;",
+											"    pm.response.to.be.withBody;",
+											"    pm.response.to.be.json;",
+											"    pm.response.to.have.jsonBody('data');",
+											"    pm.response.to.have.jsonBody('meta');",
+											"    pm.response.to.not.have.jsonBody('error');",
+											"",
+											"    pm.expect(pm.cookies.has('XSRF-TOKEN')).to.be.string;",
+											"    pm.expect(pm.cookies.has('_session')).to.be.string;",
+											"",
+											"    const responseJson = pm.response.json();",
+											"",
+											"    pm.expect(responseJson.meta).to.be.a('object');",
+											"",
+											"    pm.expect(responseJson.data).to.be.a('object');",
+											"",
+											"    pm.expect(responseJson.data.id).to.be.a('string');",
+											"    pm.expect(responseJson.data.id).to.be.equal(pm.environment.get('CMS_API_SNIPPET_ID'));",
+											"",
+											"    pm.expect(responseJson.data.title).to.be.a('string');",
+											"    pm.expect(responseJson.data.slug).to.be.a('string');",
+											"    pm.expect(responseJson.data.content).to.be.a('string');",
+											"    pm.expect(responseJson.data.created_at).to.be.a('string');",
+											"    pm.expect(responseJson.data.active).to.be.true;",
+											"    pm.expect(responseJson.data.locked).to.be.false;",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.test('Require CMS_API_SNIPPET_ID', function() {",
+											"    const CMS_API_SNIPPET_ID = pm.environment.get('CMS_API_SNIPPET_ID');",
+											"    console.info('CMS_API_SNIPPET_ID', CMS_API_SNIPPET_ID);",
+											"    pm.expect(CMS_API_SNIPPET_ID).to.be.string;",
+											"    pm.expect(CMS_API_SNIPPET_ID).to.not.be.empty;",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "XMLHttpRequest",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"_token\": \"{{TOKEN_CSRF}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL_RESOURCE}}{{URI_API_CMS}}/snippets/lock/{{CMS_API_SNIPPET_ID}}",
+									"host": [
+										"{{URL_RESOURCE}}{{URI_API_CMS}}"
+									],
+									"path": [
+										"snippets",
+										"lock",
+										"{{CMS_API_SNIPPET_ID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "slug",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Show a CMS Snippet by slug', function() {",
+											"    pm.response.to.have.status(200);",
+											"    pm.response.to.not.be.error;",
+											"    pm.response.to.be.ok;",
+											"    pm.response.to.be.withBody;",
+											"    pm.response.to.be.json;",
+											"    pm.response.to.have.jsonBody('data');",
+											"    pm.response.to.have.jsonBody('meta');",
+											"    pm.response.to.not.have.jsonBody('error');",
+											"",
+											"    pm.expect(pm.cookies.has('XSRF-TOKEN')).to.be.string;",
+											"    pm.expect(pm.cookies.has('_session')).to.be.string;",
+											"",
+											"    const responseJson = pm.response.json();",
+											"",
+											"    pm.expect(responseJson.meta).to.be.a('object');",
+											"",
+											"    pm.expect(responseJson.data).to.be.a('object');",
+											"",
+											"    pm.expect(responseJson.data.id).to.be.a('string');",
+											"    pm.expect(responseJson.data.id).to.be.equal(pm.environment.get('CMS_API_SNIPPET_ID'));",
+											"",
+											"    pm.expect(responseJson.data.title).to.be.a('string');",
+											"    pm.expect(responseJson.data.slug).to.be.a('string');",
+											"    pm.expect(responseJson.data.slug).to.be.equal(pm.environment.get('CMS_API_SNIPPET_SLUG'));",
+											"    pm.expect(responseJson.data.content).to.be.a('string');",
+											"    pm.expect(responseJson.data.created_at).to.be.a('string');",
+											"    pm.expect(responseJson.data.active).to.be.true;",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.test('Require CMS_API_SNIPPET_SLUG', function() {",
+											"    const CMS_API_SNIPPET_SLUG = pm.environment.get('CMS_API_SNIPPET_SLUG');",
+											"    console.info('CMS_API_SNIPPET_SLUG', CMS_API_SNIPPET_SLUG);",
+											"    pm.expect(CMS_API_SNIPPET_SLUG).to.be.string;",
+											"    pm.expect(CMS_API_SNIPPET_SLUG).to.not.be.empty;",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "XMLHttpRequest",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{URL_RESOURCE}}{{URI_API_CMS}}/snippet/{{CMS_API_SNIPPET_SLUG}}",
+									"host": [
+										"{{URL_RESOURCE}}{{URI_API_CMS}}"
+									],
+									"path": [
+										"snippet",
+										"{{CMS_API_SNIPPET_SLUG}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Force delete a CMS Snippet', function() {",
+											"    pm.response.to.have.status(204);",
+											"    pm.response.to.not.be.error;",
+											"    pm.response.to.not.be.withBody;",
+											"",
+											"    pm.expect(pm.cookies.has('XSRF-TOKEN')).to.be.string;",
+											"    pm.expect(pm.cookies.has('_session')).to.be.string;",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.test('Require CMS_API_SNIPPET_ID', function() {",
+											"    const CMS_API_SNIPPET_ID = pm.environment.get('CMS_API_SNIPPET_ID');",
+											"    console.info('CMS_API_SNIPPET_ID', CMS_API_SNIPPET_ID);",
+											"    pm.expect(CMS_API_SNIPPET_ID).to.be.string;",
+											"    pm.expect(CMS_API_SNIPPET_ID).to.not.be.empty;",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "XMLHttpRequest",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"_token\": \"{{TOKEN_CSRF}}\",\n    \"force\": true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL_RESOURCE}}{{URI_API_CMS}}/snippets/{{CMS_API_SNIPPET_ID}}",
+									"host": [
+										"{{URL_RESOURCE}}{{URI_API_CMS}}"
+									],
+									"path": [
+										"snippets",
+										"{{CMS_API_SNIPPET_ID}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			],
+			"description": "Requests will use JSON and use the following middleware:\n\n- `auth`\n- `web`\n- `guest`\n    \n\nPolicies will be used and check token abilities with:\n\n``` php\n\\Laravel\\Sanctum\\PersonalAccessToken::can($ability);\n\n ```\n\n- The ability namespaces will be exploded and checked for wildcards\n    \n\n``` json\n[\n    \"app:*\",\n    \"playground:*\",\n    \"playground-auth:*\",\n    \"playground-admin-resource:*\",\n    \"playground-cms-resource:*\"\n]\n\n ```\n\n- These are the abilities for an admin user with Playground.\n    \n\n``` sql\ninsert into `personal_access_tokens` \n    (\n        `name`, \n        `token`, \n        `abilities`, \n        `expires_at`, \n        `tokenable_id`, \n        `tokenable_type`, \n        `updated_at`, \n        `created_at`\n    ) \n    values (\n        'app', \n        'e859e9ca71b1509aa7b33fcde91506b6efa8df89d558be45d8907b0dd404c8d8', \n        '[\\\"app:*\\\",\\\"playground:*\\\",\\\"playground-auth:*\\\",\\\"playground-admin-resource:*\\\",\\\"playground-cms-resource:*\\\"]', \n        '2024-03-30 00:00:00', \n        '9ba2bfcb-935a-4f59-8241-231af11e33d1', \n        'App\\\\Models\\\\User', \n        '2024-03-29 18:34:45', \n        '2024-03-29 18:34:45'\n);\n\n ```"
+		}
+	]
+}

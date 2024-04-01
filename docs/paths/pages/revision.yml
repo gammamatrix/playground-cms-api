@@ -1,0 +1,51 @@
+parameters:
+  -
+    in: path
+    name: id
+    required: true
+    description: 'The page revision id.'
+    schema:
+      type: string
+      format: uuid
+get:
+  tags:
+    - Page
+  summary: 'Show a page revision.'
+  operationId: page_revision
+  responses:
+    200:
+      description: 'The page revision.'
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: ../../models/page-revision.yml
+              meta:
+                type: object
+    401:
+      description: Unauthorized
+    403:
+      description: Forbidden
+put:
+  tags:
+    - Page
+  summary: 'Restore a page revision.'
+  operationId: restore_page_revision
+  responses:
+    200:
+      description: 'The updated page from the revision.'
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: ../../models/page.yml
+              meta:
+                type: object
+    401:
+      description: Unauthorized
+    403:
+      description: Forbidden

@@ -7,14 +7,14 @@ parameters:
     schema:
       type: string
       format: uuid
-put:
+get:
   tags:
     - Page
-  summary: 'Restore a page from the trash by id.'
-  operationId: restore_page
+  summary: 'Edit a page form.'
+  operationId: edit_page
   responses:
     200:
-      description: 'The restored page.'
+      description: 'The edit information.'
       content:
         application/json:
           schema:

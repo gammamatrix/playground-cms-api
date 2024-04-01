@@ -1,20 +1,11 @@
-parameters:
-  -
-    in: path
-    name: id
-    required: true
-    description: 'The snippet id.'
-    schema:
-      type: string
-      format: uuid
-put:
+get:
   tags:
     - Snippet
-  summary: 'Restore a snippet from the trash by id.'
-  operationId: restore_snippet
+  summary: 'Create a snippet form.'
+  operationId: create_snippet
   responses:
     200:
-      description: 'The restored snippet.'
+      description: 'The create information (JSON) or form (HTML).'
       content:
         application/json:
           schema:

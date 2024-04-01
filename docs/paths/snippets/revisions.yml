@@ -3,25 +3,27 @@ parameters:
     in: path
     name: id
     required: true
-    description: 'The page id.'
+    description: 'The snippet id.'
     schema:
       type: string
       format: uuid
-put:
+get:
   tags:
-    - Page
-  summary: 'Restore a page from the trash by id.'
-  operationId: restore_page
+    - Snippet
+  summary: 'Get the revisions of a snippet.'
+  operationId: get_snippet_revisions_index
   responses:
     200:
-      description: 'The restored page.'
+      description: 'The snippet revisions.'
       content:
         application/json:
           schema:
             type: object
             properties:
               data:
-                $ref: ../../models/page.yml
+                type: array
+                items:
+                  $ref: ../../models/snippet-revision.yml
               meta:
                 type: object
     401:

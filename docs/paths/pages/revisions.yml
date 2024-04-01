@@ -7,21 +7,23 @@ parameters:
     schema:
       type: string
       format: uuid
-put:
+get:
   tags:
     - Page
-  summary: 'Restore a page from the trash by id.'
-  operationId: restore_page
+  summary: 'Get the revisions of a page.'
+  operationId: get_page_revisions_index
   responses:
     200:
-      description: 'The restored page.'
+      description: 'The page revisions.'
       content:
         application/json:
           schema:
             type: object
             properties:
               data:
-                $ref: ../../models/page.yml
+                type: array
+                items:
+                  $ref: ../../models/page-revision.yml
               meta:
                 type: object
     401:
