@@ -60,7 +60,7 @@
     },
     "scripts": {
         "analyse": "vendor/bin/phpstan analyse --verbose --debug --level max",
-        "cloc": "cloc --exclude-dir=output,vendor .",
+        "cloc": "cloc --exclude-dir=node_modules,output,vendor .",
         "format": "vendor/bin/php-cs-fixer fix",
         "test": "vendor/bin/phpunit"
     }
