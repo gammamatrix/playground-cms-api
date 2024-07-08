@@ -29,6 +29,8 @@ class TestCase extends BaseTestCase
     use Resource\Playground\UnlockJsonTrait;
     use Resource\Playground\UpdateJsonTrait;
 
+    protected bool $setUpUserForPlayground = true;
+
     /**
      * @var array<string, string>
      */

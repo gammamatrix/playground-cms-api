@@ -91,6 +91,16 @@ Information on [environment variables is available on the wiki for this package]
 
 This package requires the migrations in [playground-cms](https://github.com/gammamatrix/playground-cms) a Laravel package.
 
+## Cloc
+
+```sh
+composer cloc
+```
+
+```
+
+```
+
 ## PHPStan
 
 Tests at level 9 on:

@@ -7,9 +7,8 @@ declare(strict_types=1);
 namespace Tests\Feature\Playground\Cms\Api;
 
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Illuminate\Support\Carbon;
 use Playground\Test\OrchestraTestCase;
-use Tests\Unit\Playground\Cms\Api\TestTrait;
+use Tests\Unit\Playground\Cms\Api\PackageProviders;
 
 /**
  * \Tests\Feature\Playground\Cms\Api\TestCase
@@ -17,44 +16,24 @@ use Tests\Unit\Playground\Cms\Api\TestTrait;
 class TestCase extends OrchestraTestCase
 {
     use DatabaseTransactions;
-    use TestTrait;
-
-    protected bool $load_migrations_playground = false;
-
-    protected bool $load_migrations_cms = false;
+    use PackageProviders;
 
     /**
-     * Setup the test environment.
+     * @var array<string, array<string, array<int, string>>>
      */
-    protected function setUp(): void
-    {
-        parent::setUp();
+    protected array $load_migrations = [
+        'gammamatrix' => [
+            'playground-cms' => [
+                // 'migrations',
+            ],
+        ],
+    ];
 
-        Carbon::setTestNow(Carbon::now());
+    protected bool $hasMigrations = true;
 
-        if (! empty(env('TEST_DB_MIGRATIONS'))) {
-            // $this->loadLaravelMigrations();
-            if ($this->load_migrations_playground) {
-                $this->loadMigrationsFrom(dirname(dirname(__DIR__)).'/database/migrations-playground');
-            }
-            if ($this->load_migrations_cms) {
-                $this->loadMigrationsFrom(dirname(dirname(__DIR__)).'/database/migrations-cms-uuid');
-            }
-        }
-    }
+    protected bool $load_migrations_laravel = false;
 
-    /**
-     * Set up the environment.
-     *
-     * @param  \Illuminate\Foundation\Application  $app
-     */
-    protected function getEnvironmentSetUp($app)
-    {
-        $app['config']->set('auth.providers.users.model', 'Playground\\Test\\Models\\User');
-        $app['config']->set('playground-auth.verify', 'user');
-        $app['config']->set('auth.testing.password', 'password');
-        $app['config']->set('auth.testing.hashed', false);
+    protected bool $load_migrations_playground = true;
 
-        $app['config']->set('playground-cms.load.migrations', true);
-    }
+    protected bool $setUpUserForPlayground = false;
 }

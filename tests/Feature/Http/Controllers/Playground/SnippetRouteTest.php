@@ -13,8 +13,6 @@ use Tests\Feature\Playground\Cms\Api\Http\Controllers\SnippetTestCase;
  */
 class SnippetRouteTest extends SnippetTestCase
 {
-    use TestTrait;
-
     protected bool $load_migrations_playground = true;
 
     protected bool $load_migrations_cms = true;

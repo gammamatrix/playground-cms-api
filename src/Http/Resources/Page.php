@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * Playground
+ */
 declare(strict_types=1);
 namespace Playground\Cms\Api\Http\Resources;
 
@@ -9,18 +11,11 @@ use Illuminate\Support\Carbon;
 use Playground\Cms\Api\Http\Requests\FormRequest;
 use Playground\Cms\Models\Page as PageModel;
 
+/**
+ * \Playground\Cms\Api\Http\Resources\Page
+ */
 class Page extends JsonResource
 {
-    /**
-     * Transform the resource into an array.
-     *
-     * @return array<string, mixed>|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
-     */
-    public function toArray(Request $request)
-    {
-        return parent::toArray($request);
-    }
-
     /**
      * Get additional data that should be returned with the resource array.
      *

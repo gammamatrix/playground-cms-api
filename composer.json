@@ -19,12 +19,12 @@
     ],
     "require": {
         "php": "^8.2",
-        "gammamatrix/playground-auth": "dev-develop|dev-master|dev-feature/*|^73.0@dev|^73.0",
-        "gammamatrix/playground-http": "dev-develop|dev-master|dev-feature/*|^73.0@dev|^73.0",
-        "gammamatrix/playground-cms": "dev-develop|dev-master|dev-feature/*|^73.0@dev|^73.0"
+        "gammamatrix/playground-auth": "*",
+        "gammamatrix/playground-http": "*",
+        "gammamatrix/playground-cms": "*"
     },
     "require-dev": {
-        "gammamatrix/playground-test": "dev-develop|dev-master|dev-feature/*|^73.0@dev|^73.0",
+        "gammamatrix/playground-test": "*",
         "laravel/sanctum": "^4.0"
     },
     "minimum-stability": "dev",
@@ -59,8 +59,9 @@
         }
     },
     "scripts": {
-        "test": "vendor/bin/phpunit",
+        "analyse": "vendor/bin/phpstan analyse --verbose --debug --level max",
+        "cloc": "cloc --exclude-dir=output,vendor .",
         "format": "vendor/bin/php-cs-fixer fix",
-        "analyse": "vendor/bin/phpstan analyse --verbose --debug --level max"
+        "test": "vendor/bin/phpunit"
     }
 }
