@@ -33,6 +33,10 @@ Route::group([
         'uses' => 'SnippetController@index',
     ])->can('index', Playground\Cms\Models\Snippet::class);
 
+    Route::post('/index', [
+        'uses' => 'SnippetController@index',
+    ])->can('index', Playground\Cms\Models\Snippet::class);
+
     // UI
 
     Route::get('/create', [
