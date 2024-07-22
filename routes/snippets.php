@@ -34,6 +34,7 @@ Route::group([
     ])->can('index', Playground\Cms\Models\Snippet::class);
 
     Route::post('/index', [
+        'as' => 'playground.cms.api.snippets.index',
         'uses' => 'SnippetController@index',
     ])->can('index', Playground\Cms\Models\Snippet::class);
 
@@ -62,6 +63,10 @@ Route::group([
 
     Route::get('/{snippet}/revisions', [
         'as' => 'playground.cms.api.snippets.revisions',
+        'uses' => 'SnippetController@revisions',
+    ])->whereUuid('snippet')->can('revisions', 'snippet');
+
+    Route::post('/{snippet}/revisions', [
         'uses' => 'SnippetController@revisions',
     ])->whereUuid('snippet')->can('revisions', 'snippet');
 

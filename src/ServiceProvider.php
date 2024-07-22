@@ -139,8 +139,6 @@ class ServiceProvider extends AuthServiceProvider
 
         $sitemap = ! empty($config['sitemap']) && is_array($config['sitemap']) ? $config['sitemap'] : [];
 
-        $version = $this->version();
-
         AboutCommand::add('Playground: CMS Resource', fn () => [
             '<fg=yellow;options=bold>Load</> Policies' => ! empty($load['policies']) ? '<fg=green;options=bold>ENABLED</>' : '<fg=yellow;options=bold>DISABLED</>',
             '<fg=yellow;options=bold>Load</> Routes' => ! empty($load['routes']) ? '<fg=green;options=bold>ENABLED</>' : '<fg=yellow;options=bold>DISABLED</>',
@@ -154,12 +152,7 @@ class ServiceProvider extends AuthServiceProvider
             '<fg=red;options=bold>Route</> pages' => ! empty($routes['pages']) ? '<fg=green;options=bold>ENABLED</>' : '<fg=yellow;options=bold>DISABLED</>',
 
             'Package' => $this->package,
-            'Version' => $version,
+            'Version' => ServiceProvider::VERSION,
         ]);
-    }
-
-    public function version(): string
-    {
-        return static::VERSION;
     }
 }
