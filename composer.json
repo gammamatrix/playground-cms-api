@@ -8,7 +8,7 @@
         "laravel",
         "playground"
     ],
-    "homepage": "https://gammamatrix-playground.readthedocs.io/en/develop/components/cms.html",
+    "homepage": "https://github.com/gammamatrix/playground-cms-api",
     "license": "MIT",
     "authors": [
         {
