@@ -21,8 +21,8 @@
     "version": "73.0.0"
   },
   "externalDocs": {
-    "description": "",
-    "url": ""
+    "description": "Read the Docs: Playground CMS Packages",
+    "url": "https://gammamatrix-playground.readthedocs.io/en/develop/components/cms.html"
   },
   "tags": [
     {
@@ -963,6 +963,92 @@
                   "properties": {
                     "data": {
                       "$ref": "#/components/schemas/Snippet"
+                    },
+                    "meta": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/api/cms/snippets/index": {
+      "post": {
+        "tags": [
+          "Snippet"
+        ],
+        "summary": "Get snippets from the index using POST",
+        "operationId": "post_snippets_index",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "The CMS Snippet index form.",
+                "type": "object",
+                "properties": {
+                  "perPage": {
+                    "description": "Specify the number for records to display per page for pagination.",
+                    "type": "integer",
+                    "example": 10
+                  },
+                  "page": {
+                    "description": "Select a page for pagination.",
+                    "type": "integer",
+                    "example": 1
+                  },
+                  "offset": {
+                    "description": "Select the zero-based index offset for pagination.",
+                    "type": "integer",
+                    "example": 0
+                  },
+                  "filter": {
+                    "description": "Filter options for the snippet.",
+                    "type": "object",
+                    "properties": {
+                      "trash": {
+                        "description": "Filter trash options",
+                        "type": "string",
+                        "enum": [
+                          "with",
+                          "only",
+                          ""
+                        ]
+                      },
+                      "snippet_type": {
+                        "description": "The snippet type of this snippet.",
+                        "type": "string",
+                        "example": "banner",
+                        "nullable": true
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Get the snippets from the index.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Snippet"
+                      }
                     },
                     "meta": {
                       "type": "object"
@@ -2151,6 +2237,92 @@
                   "properties": {
                     "data": {
                       "$ref": "#/components/schemas/Page"
+                    },
+                    "meta": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/api/cms/pages/index": {
+      "post": {
+        "tags": [
+          "Page"
+        ],
+        "summary": "Get pages from the index using POST",
+        "operationId": "post_pages_index",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "The CMS Page index form.",
+                "type": "object",
+                "properties": {
+                  "perPage": {
+                    "description": "Specify the number for records to display per page for pagination.",
+                    "type": "integer",
+                    "example": 10
+                  },
+                  "page": {
+                    "description": "Select a page for pagination.",
+                    "type": "integer",
+                    "example": 1
+                  },
+                  "offset": {
+                    "description": "Select the zero-based index offset for pagination.",
+                    "type": "integer",
+                    "example": 0
+                  },
+                  "filter": {
+                    "description": "Filter options for the page.",
+                    "type": "object",
+                    "properties": {
+                      "trash": {
+                        "description": "Filter trash options",
+                        "type": "string",
+                        "enum": [
+                          "with",
+                          "only",
+                          ""
+                        ]
+                      },
+                      "page_type": {
+                        "description": "The page type of this page.",
+                        "type": "string",
+                        "example": "banner",
+                        "nullable": true
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Get the pages from the index.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Page"
+                      }
                     },
                     "meta": {
                       "type": "object"

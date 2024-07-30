@@ -17,8 +17,8 @@ info:
   #   email: support@example.com
   version: 73.0.0
 externalDocs:
-  description: ''
-  url: ''
+  description: 'Read the Docs: Playground CMS Packages'
+  url: 'https://gammamatrix-playground.readthedocs.io/en/develop/components/cms.html'
 tags:
   -
     name: Page
@@ -35,6 +35,8 @@ paths:
     $ref: paths/snippets/create.yml
   '/api/cms/snippets/edit/{id}':
     $ref: paths/snippets/edit.yml
+  /api/cms/snippets/index:
+    $ref: paths/snippets/index-form.yml
   '/api/cms/snippets/lock/{id}':
     $ref: paths/snippets/lock.yml
   '/api/cms/snippets/restore/{id}':
@@ -51,6 +53,8 @@ paths:
     $ref: paths/pages/create.yml
   '/api/cms/pages/edit/{id}':
     $ref: paths/pages/edit.yml
+  /api/cms/pages/index:
+    $ref: paths/pages/index-form.yml
   '/api/cms/pages/lock/{id}':
     $ref: paths/pages/lock.yml
   '/api/cms/pages/restore/{id}':

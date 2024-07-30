@@ -33,6 +33,11 @@ Route::group([
         'uses' => 'PageController@index',
     ])->can('index', Playground\Cms\Models\Page::class);
 
+    Route::post('/index', [
+        'as' => 'playground.cms.api.pages.index',
+        'uses' => 'PageController@index',
+    ])->can('index', Playground\Cms\Models\Page::class);
+
     // UI
 
     Route::get('/create', [
@@ -57,6 +62,14 @@ Route::group([
 
     Route::get('/{page}/revisions', [
         'as' => 'playground.cms.api.pages.revisions',
+        'uses' => 'PageController@revisions',
+    ])->whereUuid('page')->can('revisions', 'page');
+
+    Route::post('/{page}/revisions', [
+        'uses' => 'PageController@revisions',
+    ])->whereUuid('page')->can('revisions', 'page');
+
+    Route::post('/{page}/revisions', [
         'uses' => 'PageController@revisions',
     ])->whereUuid('page')->can('revisions', 'page');
 

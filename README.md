@@ -98,24 +98,24 @@ composer cloc
 ```
 
 ```
-➜  playground-cms-api git:(develop) composer cloc
+➜  playground-cms-api git:(feature/GH-3) composer cloc
 > cloc --exclude-dir=node_modules,output,vendor .
-     195 text files.
-     102 unique files.
-      94 files ignored.
+     155 text files.
+     106 unique files.
+      50 files ignored.
 
-github.com/AlDanial/cloc v 1.98  T=0.24 s (429.6 files/s, 137813.9 lines/s)
+github.com/AlDanial/cloc v 1.98  T=0.14 s (738.1 files/s, 178457.0 lines/s)
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
-JSON                             5              0              0          24544
-PHP                             67            604           1034           3449
-YAML                            24              5              2           2708
+JSON                             5              0              0          17312
+PHP                             67            605           1024           3462
+YAML                            28              7              2           2824
 XML                              3              0              7            221
-Markdown                         2             49              1             83
+Markdown                         2             49              1            101
 INI                              1              3              0             12
 -------------------------------------------------------------------------------
-SUM:                           102            661           1044          31017
+SUM:                           106            664           1034          23932
 -------------------------------------------------------------------------------
 ```
 
