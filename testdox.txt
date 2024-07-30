@@ -1,5 +1,5 @@
 Command (Tests\Feature\Playground\Cms\Api\Console\Commands\About\Command)
- [x] Command about displays package information and succeed with code 0
+ [x] Command about displays package information and succeed
 
 Create Request (Tests\Unit\Playground\Cms\Api\Http\Requests\Page\CreateRequest)
  [x] Request instance
