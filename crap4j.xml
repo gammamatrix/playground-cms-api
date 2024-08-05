@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <crap_result>
   <project/>
-  <timestamp>2024-07-30 17:40:46</timestamp>
+  <timestamp>2024-08-05 18:53:01</timestamp>
   <stats>
     <name>Method Crap Stats</name>
     <methodCount>60</methodCount>
     <crapMethodCount>0</crapMethodCount>
     <crapLoad>0</crapLoad>
-    <totalCrap>138</totalCrap>
+    <totalCrap>149</totalCrap>
     <crapMethodPercent>0</crapMethodPercent>
   </stats>
   <methods>
@@ -39,8 +39,8 @@
       <methodName>destroy</methodName>
       <methodSignature>destroy(Playground\Cms\Models\Page $page, Playground\Cms\Api\Http\Requests\Page\DestroyRequest $request): Illuminate\Http\Response</methodSignature>
       <fullMethod>destroy(Playground\Cms\Models\Page $page, Playground\Cms\Api\Http\Requests\Page\DestroyRequest $request): Illuminate\Http\Response</fullMethod>
-      <crap>2</crap>
-      <complexity>2</complexity>
+      <crap>3</crap>
+      <complexity>3</complexity>
       <coverage>100</coverage>
       <crapLoad>0</crapLoad>
     </method>
@@ -50,8 +50,8 @@
       <methodName>lock</methodName>
       <methodSignature>lock(Playground\Cms\Models\Page $page, Playground\Cms\Api\Http\Requests\Page\LockRequest $request): \Illuminate\Http\JsonResponse|\Playground\Cms\Api\Http\Resources\Page</methodSignature>
       <fullMethod>lock(Playground\Cms\Models\Page $page, Playground\Cms\Api\Http\Requests\Page\LockRequest $request): \Illuminate\Http\JsonResponse|\Playground\Cms\Api\Http\Resources\Page</fullMethod>
-      <crap>1</crap>
-      <complexity>1</complexity>
+      <crap>2</crap>
+      <complexity>2</complexity>
       <coverage>100</coverage>
       <crapLoad>0</crapLoad>
     </method>
@@ -72,8 +72,8 @@
       <methodName>restore</methodName>
       <methodSignature>restore(Playground\Cms\Models\Page $page, Playground\Cms\Api\Http\Requests\Page\RestoreRequest $request): \Illuminate\Http\JsonResponse|\Playground\Cms\Api\Http\Resources\Page</methodSignature>
       <fullMethod>restore(Playground\Cms\Models\Page $page, Playground\Cms\Api\Http\Requests\Page\RestoreRequest $request): \Illuminate\Http\JsonResponse|\Playground\Cms\Api\Http\Resources\Page</fullMethod>
-      <crap>1</crap>
-      <complexity>1</complexity>
+      <crap>2</crap>
+      <complexity>2</complexity>
       <coverage>100</coverage>
       <crapLoad>0</crapLoad>
     </method>
@@ -149,8 +149,8 @@
       <methodName>unlock</methodName>
       <methodSignature>unlock(Playground\Cms\Models\Page $page, Playground\Cms\Api\Http\Requests\Page\UnlockRequest $request): \Illuminate\Http\JsonResponse|\Playground\Cms\Api\Http\Resources\Page</methodSignature>
       <fullMethod>unlock(Playground\Cms\Models\Page $page, Playground\Cms\Api\Http\Requests\Page\UnlockRequest $request): \Illuminate\Http\JsonResponse|\Playground\Cms\Api\Http\Resources\Page</fullMethod>
-      <crap>1</crap>
-      <complexity>1</complexity>
+      <crap>2</crap>
+      <complexity>2</complexity>
       <coverage>100</coverage>
       <crapLoad>0</crapLoad>
     </method>
@@ -158,10 +158,10 @@
       <package>Playground\Cms\Api\Http\Controllers</package>
       <className>Playground\Cms\Api\Http\Controllers\PageController</className>
       <methodName>update</methodName>
-      <methodSignature>update(Playground\Cms\Models\Page $page, Playground\Cms\Api\Http\Requests\Page\UpdateRequest $request): \Illuminate\Http\JsonResponse|\Playground\Cms\Api\Http\Resources\Page</methodSignature>
-      <fullMethod>update(Playground\Cms\Models\Page $page, Playground\Cms\Api\Http\Requests\Page\UpdateRequest $request): \Illuminate\Http\JsonResponse|\Playground\Cms\Api\Http\Resources\Page</fullMethod>
-      <crap>1</crap>
-      <complexity>1</complexity>
+      <methodSignature>update(Playground\Cms\Models\Page $page, Playground\Cms\Api\Http\Requests\Page\UpdateRequest $request): Illuminate\Http\JsonResponse</methodSignature>
+      <fullMethod>update(Playground\Cms\Models\Page $page, Playground\Cms\Api\Http\Requests\Page\UpdateRequest $request): Illuminate\Http\JsonResponse</fullMethod>
+      <crap>2</crap>
+      <complexity>2</complexity>
       <coverage>100</coverage>
       <crapLoad>0</crapLoad>
     </method>
@@ -180,8 +180,8 @@
       <package>Playground\Cms\Api\Http\Controllers</package>
       <className>Playground\Cms\Api\Http\Controllers\SnippetController</className>
       <methodName>edit</methodName>
-      <methodSignature>edit(Playground\Cms\Models\Snippet $snippet, Playground\Cms\Api\Http\Requests\Snippet\EditRequest $request): Illuminate\Http\JsonResponse</methodSignature>
-      <fullMethod>edit(Playground\Cms\Models\Snippet $snippet, Playground\Cms\Api\Http\Requests\Snippet\EditRequest $request): Illuminate\Http\JsonResponse</fullMethod>
+      <methodSignature>edit(Playground\Cms\Models\Snippet $snippet, Playground\Cms\Api\Http\Requests\Snippet\EditRequest $request): \Illuminate\Http\JsonResponse|\Playground\Cms\Api\Http\Resources\Snippet</methodSignature>
+      <fullMethod>edit(Playground\Cms\Models\Snippet $snippet, Playground\Cms\Api\Http\Requests\Snippet\EditRequest $request): \Illuminate\Http\JsonResponse|\Playground\Cms\Api\Http\Resources\Snippet</fullMethod>
       <crap>1</crap>
       <complexity>1</complexity>
       <coverage>100</coverage>
@@ -193,8 +193,8 @@
       <methodName>destroy</methodName>
       <methodSignature>destroy(Playground\Cms\Models\Snippet $snippet, Playground\Cms\Api\Http\Requests\Snippet\DestroyRequest $request): Illuminate\Http\Response</methodSignature>
       <fullMethod>destroy(Playground\Cms\Models\Snippet $snippet, Playground\Cms\Api\Http\Requests\Snippet\DestroyRequest $request): Illuminate\Http\Response</fullMethod>
-      <crap>2</crap>
-      <complexity>2</complexity>
+      <crap>3</crap>
+      <complexity>3</complexity>
       <coverage>100</coverage>
       <crapLoad>0</crapLoad>
     </method>
@@ -204,8 +204,8 @@
       <methodName>lock</methodName>
       <methodSignature>lock(Playground\Cms\Models\Snippet $snippet, Playground\Cms\Api\Http\Requests\Snippet\LockRequest $request): \Illuminate\Http\JsonResponse|\Playground\Cms\Api\Http\Resources\Snippet</methodSignature>
       <fullMethod>lock(Playground\Cms\Models\Snippet $snippet, Playground\Cms\Api\Http\Requests\Snippet\LockRequest $request): \Illuminate\Http\JsonResponse|\Playground\Cms\Api\Http\Resources\Snippet</fullMethod>
-      <crap>1</crap>
-      <complexity>1</complexity>
+      <crap>2</crap>
+      <complexity>2</complexity>
       <coverage>100</coverage>
       <crapLoad>0</crapLoad>
     </method>
@@ -226,8 +226,8 @@
       <methodName>restore</methodName>
       <methodSignature>restore(Playground\Cms\Models\Snippet $snippet, Playground\Cms\Api\Http\Requests\Snippet\RestoreRequest $request): \Illuminate\Http\JsonResponse|\Playground\Cms\Api\Http\Resources\Snippet</methodSignature>
       <fullMethod>restore(Playground\Cms\Models\Snippet $snippet, Playground\Cms\Api\Http\Requests\Snippet\RestoreRequest $request): \Illuminate\Http\JsonResponse|\Playground\Cms\Api\Http\Resources\Snippet</fullMethod>
-      <crap>1</crap>
-      <complexity>1</complexity>
+      <crap>2</crap>
+      <complexity>2</complexity>
       <coverage>100</coverage>
       <crapLoad>0</crapLoad>
     </method>
@@ -303,8 +303,8 @@
       <methodName>unlock</methodName>
       <methodSignature>unlock(Playground\Cms\Models\Snippet $snippet, Playground\Cms\Api\Http\Requests\Snippet\UnlockRequest $request): \Illuminate\Http\JsonResponse|\Playground\Cms\Api\Http\Resources\Snippet</methodSignature>
       <fullMethod>unlock(Playground\Cms\Models\Snippet $snippet, Playground\Cms\Api\Http\Requests\Snippet\UnlockRequest $request): \Illuminate\Http\JsonResponse|\Playground\Cms\Api\Http\Resources\Snippet</fullMethod>
-      <crap>1</crap>
-      <complexity>1</complexity>
+      <crap>2</crap>
+      <complexity>2</complexity>
       <coverage>100</coverage>
       <crapLoad>0</crapLoad>
     </method>
@@ -312,10 +312,10 @@
       <package>Playground\Cms\Api\Http\Controllers</package>
       <className>Playground\Cms\Api\Http\Controllers\SnippetController</className>
       <methodName>update</methodName>
-      <methodSignature>update(Playground\Cms\Models\Snippet $snippet, Playground\Cms\Api\Http\Requests\Snippet\UpdateRequest $request): \Illuminate\Http\JsonResponse|\Playground\Cms\Api\Http\Resources\Snippet</methodSignature>
-      <fullMethod>update(Playground\Cms\Models\Snippet $snippet, Playground\Cms\Api\Http\Requests\Snippet\UpdateRequest $request): \Illuminate\Http\JsonResponse|\Playground\Cms\Api\Http\Resources\Snippet</fullMethod>
-      <crap>1</crap>
-      <complexity>1</complexity>
+      <methodSignature>update(Playground\Cms\Models\Snippet $snippet, Playground\Cms\Api\Http\Requests\Snippet\UpdateRequest $request): Illuminate\Http\JsonResponse</methodSignature>
+      <fullMethod>update(Playground\Cms\Models\Snippet $snippet, Playground\Cms\Api\Http\Requests\Snippet\UpdateRequest $request): Illuminate\Http\JsonResponse</fullMethod>
+      <crap>2</crap>
+      <complexity>2</complexity>
       <coverage>100</coverage>
       <crapLoad>0</crapLoad>
     </method>
@@ -622,8 +622,8 @@
       <methodName>boot</methodName>
       <methodSignature>boot(): void</methodSignature>
       <fullMethod>boot(): void</fullMethod>
-      <crap>11</crap>
-      <complexity>11</complexity>
+      <crap>12</crap>
+      <complexity>12</complexity>
       <coverage>100</coverage>
       <crapLoad>0</crapLoad>
     </method>
