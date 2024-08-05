@@ -1,9 +1,9 @@
 <?php
-
-declare(strict_types=1);
 /**
  * Playground
  */
+
+declare(strict_types=1);
 namespace Tests\Feature\Playground\Cms\Api;
 
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -32,6 +32,8 @@ class TestCase extends OrchestraTestCase
     protected bool $hasMigrations = true;
 
     protected bool $load_migrations_laravel = false;
+
+    protected bool $load_migrations_package = false;
 
     protected bool $load_migrations_playground = true;
 

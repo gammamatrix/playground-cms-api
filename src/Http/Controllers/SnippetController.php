@@ -1,31 +1,16 @@
 <?php
-
-declare(strict_types=1);
 /**
  * Playground
  */
+
+declare(strict_types=1);
 namespace Playground\Cms\Api\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Illuminate\Support\Carbon;
-use Playground\Cms\Api\Http\Requests\Snippet\CreateRequest;
-use Playground\Cms\Api\Http\Requests\Snippet\DestroyRequest;
-use Playground\Cms\Api\Http\Requests\Snippet\EditRequest;
-use Playground\Cms\Api\Http\Requests\Snippet\IndexRequest;
-use Playground\Cms\Api\Http\Requests\Snippet\LockRequest;
-use Playground\Cms\Api\Http\Requests\Snippet\RestoreRequest;
-use Playground\Cms\Api\Http\Requests\Snippet\RestoreRevisionRequest;
-use Playground\Cms\Api\Http\Requests\Snippet\RevisionsRequest;
-use Playground\Cms\Api\Http\Requests\Snippet\ShowRequest;
-use Playground\Cms\Api\Http\Requests\Snippet\ShowRevisionRequest;
-use Playground\Cms\Api\Http\Requests\Snippet\StoreRequest;
-use Playground\Cms\Api\Http\Requests\Snippet\UnlockRequest;
-use Playground\Cms\Api\Http\Requests\Snippet\UpdateRequest;
-use Playground\Cms\Api\Http\Resources\Snippet as SnippetResource;
-use Playground\Cms\Api\Http\Resources\SnippetCollection;
-use Playground\Cms\Api\Http\Resources\SnippetRevision as SnippetRevisionResource;
-use Playground\Cms\Api\Http\Resources\SnippetRevisionCollection;
+use Playground\Cms\Api\Http\Requests;
+use Playground\Cms\Api\Http\Resources;
 use Playground\Cms\Models\Snippet;
 use Playground\Cms\Models\SnippetRevision;
 
@@ -45,7 +30,7 @@ class SnippetController extends Controller
         'model_slug' => 'snippet',
         'model_slug_plural' => 'snippets',
         'module_label' => 'CMS',
-        'module_label_plural' => 'Matrices',
+        'module_label_plural' => 'CMS',
         'module_route' => 'playground.cms.api',
         'module_slug' => 'cms',
         'privilege' => 'playground-cms-api:snippet',
@@ -53,13 +38,13 @@ class SnippetController extends Controller
     ];
 
     /**
-     * CREATE the Snippet resource in storage.
+     * Create the Snippet resource in storage.
      *
      * @route GET /api/cms/snippets/create playground.cms.api.snippets.create
      */
     public function create(
-        CreateRequest $request
-    ): JsonResponse|SnippetResource {
+        Requests\Snippet\CreateRequest $request
+    ): JsonResponse|Resources\Snippet {
 
         $validated = $request->validated();
 
@@ -67,7 +52,7 @@ class SnippetController extends Controller
 
         $snippet = new Snippet($validated);
 
-        return (new SnippetResource($snippet))->additional(['meta' => [
+        return (new Resources\Snippet($snippet))->additional(['meta' => [
             'info' => $this->packageInfo,
         ]])->response($request);
     }
@@ -75,13 +60,13 @@ class SnippetController extends Controller
     /**
      * Edit the Snippet resource in storage.
      *
-     * @route GET /api/cms/snippets/snippets/edit playground.cms.api.snippets.edit
+     * @route GET /api/cms/snippets/edit playground.cms.api.snippets.edit
      */
     public function edit(
         Snippet $snippet,
-        EditRequest $request
-    ): JsonResponse {
-        return (new SnippetResource($snippet))->additional(['meta' => [
+        Requests\Snippet\EditRequest $request
+    ): JsonResponse|Resources\Snippet {
+        return (new Resources\Snippet($snippet))->additional(['meta' => [
             'info' => $this->packageInfo,
         ]])->response($request);
     }
@@ -93,9 +78,16 @@ class SnippetController extends Controller
      */
     public function destroy(
         Snippet $snippet,
-        DestroyRequest $request
+        Requests\Snippet\DestroyRequest $request
     ): Response {
+
         $validated = $request->validated();
+
+        $user = $request->user();
+
+        if ($user?->id) {
+            $snippet->modified_by_id = $user->id;
+        }
 
         if (empty($validated['force'])) {
             $snippet->delete();
@@ -113,17 +105,22 @@ class SnippetController extends Controller
      */
     public function lock(
         Snippet $snippet,
-        LockRequest $request
-    ): JsonResponse|SnippetResource {
+        Requests\Snippet\LockRequest $request
+    ): JsonResponse|Resources\Snippet {
+
         $validated = $request->validated();
 
         $user = $request->user();
 
-        $snippet->setAttribute('locked', true);
+        if ($user?->id) {
+            $snippet->modified_by_id = $user->id;
+        }
+
+        $snippet->locked = true;
 
         $snippet->save();
 
-        return (new SnippetResource($snippet))->additional(['meta' => [
+        return (new Resources\Snippet($snippet))->additional(['meta' => [
             'info' => $this->packageInfo,
         ]])->response($request);
     }
@@ -134,8 +131,9 @@ class SnippetController extends Controller
      * @route GET /api/cms/snippets playground.cms.api.snippets
      */
     public function index(
-        IndexRequest $request
-    ): JsonResponse|SnippetCollection {
+        Requests\Snippet\IndexRequest $request
+    ): JsonResponse|Resources\SnippetCollection {
+
         $user = $request->user();
 
         $validated = $request->validated();
@@ -145,6 +143,7 @@ class SnippetController extends Controller
         $query->sort($validated['sort'] ?? null);
 
         if (! empty($validated['filter']) && is_array($validated['filter'])) {
+
             $query->filterTrash($validated['filter']['trash'] ?? null);
 
             $query->filterIds(
@@ -169,13 +168,11 @@ class SnippetController extends Controller
         }
 
         $perPage = ! empty($validated['perPage']) && is_int($validated['perPage']) ? $validated['perPage'] : null;
-        $paginator = $query->paginate( $perPage);
+        $paginator = $query->paginate($perPage);
 
         $paginator->appends($validated);
 
-        return (new SnippetCollection($paginator))->additional(['meta' => [
-            'info' => $this->packageInfo,
-        ]])->response($request);
+        return (new Resources\SnippetCollection($paginator))->response($request);
     }
 
     /**
@@ -185,12 +182,18 @@ class SnippetController extends Controller
      */
     public function restore(
         Snippet $snippet,
-        RestoreRequest $request
-    ): JsonResponse|SnippetResource {
+        Requests\Snippet\RestoreRequest $request
+    ): JsonResponse|Resources\Snippet {
+
+        $user = $request->user();
+
+        if ($user?->id) {
+            $snippet->modified_by_id = $user->id;
+        }
 
         $snippet->restore();
 
-        return (new SnippetResource($snippet))->additional(['meta' => [
+        return (new Resources\Snippet($snippet))->additional(['meta' => [
             'info' => $this->packageInfo,
         ]])->response($request);
     }
@@ -202,8 +205,8 @@ class SnippetController extends Controller
      */
     public function restoreRevision(
         SnippetRevision $snippet_revision,
-        RestoreRevisionRequest $request
-    ): JsonResponse|SnippetResource {
+        Requests\Snippet\RestoreRevisionRequest $request
+    ): JsonResponse|Resources\Snippet {
         $validated = $request->validated();
 
         /**
@@ -211,7 +214,7 @@ class SnippetController extends Controller
          */
         $snippet = Snippet::where(
             'id',
-            $snippet_revision->getAttributeValue('snippet_id')
+            $snippet_revision->snippet_id
         )->firstOrFail();
 
         $this->saveRevision($snippet);
@@ -227,7 +230,7 @@ class SnippetController extends Controller
 
         $snippet->save();
 
-        return (new SnippetResource($snippet))->additional(['meta' => [
+        return (new Resources\Snippet($snippet))->additional(['meta' => [
             'info' => $this->packageInfo,
         ]])->response($request);
     }
@@ -239,9 +242,21 @@ class SnippetController extends Controller
      */
     public function revision(
         SnippetRevision $snippet_revision,
-        ShowRevisionRequest $request
-    ): JsonResponse|SnippetRevisionResource {
-        return (new SnippetRevisionResource($snippet_revision))->additional(['meta' => [
+        Requests\Snippet\ShowRevisionRequest $request
+    ): JsonResponse|Resources\SnippetRevision {
+        $validated = $request->validated();
+
+        $user = $request->user();
+
+        $meta = [
+            'session_user_id' => $user?->id,
+            'id' => $snippet_revision->id,
+            'timestamp' => Carbon::now()->toJson(),
+            'validated' => $validated,
+            'info' => $this->packageInfo,
+        ];
+
+        return (new Resources\SnippetRevision($snippet_revision))->additional(['meta' => [
             'info' => $this->packageInfo,
         ]])->response($request);
     }
@@ -253,8 +268,8 @@ class SnippetController extends Controller
      */
     public function revisions(
         Snippet $snippet,
-        RevisionsRequest $request
-    ): JsonResponse|SnippetRevisionCollection {
+        Requests\Snippet\RevisionsRequest $request
+    ): JsonResponse|Resources\SnippetRevisionCollection {
         $user = $request->user();
 
         $validated = $request->validated();
@@ -292,7 +307,7 @@ class SnippetController extends Controller
 
         $paginator->appends($validated);
 
-        return (new SnippetRevisionCollection($paginator))->additional(['meta' => [
+        return (new Resources\SnippetRevisionCollection($paginator))->additional(['meta' => [
             'info' => $this->packageInfo,
         ]])->response($request);
     }
@@ -304,17 +319,17 @@ class SnippetController extends Controller
     {
         $revision = new SnippetRevision($snippet->toArray());
 
-        $revision->setAttribute('created_by_id', $snippet->getAttributeValue('created_by_id'));
-        $revision->setAttribute('modified_by_id', $snippet->getAttributeValue('modified_by_id'));
-        $revision->setAttribute('owned_by_id', $snippet->getAttributeValue('owned_by_id'));
-        $revision->setAttribute('snippet_id', $snippet->getAttributeValue('id'));
+        $revision->created_by_id = $snippet->created_by_id;
+        $revision->modified_by_id = $snippet->modified_by_id;
+        $revision->owned_by_id = $snippet->owned_by_id;
+        $revision->snippet_id = $snippet->id;
 
         $r = SnippetRevision::where('snippet_id', $snippet->id)->max('revision');
         $r = ! is_numeric($r) || empty($r) || $r < 0 ? 0 : (int) $r;
         $r++;
 
-        $revision->setAttribute('revision', $r);
-        $snippet->setAttribute('revision', $r);
+        $revision->revision = $r;
+        $snippet->revision = $r;
 
         $revision->saveOrFail();
 
@@ -328,21 +343,9 @@ class SnippetController extends Controller
      */
     public function show(
         Snippet $snippet,
-        ShowRequest $request
-    ): JsonResponse|SnippetResource {
-        $validated = $request->validated();
-
-        $user = $request->user();
-
-        $meta = [
-            'session_user_id' => $user?->id,
-            'id' => $snippet->id,
-            'timestamp' => Carbon::now()->toJson(),
-            'validated' => $validated,
-            'info' => $this->packageInfo,
-        ];
-
-        return (new SnippetResource($snippet))->additional(['meta' => [
+        Requests\Snippet\ShowRequest $request
+    ): JsonResponse|Resources\Snippet {
+        return (new Resources\Snippet($snippet))->additional(['meta' => [
             'info' => $this->packageInfo,
         ]])->response($request);
     }
@@ -350,11 +353,11 @@ class SnippetController extends Controller
     /**
      * Store a newly created API Snippet resource in storage.
      *
-     * @route POST /api/cms playground.cms.api.snippets.post
+     * @route POST /api/cms/snippets playground.cms.api.snippets.post
      */
     public function store(
-        StoreRequest $request
-    ): Response|JsonResponse|SnippetResource {
+        Requests\Snippet\StoreRequest $request
+    ): Response|JsonResponse|Resources\Snippet {
         $validated = $request->validated();
 
         $user = $request->user();
@@ -365,12 +368,9 @@ class SnippetController extends Controller
 
         $snippet->save();
 
-        return (new SnippetResource($snippet))
-            ->additional(['meta' => [
-                'info' => $this->packageInfo,
-            ]])
-            ->response($request)
-            ->setStatusCode(201);
+        return (new Resources\Snippet($snippet))->additional(['meta' => [
+            'info' => $this->packageInfo,
+        ]])->response($request)->setStatusCode(201);
     }
 
     /**
@@ -380,17 +380,22 @@ class SnippetController extends Controller
      */
     public function unlock(
         Snippet $snippet,
-        UnlockRequest $request
-    ): JsonResponse|SnippetResource {
+        Requests\Snippet\UnlockRequest $request
+    ): JsonResponse|Resources\Snippet {
+
         $validated = $request->validated();
 
         $user = $request->user();
 
-        $snippet->setAttribute('locked', false);
+        $snippet->locked = false;
+
+        if ($user?->id) {
+            $snippet->modified_by_id = $user->id;
+        }
 
         $snippet->save();
 
-        return (new SnippetResource($snippet))->additional(['meta' => [
+        return (new Resources\Snippet($snippet))->additional(['meta' => [
             'info' => $this->packageInfo,
         ]])->response($request);
     }
@@ -402,19 +407,22 @@ class SnippetController extends Controller
      */
     public function update(
         Snippet $snippet,
-        UpdateRequest $request
-    ): JsonResponse|SnippetResource {
+        Requests\Snippet\UpdateRequest $request
+    ): JsonResponse {
+
+        $this->saveRevision($snippet);
+
         $validated = $request->validated();
 
         $user = $request->user();
 
-        $this->saveRevision($snippet);
-
-        $snippet->modified_by_id = $user?->id;
+        if ($user?->id) {
+            $snippet->modified_by_id = $user->id;
+        }
 
         $snippet->update($validated);
 
-        return (new SnippetResource($snippet))->additional(['meta' => [
+        return (new Resources\Snippet($snippet))->additional(['meta' => [
             'info' => $this->packageInfo,
         ]])->response($request);
     }

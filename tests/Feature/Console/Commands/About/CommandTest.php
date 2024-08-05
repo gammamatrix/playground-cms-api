@@ -12,7 +12,7 @@ use Playground\Cms\Api\ServiceProvider;
 use Tests\Feature\Playground\Cms\Api\TestCase;
 
 /**
- * \Tests\Feature\Playground\Cms\Api\Console\Commands\About
+ * \Tests\Feature\Playground\Cms\Api\Console\Commands\About\CommandTest
  */
 #[CoversClass(ServiceProvider::class)]
 class CommandTest extends TestCase

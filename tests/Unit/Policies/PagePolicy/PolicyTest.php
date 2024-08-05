@@ -6,12 +6,14 @@
 declare(strict_types=1);
 namespace Tests\Unit\Playground\Cms\Api\Policies\PagePolicy;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use Playground\Cms\Api\Policies\PagePolicy;
 use Tests\Unit\Playground\Cms\Api\TestCase;
 
 /**
- * \ests\Unit\Playground\Cms\Api\Policies\PagePolicy\PolicyTest
+ * \Tests\Unit\Playground\Cms\Api\Policies\PagePolicy\PolicyTest
  */
+#[CoversClass(PagePolicy::class)]
 class PolicyTest extends TestCase
 {
     public function test_policy_instance(): void

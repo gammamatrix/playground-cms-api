@@ -1,9 +1,9 @@
 <?php
-
-declare(strict_types=1);
 /**
  * Playground
  */
+
+declare(strict_types=1);
 namespace Playground\Cms\Api\Http\Requests\Snippet;
 
 use Playground\Cms\Api\Http\Requests\FormRequest;
@@ -13,4 +13,5 @@ use Playground\Cms\Api\Http\Requests\FormRequest;
  */
 class ShowRequest extends FormRequest
 {
+
 }

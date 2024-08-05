@@ -1,9 +1,9 @@
 <?php
-
-declare(strict_types=1);
 /**
  * Playground
  */
+
+declare(strict_types=1);
 namespace Playground\Cms\Api\Http\Requests;
 
 use Illuminate\Contracts\Auth\Authenticatable;
@@ -50,7 +50,7 @@ class FormRequest extends BaseFormRequest
         $admin = false;
         if (! empty($user)) {
             if (method_exists($user, 'isAdmin')) {
-                $admin = ! empty($user->isAdmin());
+                $admin = $user->isAdmin();
             } else {
                 // standard user, no roles or privileges
                 $admin = true;
