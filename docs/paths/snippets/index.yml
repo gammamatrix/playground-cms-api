@@ -33,7 +33,7 @@ post:
           $ref: ../../requests/snippet/post.yml
   responses:
     200:
-      description: 'The created snippets.'
+      description: 'The created snippet.'
       content:
         application/json:
           schema:
@@ -57,8 +57,10 @@ post:
               errors:
                 type: object
                 properties:
-                  label:
+                  title:
                     type: array
                     items:
                       type: string
-                      example: 'The label field is required.'
+                      example: 'The title field is required.'
+    423:
+      description: 'The snippet is locked. Unlock to patch.'

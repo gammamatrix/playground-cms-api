@@ -10,7 +10,7 @@ parameters:
 put:
   tags:
     - Page
-  summary: 'Restore a page from the trash by id.'
+  summary: 'Restore a page from the trash by ID.'
   operationId: restore_page
   responses:
     200:

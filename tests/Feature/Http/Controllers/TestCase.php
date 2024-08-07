@@ -1,9 +1,9 @@
 <?php
-
-declare(strict_types=1);
 /**
  * Playground
  */
+
+declare(strict_types=1);
 namespace Tests\Feature\Playground\Cms\Api\Http\Controllers;
 
 use Illuminate\Database\Eloquent\Model;
@@ -35,7 +35,7 @@ class TestCase extends BaseTestCase
      * @var array<string, string>
      */
     public array $packageInfo = [
-        'model_attribute' => 'label',
+        'model_attribute' => 'title',
         'model_label' => '',
         'model_label_plural' => '',
         'model_route' => '',
@@ -45,9 +45,9 @@ class TestCase extends BaseTestCase
         'module_label_plural' => 'CMS',
         'module_route' => 'playground.cms.api',
         'module_slug' => 'cms',
-        'privilege' => '',
+        'privilege' => 'playground-cms-api:',
         'table' => '',
-        'view' => '',
+        'view' => 'playground.cms.api::',
     ];
 
     /**

@@ -33,7 +33,7 @@ post:
           $ref: ../../requests/page/post.yml
   responses:
     200:
-      description: 'The created pages.'
+      description: 'The created page.'
       content:
         application/json:
           schema:
@@ -57,8 +57,10 @@ post:
               errors:
                 type: object
                 properties:
-                  label:
+                  title:
                     type: array
                     items:
                       type: string
-                      example: 'The label field is required.'
+                      example: 'The title field is required.'
+    423:
+      description: 'The page is locked. Unlock to patch.'

@@ -1,4 +1,7 @@
 <?php
+/**
+ * Playground
+ */
 
 declare(strict_types=1);
 
@@ -11,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 |
 */
+
 Route::group([
     'prefix' => 'api/cms/page',
     'middleware' => config('playground-cms-api.middleware.default'),
@@ -51,7 +55,7 @@ Route::group([
     ])->whereUuid('page')->can('edit', 'page');
 
     // Route::get('/go/{id}', [
-    //     'as'   => 'playground.cms.api.pages.go',
+    //     'as' => 'playground.cms.api.pages.go',
     //     'uses' => 'PageController@go',
     // ]);
 
@@ -69,15 +73,10 @@ Route::group([
         'uses' => 'PageController@revisions',
     ])->whereUuid('page')->can('revisions', 'page');
 
-    Route::post('/{page}/revisions', [
-        'uses' => 'PageController@revisions',
-    ])->whereUuid('page')->can('revisions', 'page');
-
     Route::get('/revision/{page_revision}', [
         'as' => 'playground.cms.api.pages.revision',
         'uses' => 'PageController@revision',
-    ])->whereUuid('page')
-        ->can('viewRevision', 'page_revision');
+    ])->whereUuid('page')->can('viewRevision', 'page_revision');
 
     Route::put('/revision/{page_revision}', [
         'as' => 'playground.cms.api.pages.revision.restore',
@@ -99,16 +98,12 @@ Route::group([
     Route::delete('/{page}', [
         'as' => 'playground.cms.api.pages.destroy',
         'uses' => 'PageController@destroy',
-    ])->whereUuid('page')
-        ->can('delete', 'page')
-        ->withTrashed();
+    ])->whereUuid('page')->can('delete', 'page')->withTrashed();
 
     Route::put('/restore/{page}', [
         'as' => 'playground.cms.api.pages.restore',
         'uses' => 'PageController@restore',
-    ])->whereUuid('page')
-        ->can('restore', 'page')
-        ->withTrashed();
+    ])->whereUuid('page')->can('restore', 'page')->withTrashed();
 
     Route::post('/', [
         'as' => 'playground.cms.api.pages.post',
@@ -116,12 +111,12 @@ Route::group([
     ])->can('store', Playground\Cms\Models\Page::class);
 
     // Route::put('/', [
-    //     'as'   => 'playground.cms.api.pages.put',
+    //     'as' => 'playground.cms.api.pages.put',
     //     'uses' => 'PageController@store',
-    // ])->can('store', \Playground\Cms\Models\Page::class);
+    // ])->can('store', Playground\Cms\Models\Page::class);
     //
     // Route::put('/{page}', [
-    //     'as'   => 'playground.cms.api.pages.put.id',
+    //     'as' => 'playground.cms.api.pages.put.id',
     //     'uses' => 'PageController@store',
     // ])->whereUuid('page')->can('update', 'page');
 

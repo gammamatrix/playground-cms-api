@@ -10,8 +10,8 @@ parameters:
 delete:
   tags:
     - Snippet
-  summary: 'Unlock a snippet by id.'
-  operationId: lock_snippet
+  summary: 'Delete a snippet by id.'
+  operationId: unlock_snippet
   responses:
     204:
       description: 'The snippet has been unlocked.'
@@ -22,8 +22,8 @@ delete:
 put:
   tags:
     - Snippet
-  summary: 'Lock a snippet by id.'
-  operationId: unlock_snippet
+  summary: 'Lock a snippet by ID.'
+  operationId: lock_snippet
   responses:
     200:
       description: 'The unlocked snippet.'

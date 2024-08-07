@@ -1,4 +1,7 @@
 <?php
+/**
+ * Playground
+ */
 
 declare(strict_types=1);
 
@@ -11,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 |
 */
+
 Route::group([
     'prefix' => 'api/cms/snippet',
     'middleware' => config('playground-cms-api.middleware.default'),
@@ -51,15 +55,14 @@ Route::group([
     ])->whereUuid('snippet')->can('edit', 'snippet');
 
     // Route::get('/go/{id}', [
-    //     'as'   => 'playground.cms.api.snippets.go',
+    //     'as' => 'playground.cms.api.snippets.go',
     //     'uses' => 'SnippetController@go',
     // ]);
 
     Route::get('/{snippet}', [
         'as' => 'playground.cms.api.snippets.show',
         'uses' => 'SnippetController@show',
-    ])->whereUuid('snippet')
-        ->can('detail', 'snippet');
+    ])->whereUuid('snippet')->can('detail', 'snippet');
 
     Route::get('/{snippet}/revisions', [
         'as' => 'playground.cms.api.snippets.revisions',
@@ -95,16 +98,12 @@ Route::group([
     Route::delete('/{snippet}', [
         'as' => 'playground.cms.api.snippets.destroy',
         'uses' => 'SnippetController@destroy',
-    ])->whereUuid('snippet')
-        ->can('delete', 'snippet')
-        ->withTrashed();
+    ])->whereUuid('snippet')->can('delete', 'snippet')->withTrashed();
 
     Route::put('/restore/{snippet}', [
         'as' => 'playground.cms.api.snippets.restore',
         'uses' => 'SnippetController@restore',
-    ])->whereUuid('snippet')
-        ->can('restore', 'snippet')
-        ->withTrashed();
+    ])->whereUuid('snippet')->can('restore', 'snippet')->withTrashed();
 
     Route::post('/', [
         'as' => 'playground.cms.api.snippets.post',
@@ -112,12 +111,12 @@ Route::group([
     ])->can('store', Playground\Cms\Models\Snippet::class);
 
     // Route::put('/', [
-    //     'as'   => 'playground.cms.api.snippets.put',
+    //     'as' => 'playground.cms.api.snippets.put',
     //     'uses' => 'SnippetController@store',
-    // ])->can('store', \Playground\Cms\Models\Snippet::class);
+    // ])->can('store', Playground\Cms\Models\Snippet::class);
     //
     // Route::put('/{snippet}', [
-    //     'as'   => 'playground.cms.api.snippets.put.id',
+    //     'as' => 'playground.cms.api.snippets.put.id',
     //     'uses' => 'SnippetController@store',
     // ])->whereUuid('snippet')->can('update', 'snippet');
 

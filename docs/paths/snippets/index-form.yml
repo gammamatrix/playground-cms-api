@@ -1,7 +1,7 @@
 post:
   tags:
     - Snippet
-  summary: 'Get snippets from the index using POST'
+  summary: 'Get snippets from the index using POST.'
   operationId: post_snippets_index
   requestBody:
     content:

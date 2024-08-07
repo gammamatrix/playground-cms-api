@@ -10,8 +10,8 @@ parameters:
 get:
   tags:
     - Snippet
-  summary: 'Show a snippet revision.'
-  operationId: snippet_revision
+  summary: 'Show a snippet revision by ID.'
+  operationId: revision_snippet
   responses:
     200:
       description: 'The snippet revision.'
@@ -31,11 +31,11 @@ get:
 put:
   tags:
     - Snippet
-  summary: 'Restore a snippet revision.'
-  operationId: restore_snippet_revision
+  summary: 'Restore a snippet Revision by ID.'
+  operationId: restore_revision_snippet
   responses:
     200:
-      description: 'The updated snippet from the revision.'
+      description: 'The restored snippet.'
       content:
         application/json:
           schema:

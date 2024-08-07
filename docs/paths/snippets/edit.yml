@@ -14,7 +14,7 @@ get:
   operationId: edit_snippet
   responses:
     200:
-      description: 'The edit information.'
+      description: 'The edit snippet information.'
       content:
         application/json:
           schema:

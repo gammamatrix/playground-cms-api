@@ -1,9 +1,9 @@
 <?php
-
-declare(strict_types=1);
 /**
  * Playground
  */
+
+declare(strict_types=1);
 namespace Playground\Cms\Api\Policies;
 
 use Illuminate\Auth\Access\Response;
@@ -46,20 +46,6 @@ class PagePolicy extends ModelPolicy
      */
     public function revisions(Authenticatable $user): bool|Response
     {
-        // dump([
-        //     '__METHOD__' => __METHOD__,
-        //     '__FILE__' => __FILE__,
-        //     '__LINE__' => __LINE__,
-        //     'static::class' => static::class,
-        //     '$user' => $user->toArray(),
-        //     '$this->allowRootOverride' => $this->allowRootOverride,
-        //     '$this->package' => $this->package,
-        //     '$this->entity' => $this->entity,
-        // ]);
-
-        // \Log::debug(__METHOD__, [
-        //     '$user' => $user,
-        // ]);
         return $this->verify($user, 'viewAny');
     }
 
@@ -68,14 +54,11 @@ class PagePolicy extends ModelPolicy
      */
     public function viewRevision(Authenticatable $user, PageRevision $page_revision): bool|Response
     {
-        // \Log::debug(__METHOD__, [
-        //     '$user' => $user,
-        // ]);
         return $this->verify($user, 'view');
     }
 
     /**
-     * Determine whether the user can restore the page revision.
+     * Determine whether the user can restore the Page Revision.
      */
     public function restoreRevision(Authenticatable $user, PageRevision $page_revision): bool|Response
     {

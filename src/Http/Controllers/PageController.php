@@ -1,31 +1,16 @@
 <?php
-
-declare(strict_types=1);
 /**
  * Playground
  */
+
+declare(strict_types=1);
 namespace Playground\Cms\Api\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Illuminate\Support\Carbon;
-use Playground\Cms\Api\Http\Requests\Page\CreateRequest;
-use Playground\Cms\Api\Http\Requests\Page\DestroyRequest;
-use Playground\Cms\Api\Http\Requests\Page\EditRequest;
-use Playground\Cms\Api\Http\Requests\Page\IndexRequest;
-use Playground\Cms\Api\Http\Requests\Page\LockRequest;
-use Playground\Cms\Api\Http\Requests\Page\RestoreRequest;
-use Playground\Cms\Api\Http\Requests\Page\RestoreRevisionRequest;
-use Playground\Cms\Api\Http\Requests\Page\RevisionsRequest;
-use Playground\Cms\Api\Http\Requests\Page\ShowRequest;
-use Playground\Cms\Api\Http\Requests\Page\ShowRevisionRequest;
-use Playground\Cms\Api\Http\Requests\Page\StoreRequest;
-use Playground\Cms\Api\Http\Requests\Page\UnlockRequest;
-use Playground\Cms\Api\Http\Requests\Page\UpdateRequest;
-use Playground\Cms\Api\Http\Resources\Page as PageResource;
-use Playground\Cms\Api\Http\Resources\PageCollection;
-use Playground\Cms\Api\Http\Resources\PageRevision as PageRevisionResource;
-use Playground\Cms\Api\Http\Resources\PageRevisionCollection;
+use Playground\Cms\Api\Http\Requests;
+use Playground\Cms\Api\Http\Resources;
 use Playground\Cms\Models\Page;
 use Playground\Cms\Models\PageRevision;
 
@@ -45,7 +30,7 @@ class PageController extends Controller
         'model_slug' => 'page',
         'model_slug_plural' => 'pages',
         'module_label' => 'CMS',
-        'module_label_plural' => 'Matrices',
+        'module_label_plural' => 'CMS',
         'module_route' => 'playground.cms.api',
         'module_slug' => 'cms',
         'privilege' => 'playground-cms-api:page',
@@ -53,13 +38,13 @@ class PageController extends Controller
     ];
 
     /**
-     * CREATE the Page resource in storage.
+     * Create the Page resource in storage.
      *
      * @route GET /api/cms/pages/create playground.cms.api.pages.create
      */
     public function create(
-        CreateRequest $request
-    ): JsonResponse|PageResource {
+        Requests\Page\CreateRequest $request
+    ): JsonResponse|Resources\Page {
 
         $validated = $request->validated();
 
@@ -67,7 +52,7 @@ class PageController extends Controller
 
         $page = new Page($validated);
 
-        return (new PageResource($page))->additional(['meta' => [
+        return (new Resources\Page($page))->additional(['meta' => [
             'info' => $this->packageInfo,
         ]])->response($request);
     }
@@ -75,13 +60,13 @@ class PageController extends Controller
     /**
      * Edit the Page resource in storage.
      *
-     * @route GET /api/cms/pages/pages/edit playground.cms.api.pages.edit
+     * @route GET /api/cms/pages/edit playground.cms.api.pages.edit
      */
     public function edit(
         Page $page,
-        EditRequest $request
-    ): JsonResponse|PageResource {
-        return (new PageResource($page))->additional(['meta' => [
+        Requests\Page\EditRequest $request
+    ): JsonResponse|Resources\Page {
+        return (new Resources\Page($page))->additional(['meta' => [
             'info' => $this->packageInfo,
         ]])->response($request);
     }
@@ -93,9 +78,16 @@ class PageController extends Controller
      */
     public function destroy(
         Page $page,
-        DestroyRequest $request
+        Requests\Page\DestroyRequest $request
     ): Response {
+
         $validated = $request->validated();
+
+        $user = $request->user();
+
+        if ($user?->id) {
+            $page->modified_by_id = $user->id;
+        }
 
         if (empty($validated['force'])) {
             $page->delete();
@@ -113,17 +105,22 @@ class PageController extends Controller
      */
     public function lock(
         Page $page,
-        LockRequest $request
-    ): JsonResponse|PageResource {
+        Requests\Page\LockRequest $request
+    ): JsonResponse|Resources\Page {
+
         $validated = $request->validated();
 
         $user = $request->user();
 
-        $page->setAttribute('locked', true);
+        if ($user?->id) {
+            $page->modified_by_id = $user->id;
+        }
+
+        $page->locked = true;
 
         $page->save();
 
-        return (new PageResource($page))->additional(['meta' => [
+        return (new Resources\Page($page))->additional(['meta' => [
             'info' => $this->packageInfo,
         ]])->response($request);
     }
@@ -134,8 +131,9 @@ class PageController extends Controller
      * @route GET /api/cms/pages playground.cms.api.pages
      */
     public function index(
-        IndexRequest $request
-    ): JsonResponse|PageCollection {
+        Requests\Page\IndexRequest $request
+    ): JsonResponse|Resources\PageCollection {
+
         $user = $request->user();
 
         $validated = $request->validated();
@@ -145,6 +143,7 @@ class PageController extends Controller
         $query->sort($validated['sort'] ?? null);
 
         if (! empty($validated['filter']) && is_array($validated['filter'])) {
+
             $query->filterTrash($validated['filter']['trash'] ?? null);
 
             $query->filterIds(
@@ -169,14 +168,11 @@ class PageController extends Controller
         }
 
         $perPage = ! empty($validated['perPage']) && is_int($validated['perPage']) ? $validated['perPage'] : null;
-        $paginator = $query->paginate( $perPage);
+        $paginator = $query->paginate($perPage);
 
         $paginator->appends($validated);
 
-        return (new PageCollection($paginator))->additional(['meta' => [
-            'info' => $this->packageInfo,
-        ]])->response($request);
-
+        return (new Resources\PageCollection($paginator))->response($request);
     }
 
     /**
@@ -186,12 +182,18 @@ class PageController extends Controller
      */
     public function restore(
         Page $page,
-        RestoreRequest $request
-    ): JsonResponse|PageResource {
+        Requests\Page\RestoreRequest $request
+    ): JsonResponse|Resources\Page {
+
+        $user = $request->user();
+
+        if ($user?->id) {
+            $page->modified_by_id = $user->id;
+        }
 
         $page->restore();
 
-        return (new PageResource($page))->additional(['meta' => [
+        return (new Resources\Page($page))->additional(['meta' => [
             'info' => $this->packageInfo,
         ]])->response($request);
     }
@@ -203,8 +205,8 @@ class PageController extends Controller
      */
     public function restoreRevision(
         PageRevision $page_revision,
-        RestoreRevisionRequest $request
-    ): JsonResponse|PageResource {
+        Requests\Page\RestoreRevisionRequest $request
+    ): JsonResponse|Resources\Page {
         $validated = $request->validated();
 
         /**
@@ -212,7 +214,7 @@ class PageController extends Controller
          */
         $page = Page::where(
             'id',
-            $page_revision->getAttributeValue('page_id')
+            $page_revision->page_id
         )->firstOrFail();
 
         $this->saveRevision($page);
@@ -228,7 +230,7 @@ class PageController extends Controller
 
         $page->save();
 
-        return (new PageResource($page))->additional(['meta' => [
+        return (new Resources\Page($page))->additional(['meta' => [
             'info' => $this->packageInfo,
         ]])->response($request);
     }
@@ -240,8 +242,8 @@ class PageController extends Controller
      */
     public function revision(
         PageRevision $page_revision,
-        ShowRevisionRequest $request
-    ): JsonResponse|PageRevisionResource {
+        Requests\Page\ShowRevisionRequest $request
+    ): JsonResponse|Resources\PageRevision {
         $validated = $request->validated();
 
         $user = $request->user();
@@ -254,7 +256,7 @@ class PageController extends Controller
             'info' => $this->packageInfo,
         ];
 
-        return (new PageRevisionResource($page_revision))->additional(['meta' => [
+        return (new Resources\PageRevision($page_revision))->additional(['meta' => [
             'info' => $this->packageInfo,
         ]])->response($request);
     }
@@ -266,8 +268,8 @@ class PageController extends Controller
      */
     public function revisions(
         Page $page,
-        RevisionsRequest $request
-    ): JsonResponse|PageRevisionCollection {
+        Requests\Page\RevisionsRequest $request
+    ): JsonResponse|Resources\PageRevisionCollection {
         $user = $request->user();
 
         $validated = $request->validated();
@@ -305,7 +307,7 @@ class PageController extends Controller
 
         $paginator->appends($validated);
 
-        return (new PageRevisionCollection($paginator))->additional(['meta' => [
+        return (new Resources\PageRevisionCollection($paginator))->additional(['meta' => [
             'info' => $this->packageInfo,
         ]])->response($request);
     }
@@ -317,17 +319,17 @@ class PageController extends Controller
     {
         $revision = new PageRevision($page->toArray());
 
-        $revision->setAttribute('created_by_id', $page->getAttributeValue('created_by_id'));
-        $revision->setAttribute('modified_by_id', $page->getAttributeValue('modified_by_id'));
-        $revision->setAttribute('owned_by_id', $page->getAttributeValue('owned_by_id'));
-        $revision->setAttribute('page_id', $page->getAttributeValue('id'));
+        $revision->created_by_id = $page->created_by_id;
+        $revision->modified_by_id = $page->modified_by_id;
+        $revision->owned_by_id = $page->owned_by_id;
+        $revision->page_id = $page->id;
 
         $r = PageRevision::where('page_id', $page->id)->max('revision');
         $r = ! is_numeric($r) || empty($r) || $r < 0 ? 0 : (int) $r;
         $r++;
 
-        $revision->setAttribute('revision', $r);
-        $page->setAttribute('revision', $r);
+        $revision->revision = $r;
+        $page->revision = $r;
 
         $revision->saveOrFail();
 
@@ -341,21 +343,9 @@ class PageController extends Controller
      */
     public function show(
         Page $page,
-        ShowRequest $request
-    ): JsonResponse|PageResource {
-        $validated = $request->validated();
-
-        $user = $request->user();
-
-        $meta = [
-            'session_user_id' => $user?->id,
-            'id' => $page->id,
-            'timestamp' => Carbon::now()->toJson(),
-            'validated' => $validated,
-            'info' => $this->packageInfo,
-        ];
-
-        return (new PageResource($page))->additional(['meta' => [
+        Requests\Page\ShowRequest $request
+    ): JsonResponse|Resources\Page {
+        return (new Resources\Page($page))->additional(['meta' => [
             'info' => $this->packageInfo,
         ]])->response($request);
     }
@@ -363,11 +353,11 @@ class PageController extends Controller
     /**
      * Store a newly created API Page resource in storage.
      *
-     * @route POST /api/cms playground.cms.api.pages.post
+     * @route POST /api/cms/pages playground.cms.api.pages.post
      */
     public function store(
-        StoreRequest $request
-    ): Response|JsonResponse|PageResource {
+        Requests\Page\StoreRequest $request
+    ): Response|JsonResponse|Resources\Page {
         $validated = $request->validated();
 
         $user = $request->user();
@@ -378,12 +368,9 @@ class PageController extends Controller
 
         $page->save();
 
-        return (new PageResource($page))
-            ->additional(['meta' => [
-                'info' => $this->packageInfo,
-            ]])
-            ->response($request)
-            ->setStatusCode(201);
+        return (new Resources\Page($page))->additional(['meta' => [
+            'info' => $this->packageInfo,
+        ]])->response($request)->setStatusCode(201);
     }
 
     /**
@@ -393,17 +380,22 @@ class PageController extends Controller
      */
     public function unlock(
         Page $page,
-        UnlockRequest $request
-    ): JsonResponse|PageResource {
+        Requests\Page\UnlockRequest $request
+    ): JsonResponse|Resources\Page {
+
         $validated = $request->validated();
 
         $user = $request->user();
 
-        $page->setAttribute('locked', false);
+        $page->locked = false;
+
+        if ($user?->id) {
+            $page->modified_by_id = $user->id;
+        }
 
         $page->save();
 
-        return (new PageResource($page))->additional(['meta' => [
+        return (new Resources\Page($page))->additional(['meta' => [
             'info' => $this->packageInfo,
         ]])->response($request);
     }
@@ -415,19 +407,22 @@ class PageController extends Controller
      */
     public function update(
         Page $page,
-        UpdateRequest $request
-    ): JsonResponse|PageResource {
+        Requests\Page\UpdateRequest $request
+    ): JsonResponse {
+
+        $this->saveRevision($page);
+
         $validated = $request->validated();
 
         $user = $request->user();
 
-        $this->saveRevision($page);
-
-        $page->modified_by_id = $user?->id;
+        if ($user?->id) {
+            $page->modified_by_id = $user->id;
+        }
 
         $page->update($validated);
 
-        return (new PageResource($page))->additional(['meta' => [
+        return (new Resources\Page($page))->additional(['meta' => [
             'info' => $this->packageInfo,
         ]])->response($request);
     }

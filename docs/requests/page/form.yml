@@ -1,29 +1,31 @@
-description: The CMS Page index form.
+description: 'The CMS Page index form.'
 type: object
 properties:
   perPage:
-    description: Specify the number for records to display per page for pagination.
+    description: 'Specify the number of records to display per page for pagination.'
     type: integer
     example: 10
   page:
-    description: Select a page for pagination.
+    description: 'Select a page for pagination.'
     type: integer
     example: 1
   offset:
-    description: Select the zero-based index offset for pagination.
+    description: 'Select the zero-based index offset for pagination.'
     type: integer
     example: 0
   filter:
-    description: Filter options for the page.
+    description: 'Filter options for the Page.'
     type: object
     properties:
       trash:
-        description: Filter trash options
-        type: string
-        enum: ["with", "only", ""]
+        description: 'Filter trash options'
+        type: integer
+        example: 1
+        enum:
+          - with
+          - only
+          - ''
       page_type:
-        description: 'The page type of this page.'
-        type: string
-        example: banner
-        nullable: true
-
+        description: 'The Page type of this Page.'
+        type: integer
+        example: 1

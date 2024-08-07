@@ -1,9 +1,9 @@
 <?php
-
-declare(strict_types=1);
 /**
  * Playground
  */
+
+declare(strict_types=1);
 namespace Playground\Cms\Api\Http\Requests\Snippet;
 
 use Playground\Cms\Api\Http\Requests\FormRequest;
@@ -17,23 +17,24 @@ class CreateRequest extends FormRequest
      * @var array<string, string|array<mixed>>
      */
     public const RULES = [
+        'snippet_type' => ['nullable', 'string'],
         'owned_by_id' => ['nullable', 'uuid'],
         'parent_id' => ['nullable', 'uuid'],
-        'snippet_type' => ['nullable', 'string'],
-        'start_at' => ['nullable', 'string'],
-        'planned_start_at' => ['nullable', 'string'],
-        'end_at' => ['nullable', 'string'],
-        'planned_end_at' => ['nullable', 'string'],
+        'matrix_id' => ['nullable', 'uuid'],
         'canceled_at' => ['nullable', 'string'],
         'closed_at' => ['nullable', 'string'],
         'embargo_at' => ['nullable', 'string'],
         'fixed_at' => ['nullable', 'string'],
+        'planned_end_at' => ['nullable', 'string'],
+        'planned_start_at' => ['nullable', 'string'],
         'postponed_at' => ['nullable', 'string'],
         'published_at' => ['nullable', 'string'],
         'released_at' => ['nullable', 'string'],
-        'resolved_at' => ['nullable', 'string'],
         'resumed_at' => ['nullable', 'string'],
+        'resolved_at' => ['nullable', 'string'],
         'suspended_at' => ['nullable', 'string'],
+        'timer_end_at' => ['nullable', 'string'],
+        'timer_start_at' => ['nullable', 'string'],
         'gids' => ['integer'],
         'po' => ['integer'],
         'pg' => ['integer'],
@@ -45,10 +46,22 @@ class CreateRequest extends FormRequest
         'status' => ['integer'],
         'rank' => ['integer'],
         'size' => ['integer'],
+        'matrix' => ['nullable', 'array'],
+        'x' => ['nullable', 'integer'],
+        'y' => ['nullable', 'integer'],
+        'z' => ['nullable', 'integer'],
+        'r' => ['nullable', 'numeric'],
+        'theta' => ['nullable', 'numeric'],
+        'rho' => ['nullable', 'numeric'],
+        'phi' => ['nullable', 'numeric'],
+        'elevation' => ['nullable', 'numeric'],
+        'latitude' => ['nullable', 'numeric'],
+        'longitude' => ['nullable', 'numeric'],
         'active' => ['boolean'],
         'canceled' => ['boolean'],
         'closed' => ['boolean'],
         'completed' => ['boolean'],
+        'cron' => ['boolean'],
         'duplicate' => ['boolean'],
         'fixed' => ['boolean'],
         'flagged' => ['boolean'],
@@ -56,14 +69,15 @@ class CreateRequest extends FormRequest
         'locked' => ['boolean'],
         'pending' => ['boolean'],
         'planned' => ['boolean'],
+        'prioritized' => ['boolean'],
         'problem' => ['boolean'],
         'published' => ['boolean'],
         'released' => ['boolean'],
-        'retired' => ['boolean'],
         'resolved' => ['boolean'],
-        'sitemap' => ['boolean'],
+        'retired' => ['boolean'],
         'suspended' => ['boolean'],
         'unknown' => ['boolean'],
+        'locale' => ['string'],
         'label' => ['string'],
         'title' => ['string'],
         'byline' => ['string'],

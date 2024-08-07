@@ -10,7 +10,7 @@ parameters:
 put:
   tags:
     - Snippet
-  summary: 'Restore a snippet from the trash by id.'
+  summary: 'Restore a snippet from the trash by ID.'
   operationId: restore_snippet
   responses:
     200:
