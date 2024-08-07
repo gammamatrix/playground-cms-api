@@ -73,10 +73,6 @@ Route::group([
         'uses' => 'SnippetController@revisions',
     ])->whereUuid('snippet')->can('revisions', 'snippet');
 
-    Route::post('/{snippet}/revisions', [
-        'uses' => 'SnippetController@revisions',
-    ])->whereUuid('snippet')->can('revisions', 'snippet');
-
     Route::get('/revision/{snippet_revision}', [
         'as' => 'playground.cms.api.snippets.revision',
         'uses' => 'SnippetController@revision',

@@ -5,7 +5,7 @@ get:
   operationId: create_snippet
   responses:
     200:
-      description: 'The create information (JSON) or form (HTML).'
+      description: 'The create snippet information.'
       content:
         application/json:
           schema:

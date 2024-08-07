@@ -27,32 +27,10 @@ tags:
     name: Snippet
     description: 'Manage snippets in storage.'
 paths:
-  '/api/cms/snippets/{id}':
-    $ref: paths/snippets/id.yml
-  /api/cms/snippets:
-    $ref: paths/snippets/index.yml
-  /api/cms/snippets/create:
-    $ref: paths/snippets/create.yml
-  '/api/cms/snippets/edit/{id}':
-    $ref: paths/snippets/edit.yml
-  /api/cms/snippets/index:
-    $ref: paths/snippets/index-form.yml
-  '/api/cms/snippets/lock/{id}':
-    $ref: paths/snippets/lock.yml
-  '/api/cms/snippets/restore/{id}':
-    $ref: paths/snippets/restore.yml
-  '/api/cms/snippets/revision/{id}':
-    $ref: paths/snippets/revision.yml
-  '/api/cms/snippets/{id}/revisions':
-    $ref: paths/snippets/revisions.yml
   '/api/cms/pages/{id}':
     $ref: paths/pages/id.yml
   /api/cms/pages:
     $ref: paths/pages/index.yml
-  /api/cms/pages/create:
-    $ref: paths/pages/create.yml
-  '/api/cms/pages/edit/{id}':
-    $ref: paths/pages/edit.yml
   /api/cms/pages/index:
     $ref: paths/pages/index-form.yml
   '/api/cms/pages/lock/{id}':
@@ -63,13 +41,35 @@ paths:
     $ref: paths/pages/revision.yml
   '/api/cms/pages/{id}/revisions':
     $ref: paths/pages/revisions.yml
+  /api/cms/pages/create:
+    $ref: paths/pages/create.yml
+  '/api/cms/pages/edit/{id}':
+    $ref: paths/pages/edit.yml
+  '/api/cms/snippets/{id}':
+    $ref: paths/snippets/id.yml
+  /api/cms/snippets:
+    $ref: paths/snippets/index.yml
+  /api/cms/snippets/index:
+    $ref: paths/snippets/index-form.yml
+  '/api/cms/snippets/lock/{id}':
+    $ref: paths/snippets/lock.yml
+  '/api/cms/snippets/restore/{id}':
+    $ref: paths/snippets/restore.yml
+  '/api/cms/snippets/revision/{id}':
+    $ref: paths/snippets/revision.yml
+  '/api/cms/snippets/{id}/revisions':
+    $ref: paths/snippets/revisions.yml
+  /api/cms/snippets/create:
+    $ref: paths/snippets/create.yml
+  '/api/cms/snippets/edit/{id}':
+    $ref: paths/snippets/edit.yml
 components:
   schemas:
     Page:
       $ref: models/page.yml
-    PageRevision:
-      $ref: models/page-revision.yml
     Snippet:
       $ref: models/snippet.yml
+    PageRevision:
+      $ref: models/page-revision.yml
     SnippetRevision:
       $ref: models/snippet-revision.yml

@@ -5,7 +5,7 @@ get:
   operationId: create_page
   responses:
     200:
-      description: 'The create information.'
+      description: 'The create page information.'
       content:
         application/json:
           schema:

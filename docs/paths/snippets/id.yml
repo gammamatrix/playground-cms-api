@@ -45,7 +45,7 @@ delete:
 patch:
   tags:
     - Snippet
-  summary: 'Update a snippet by id.'
+  summary: 'Patch a snippet by id.'
   operationId: patch_snippet
   requestBody:
     content:
@@ -54,7 +54,7 @@ patch:
           $ref: ../../requests/snippet/patch.yml
   responses:
     200:
-      description: 'The updated snippet.'
+      description: 'The snippet has been patched.'
       content:
         application/json:
           schema:
@@ -78,8 +78,10 @@ patch:
               errors:
                 type: object
                 properties:
-                  label:
+                  title:
                     type: array
                     items:
                       type: string
-                      example: 'The label field is required.'
+                      example: 'The title field is required.'
+    423:
+      description: 'The snippet is locked. Unlock to patch.'

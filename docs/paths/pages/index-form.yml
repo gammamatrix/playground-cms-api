@@ -1,7 +1,7 @@
 post:
   tags:
     - Page
-  summary: 'Get pages from the index using POST'
+  summary: 'Get pages from the index using POST.'
   operationId: post_pages_index
   requestBody:
     content:

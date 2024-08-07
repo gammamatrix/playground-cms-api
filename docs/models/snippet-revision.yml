@@ -1,4 +1,4 @@
-description: 'The CMS Snippet revision model.'
+description: 'The CMS snippet revision model.'
 type: object
 properties:
   id:
@@ -6,117 +6,122 @@ properties:
     type: string
     format: uuid
     readOnly: true
+  snippet_type:
+    description: 'The snippet type of this snippet revision.'
+    type: string
+    nullable: true
   created_by_id:
-    description: 'Foreign key: links a created by user to this snippet.'
+    description: 'Foreign key: links a created by user to this snippet revision.'
     type: string
     format: uuid
     nullable: true
   modified_by_id:
-    description: 'Foreign key: links a modified by user to this snippet.'
+    description: 'Foreign key: links a modified by user to this snippet revision.'
     type: string
     format: uuid
     nullable: true
   owned_by_id:
-    description: 'Foreign key: links an owned by user to this snippet.'
+    description: 'Foreign key: links an owned by user to this snippet revision.'
     type: string
     format: uuid
     nullable: true
   parent_id:
-    description: 'Foreign key: links a parent to this snippet.'
+    description: 'ID: a parent of this snippet revision.'
     type: string
     format: uuid
     nullable: true
   snippet_id:
-    description: 'Foreign key: links a snippet to this revision.'
+    description: 'Foreign key: links a snippet to this snippet revision.'
     type: string
     format: uuid
     nullable: true
-  snippet_type:
-    description: 'The snippet type of this snippet.'
+  matrix_id:
+    description: 'Foreign key: links a matrix to this snippet revision.'
     type: string
+    format: uuid
     nullable: true
   created_at:
-    description: 'Denotes the date and time, the snippet was created.'
+    description: 'Denotes the date and time, the snippet revision was created.'
     type: string
     format: date-time
     readOnly: true
   updated_at:
-    description: 'Denotes the date and time, the snippet was last modified.'
+    description: 'Denotes the date and time, the snippet revision was last modified.'
     type: string
     format: date-time
     readOnly: true
   deleted_at:
-    description: 'Denotes the date and time, the snippet was put in the trash.'
-    type: string
-    format: date-time
-    nullable: true
-  start_at:
-    description: 'The start at date for this snippet.'
-    type: string
-    format: date-time
-    nullable: true
-  planned_start_at:
-    description: 'The planned start at date for this snippet.'
-    type: string
-    format: date-time
-    nullable: true
-  end_at:
-    description: 'The end at date for this snippet.'
-    type: string
-    format: date-time
-    nullable: true
-  planned_end_at:
-    description: 'The planned end at date for this snippet.'
+    description: 'Denotes the date and time, the snippet revision was put in the trash.'
     type: string
     format: date-time
     nullable: true
   canceled_at:
-    description: 'The canceled at date for this snippet.'
+    description: 'The canceled at date for this snippet revision.'
     type: string
     format: date-time
     nullable: true
   closed_at:
-    description: 'The closed at date for this snippet.'
+    description: 'The closed at date for this snippet revision.'
     type: string
     format: date-time
     nullable: true
   embargo_at:
-    description: 'The embargo at date for this snippet.'
+    description: 'The embargo at date for this snippet revision.'
     type: string
     format: date-time
     nullable: true
   fixed_at:
-    description: 'The fixed at date for this snippet.'
+    description: 'The fixed at date for this snippet revision.'
+    type: string
+    format: date-time
+    nullable: true
+  planned_end_at:
+    description: 'The planned end at date for this snippet revision.'
+    type: string
+    format: date-time
+    nullable: true
+  planned_start_at:
+    description: 'The planned start at date for this snippet revision.'
     type: string
     format: date-time
     nullable: true
   postponed_at:
-    description: 'The postponed at date for this snippet.'
+    description: 'The postponed at date for this snippet revision.'
     type: string
     format: date-time
     nullable: true
   published_at:
-    description: 'The published at date for this snippet.'
+    description: 'The published at date for this snippet revision.'
     type: string
     format: date-time
     nullable: true
   released_at:
-    description: 'The released at date for this snippet.'
+    description: 'The released at date for this snippet revision.'
     type: string
     format: date-time
     nullable: true
   resumed_at:
-    description: 'The resumed at date for this snippet.'
+    description: 'The resumed at date for this snippet revision.'
     type: string
     format: date-time
     nullable: true
   resolved_at:
-    description: 'The resolved at date for this snippet.'
+    description: 'The resolved at date for this snippet revision.'
     type: string
     format: date-time
     nullable: true
   suspended_at:
-    description: 'The suspended at date for this snippet.'
+    description: 'The suspended at date for this snippet revision.'
+    type: string
+    format: date-time
+    nullable: true
+  timer_end_at:
+    description: 'The timer end at date for this snippet revision.'
+    type: string
+    format: date-time
+    nullable: true
+  timer_start_at:
+    description: 'The timer start at date for this snippet revision.'
     type: string
     format: date-time
     nullable: true
@@ -149,7 +154,7 @@ properties:
     description: 'Permissions: allow public'
     type: boolean
   status:
-    description: 'The status of the snippet.'
+    description: 'The status of the snippet revision.'
     type: integer
     format: int64
   rank:
@@ -158,6 +163,10 @@ properties:
     format: int64
   size:
     description: 'Status: size'
+    type: integer
+    format: int64
+  revision:
+    description: 'Status: revision'
     type: integer
     format: int64
   icon:
@@ -173,7 +182,7 @@ properties:
     type: string
     maxLength: 512
   ui:
-    description: 'The ui of the snippet.'
+    description: 'The ui of the snippet revision.'
     type: object
     nullable: true
   active:
@@ -187,6 +196,9 @@ properties:
     type: boolean
   completed:
     description: 'Flags: completed'
+    type: boolean
+  cron:
+    description: 'Flags: cron'
     type: boolean
   duplicate:
     description: 'Flags: duplicate'
@@ -209,6 +221,9 @@ properties:
   planned:
     description: 'Flags: planned'
     type: boolean
+  prioritized:
+    description: 'Flags: prioritized'
+    type: boolean
   problem:
     description: 'Flags: problem'
     type: boolean
@@ -218,11 +233,11 @@ properties:
   released:
     description: 'Flags: released'
     type: boolean
-  retired:
-    description: 'Flags: retired'
-    type: boolean
   resolved:
     description: 'Flags: resolved'
+    type: boolean
+  retired:
+    description: 'Flags: retired'
     type: boolean
   suspended:
     description: 'Flags: suspended'
@@ -230,41 +245,45 @@ properties:
   unknown:
     description: 'Flags: unknown'
     type: boolean
+  locale:
+    description: 'The locale of the snippet revision.'
+    type: string
+    maxLength: 255
   label:
-    description: 'The label of the snippet.'
+    description: 'The label of the snippet revision.'
     type: string
     maxLength: 128
   title:
-    description: 'The title of the snippet.'
+    description: 'The title of the snippet revision.'
     type: string
     maxLength: 255
   byline:
-    description: 'The byline of the snippet.'
+    description: 'The byline of the snippet revision.'
     type: string
     maxLength: 255
   slug:
-    description: 'The slug of the snippet.'
+    description: 'The slug of the snippet revision.'
     type: string
     maxLength: 128
     nullable: true
   url:
-    description: 'The url of the snippet.'
+    description: 'The url of the snippet revision.'
     type: string
     maxLength: 512
   description:
-    description: 'The description of the snippet.'
+    description: 'The description of the snippet revision.'
     type: string
     maxLength: 512
   introduction:
-    description: 'The introduction of the snippet.'
+    description: 'The introduction of the snippet revision.'
     type: string
     maxLength: 512
   content:
-    description: 'The content of the snippet. Allows HTML.'
+    description: 'The content of the snippet revision. Allows HTML.'
     type: string
     nullable: true
   summary:
-    description: 'The summary of the snippet. Allows HTML.'
+    description: 'The summary of the snippet revision. Allows HTML.'
     type: string
     nullable: true
   assets:

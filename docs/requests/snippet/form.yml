@@ -1,29 +1,31 @@
-description: The CMS Snippet index form.
+description: 'The CMS Snippet index form.'
 type: object
 properties:
   perPage:
-    description: Specify the number for records to display per page for pagination.
+    description: 'Specify the number of records to display per page for pagination.'
     type: integer
     example: 10
   page:
-    description: Select a page for pagination.
+    description: 'Select a page for pagination.'
     type: integer
     example: 1
   offset:
-    description: Select the zero-based index offset for pagination.
+    description: 'Select the zero-based index offset for pagination.'
     type: integer
     example: 0
   filter:
-    description: Filter options for the snippet.
+    description: 'Filter options for the Snippet.'
     type: object
     properties:
       trash:
-        description: Filter trash options
-        type: string
-        enum: ["with", "only", ""]
-      snippet_type:
-        description: 'The snippet type of this snippet.'
-        type: string
-        example: banner
-        nullable: true
-
+        description: 'Filter trash options'
+        type: integer
+        example: 1
+        enum:
+          - with
+          - only
+          - ''
+      page_type:
+        description: 'The Snippet type of this Snippet.'
+        type: integer
+        example: 1

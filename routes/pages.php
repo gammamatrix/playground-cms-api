@@ -73,10 +73,6 @@ Route::group([
         'uses' => 'PageController@revisions',
     ])->whereUuid('page')->can('revisions', 'page');
 
-    Route::post('/{page}/revisions', [
-        'uses' => 'PageController@revisions',
-    ])->whereUuid('page')->can('revisions', 'page');
-
     Route::get('/revision/{page_revision}', [
         'as' => 'playground.cms.api.pages.revision',
         'uses' => 'PageController@revision',

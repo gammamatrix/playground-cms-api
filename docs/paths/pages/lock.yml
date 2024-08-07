@@ -10,8 +10,8 @@ parameters:
 delete:
   tags:
     - Page
-  summary: 'Unlock a page by id.'
-  operationId: lock_page
+  summary: 'Delete a page by id.'
+  operationId: unlock_page
   responses:
     204:
       description: 'The page has been unlocked.'
@@ -22,8 +22,8 @@ delete:
 put:
   tags:
     - Page
-  summary: 'Lock a page by id.'
-  operationId: unlock_page
+  summary: 'Lock a page by ID.'
+  operationId: lock_page
   responses:
     200:
       description: 'The unlocked page.'

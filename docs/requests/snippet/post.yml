@@ -1,39 +1,24 @@
 description: 'The CMS Snippet fillable properties.'
 type: object
 properties:
+  snippet_type:
+    description: 'The snippet type of this snippet.'
+    type: string
+    nullable: true
   owned_by_id:
     description: 'Foreign key: links an owned by user to this snippet.'
     type: string
     format: uuid
     nullable: true
   parent_id:
-    description: 'Foreign key: links a parent to this snippet.'
+    description: 'ID: a parent of this snippet.'
     type: string
     format: uuid
     nullable: true
-  snippet_type:
-    description: 'The snippet type of this snippet.'
+  matrix_id:
+    description: 'Foreign key: links a matrix to this snippet.'
     type: string
-    nullable: true
-  start_at:
-    description: 'The start at date for this snippet.'
-    type: string
-    format: date-time
-    nullable: true
-  planned_start_at:
-    description: 'The planned start at date for this snippet.'
-    type: string
-    format: date-time
-    nullable: true
-  end_at:
-    description: 'The end at date for this snippet.'
-    type: string
-    format: date-time
-    nullable: true
-  planned_end_at:
-    description: 'The planned end at date for this snippet.'
-    type: string
-    format: date-time
+    format: uuid
     nullable: true
   canceled_at:
     description: 'The canceled at date for this snippet.'
@@ -52,6 +37,16 @@ properties:
     nullable: true
   fixed_at:
     description: 'The fixed at date for this snippet.'
+    type: string
+    format: date-time
+    nullable: true
+  planned_end_at:
+    description: 'The planned end at date for this snippet.'
+    type: string
+    format: date-time
+    nullable: true
+  planned_start_at:
+    description: 'The planned start at date for this snippet.'
     type: string
     format: date-time
     nullable: true
@@ -82,6 +77,16 @@ properties:
     nullable: true
   suspended_at:
     description: 'The suspended at date for this snippet.'
+    type: string
+    format: date-time
+    nullable: true
+  timer_end_at:
+    description: 'The timer end at date for this snippet.'
+    type: string
+    format: date-time
+    nullable: true
+  timer_start_at:
+    description: 'The timer start at date for this snippet.'
     type: string
     format: date-time
     nullable: true
@@ -153,6 +158,9 @@ properties:
   completed:
     description: 'Flags: completed'
     type: boolean
+  cron:
+    description: 'Flags: cron'
+    type: boolean
   duplicate:
     description: 'Flags: duplicate'
     type: boolean
@@ -174,6 +182,9 @@ properties:
   planned:
     description: 'Flags: planned'
     type: boolean
+  prioritized:
+    description: 'Flags: prioritized'
+    type: boolean
   problem:
     description: 'Flags: problem'
     type: boolean
@@ -183,11 +194,11 @@ properties:
   released:
     description: 'Flags: released'
     type: boolean
-  retired:
-    description: 'Flags: retired'
-    type: boolean
   resolved:
     description: 'Flags: resolved'
+    type: boolean
+  retired:
+    description: 'Flags: retired'
     type: boolean
   suspended:
     description: 'Flags: suspended'
@@ -195,6 +206,10 @@ properties:
   unknown:
     description: 'Flags: unknown'
     type: boolean
+  locale:
+    description: 'The locale of the snippet.'
+    type: string
+    maxLength: 255
   label:
     description: 'The label of the snippet.'
     type: string

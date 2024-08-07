@@ -11,7 +11,7 @@ get:
   tags:
     - Page
   summary: 'Get the revisions of a page.'
-  operationId: get_page_revisions_index
+  operationId: revision_index_page
   responses:
     200:
       description: 'The page revisions.'

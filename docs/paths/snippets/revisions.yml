@@ -11,7 +11,7 @@ get:
   tags:
     - Snippet
   summary: 'Get the revisions of a snippet.'
-  operationId: get_snippet_revisions_index
+  operationId: revision_index_snippet
   responses:
     200:
       description: 'The snippet revisions.'
