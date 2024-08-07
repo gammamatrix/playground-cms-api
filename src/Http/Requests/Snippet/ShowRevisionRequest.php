@@ -13,5 +13,4 @@ use Playground\Cms\Api\Http\Requests\FormRequest;
  */
 class ShowRevisionRequest extends FormRequest
 {
-
 }
