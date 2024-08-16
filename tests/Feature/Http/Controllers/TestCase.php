@@ -47,7 +47,7 @@ class TestCase extends BaseTestCase
         'module_slug' => 'cms',
         'privilege' => 'playground-cms-api:',
         'table' => '',
-        'view' => 'playground.cms.api::',
+        'view' => 'playground-cms-api::',
     ];
 
     /**

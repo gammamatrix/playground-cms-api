@@ -1,8 +1,7 @@
 openapi: 3.0.3
 info:
-  title: 'Playground CMS'
-  description: 'Playground: Provide the CMS models for the Playground CMS System.'
-  termsOfService: ''
+  title: 'Playground CMS API'
+  description: 'Playground: Provides an API, without a UI for interacting with Playground CMS, a Content Management System for Laravel applications.'
   version: ''
 externalDocs:
   url: 'https://gammamatrix-playground.readthedocs.io/en/develop/components/cms.html'

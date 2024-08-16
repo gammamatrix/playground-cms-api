@@ -60,7 +60,7 @@ class PageController extends Controller
     /**
      * Edit the Page resource in storage.
      *
-     * @route GET /api/cms/pages/edit playground.cms.api.pages.edit
+     * @route GET /api/cms/pages/edit/{page} playground.cms.api.pages.edit
      */
     public function edit(
         Page $page,

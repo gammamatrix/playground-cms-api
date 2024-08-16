@@ -1,9 +1,9 @@
 <?php
-
-declare(strict_types=1);
 /**
  * Playground
  */
+
+declare(strict_types=1);
 namespace Tests\Feature\Playground\Cms\Api\Http\Controllers\Playground;
 
 use Tests\Feature\Playground\Cms\Api\Http\Controllers\PageTestCase;

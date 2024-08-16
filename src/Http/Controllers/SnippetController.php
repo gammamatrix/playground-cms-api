@@ -60,7 +60,7 @@ class SnippetController extends Controller
     /**
      * Edit the Snippet resource in storage.
      *
-     * @route GET /api/cms/snippets/edit playground.cms.api.snippets.edit
+     * @route GET /api/cms/snippets/edit/{snippet} playground.cms.api.snippets.edit
      */
     public function edit(
         Snippet $snippet,
