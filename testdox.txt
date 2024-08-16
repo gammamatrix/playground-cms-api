@@ -7,6 +7,24 @@ Create Request (Tests\Unit\Playground\Cms\Api\Http\Requests\Page\CreateRequest)
 Create Request (Tests\Unit\Playground\Cms\Api\Http\Requests\Snippet\CreateRequest)
  [x] Request instance
 
+Destroy Request (Tests\Unit\Playground\Cms\Api\Http\Requests\Page\DestroyRequest)
+ [x] Request instance
+
+Destroy Request (Tests\Unit\Playground\Cms\Api\Http\Requests\Snippet\DestroyRequest)
+ [x] Request instance
+
+Edit Request (Tests\Unit\Playground\Cms\Api\Http\Requests\Page\EditRequest)
+ [x] Request instance
+
+Edit Request (Tests\Unit\Playground\Cms\Api\Http\Requests\Snippet\EditRequest)
+ [x] Request instance
+
+Index Request (Tests\Unit\Playground\Cms\Api\Http\Requests\Page\IndexRequest)
+ [x] Request instance
+
+Index Request (Tests\Unit\Playground\Cms\Api\Http\Requests\Snippet\IndexRequest)
+ [x] Request instance
+
 Instance (Tests\Feature\Playground\Cms\Api\Http\Requests\FormRequest\Instance)
  [x] FormRequest authorize with admin
 
@@ -22,6 +40,12 @@ Instance (Tests\Unit\Playground\Cms\Api\ServiceProvider\Instance)
  [x] SetPolicies with empty array
  [x] SetPolicies with invalid model
  [x] SetPolicies with invalid policy
+
+Lock Request (Tests\Unit\Playground\Cms\Api\Http\Requests\Page\LockRequest)
+ [x] Request instance
+
+Lock Request (Tests\Unit\Playground\Cms\Api\Http\Requests\Snippet\LockRequest)
+ [x] Request instance
 
 Page Route (Tests\Feature\Playground\Cms\Api\Http\Controllers\Playground\PageRoute)
  [x] Json guest cannot see info
@@ -74,6 +98,18 @@ Policy (Tests\Unit\Playground\Cms\Api\Policies\PagePolicy\Policy)
 
 Policy (Tests\Unit\Playground\Cms\Api\Policies\SnippetPolicy\Policy)
  [x] Policy instance
+
+Restore Request (Tests\Unit\Playground\Cms\Api\Http\Requests\Page\RestoreRequest)
+ [x] Request instance
+
+Restore Request (Tests\Unit\Playground\Cms\Api\Http\Requests\Snippet\RestoreRequest)
+ [x] Request instance
+
+Show Request (Tests\Unit\Playground\Cms\Api\Http\Requests\Page\ShowRequest)
+ [x] Request instance
+
+Show Request (Tests\Unit\Playground\Cms\Api\Http\Requests\Snippet\ShowRequest)
+ [x] Request instance
 
 Snippet Route (Tests\Feature\Playground\Cms\Api\Http\Controllers\Playground\SnippetRoute)
  [x] Json guest cannot see info
@@ -130,6 +166,12 @@ Store Request (Tests\Unit\Playground\Cms\Api\Http\Requests\Snippet\StoreRequest)
  [x] Request instance
  [x] StoreRequest rules with optional revisions disabled
  [x] StoreRequest rules with optional revisions enabled
+
+Unlock Request (Tests\Unit\Playground\Cms\Api\Http\Requests\Page\UnlockRequest)
+ [x] Request instance
+
+Unlock Request (Tests\Unit\Playground\Cms\Api\Http\Requests\Snippet\UnlockRequest)
+ [x] Request instance
 
 Update Request (Tests\Unit\Playground\Cms\Api\Http\Requests\Page\UpdateRequest)
  [x] Request instance
