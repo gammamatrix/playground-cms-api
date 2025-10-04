@@ -17,14 +17,16 @@
         }
     ],
     "require": {
-        "php": "^8.2",
+        "php": "^8.4",
         "gammamatrix/playground": "*",
         "gammamatrix/playground-auth": "*",
         "gammamatrix/playground-http": "*",
-        "gammamatrix/playground-cms": "*"
+        "gammamatrix/playground-cms": "*",
+        "illuminate/support": "^12.0"
     },
     "require-dev": {
         "gammamatrix/playground-test": "*",
+        "illuminate/testing": "^12.0",
         "laravel/sanctum": "^4.0"
     },
     "autoload": {
@@ -47,7 +49,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-develop": "73.x-dev"
+            "dev-develop": "74.x-dev"
         },
         "laravel": {
             "providers": [
@@ -60,7 +62,15 @@
     "scripts": {
         "analyse": "vendor/bin/phpstan analyse --verbose --debug --level max",
         "cloc": "cloc --exclude-dir=node_modules,output,vendor .",
-        "format": "vendor/bin/php-cs-fixer fix",
-        "test": "vendor/bin/testbench package:test"
+        "format": "vendor/bin/pint",
+        "test": "vendor/bin/testbench package:test",
+        "test-dev": [
+            "Composer\\Config::disableProcessTimeout",
+            "vendor/bin/phpunit -c phpunit-dev.xml"
+        ],
+        "test-parallel": [
+            "Composer\\Config::disableProcessTimeout",
+            "vendor/bin/paratest -c phpunit-dev.xml"
+        ]
     }
 }

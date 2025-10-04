@@ -1,33 +1,32 @@
-# Playground CMS API
+# Playground: CMS API
 
 [![Playground CI Workflow](https://github.com/gammamatrix/playground-cms-api/actions/workflows/ci.yml/badge.svg?branch=develop)](https://raw.githubusercontent.com/gammamatrix/playground-cms-api/testing/develop/testdox.txt)
 [![Test Coverage](https://raw.githubusercontent.com/gammamatrix/playground-cms-api/testing/develop/coverage.svg)](tests)
-[![PHPStan Level 9 src and tests](https://img.shields.io/badge/PHPStan-level%209-brightgreen)](.github/workflows/ci.yml#L120)
+[![PHPStan Level 10](https://img.shields.io/badge/PHPStan-level%2010-brightgreen)](.github/workflows/ci.yml#L128)
 
-The `playground-cms-api` Laravel package.
+Playground: CMS API
 
-This package provides an API, without a UI for interacting with the [Playground CMS](https://github.com/gammamatrix/playground-cms), a Content Management System for Laravel.
+This package provides an API without UI for interacting with the [Playground: CMS](https://github.com/gammamatrix/playground-cms), a model package for Laravel.
 
-If you need a CMS with a UI, then have a look at [Playground CMS Resource.](https://github.com/gammamatrix/playground-cms-resource)
+If you need a JSON API with a UI, then have a look at [Playground: CMS Resource.](https://github.com/gammamatrix/playground-cms-resource)
 
 ## Documentation
 
-Read more on using [Playground CMS API at Read the Docs: Playground Documentation.](https://gammamatrix-playground.readthedocs.io/en/develop/components/cms.html)
+Read more on using [Playground: CMS API at Read the Docs: Playground Documentation](https://gammamatrix-playground.readthedocs.io/en/develop/built-components/cms.html)
 
 ### Postman
 
 A postman collection is provided in the repository: [postman-playground-cms-api.json.](postman-playground-cms-api.json)
-- This same collection is viewable on the [Postman: GammaMatrix Playground workspace.](https://www.postman.com/gammamatrix/workspace/playground/collection/1185343-bd35380d-6b9f-4ded-abe2-7dd36272f550)
+- This same collection is viewable on the [Postman: GammaMatrix Playground Workspace.](https://www.postman.com/gammamatrix/workspace/playground/documentation/1185343-1e4a5656-d4e0-45b2-8f4e-daad7a6ee2b1)
 
+### OpenAPI
 
-### Swagger
-
-This application provides Swagger documentation: [swagger.json](swagger.json).
+This application provides OpenAPI documentation: [openapi.yaml](openapi.yaml).
 - The endpoint models support locks, trash with force delete, restoring, revisions and more.
 - Index endpoints support advanced query filtering.
 
-Swagger API Documentation is built with npm.
-- npm is only needed to generate documentation and is not needed to operate the CMS API.
+OpenAPI API Documentation is built with npm using Redocly.
+- npm is only needed to generate documentation and is not needed to operate the Playground: CMS API API.
 
 See [package.json](package.json) requirements.
 
@@ -37,15 +36,14 @@ Install npm.
 npm install
 ```
 
-Build the documentation to generate the [swagger.json](swagger.json) configuration.
+Build the documentation to generate the [openapi.yaml](openapi.yaml) configuration.
 
 ```sh
 npm run docs
 ```
 
 Documentation
-- Preview [swagger.json on the Swagger Editor UI.](https://editor.swagger.io/?url=https://raw.githubusercontent.com/gammamatrix/playground-cms-api/develop/swagger.json)
-- Preview [swagger.json on the Redocly Editor UI.](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/gammamatrix/playground-cms-api/develop/swagger.json)
+- Preview [openapi.yaml on the Redocly Editor UI.](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/gammamatrix/playground-cms-api/develop/openapi.yaml)
 
 ## Installation
 
@@ -59,7 +57,7 @@ composer require gammamatrix/playground-cms-api
 
 Playground provides information in the `artisan about` command.
 
-<!-- <img src="resources/docs/artisan-about-playground-cms-api.png" alt="screenshot of artisan about command with Playground CMS Resource."> -->
+<!-- <img src="resources/docs/artisan-about-playground-cms-api.png" alt="screenshot of artisan about command with Playground: CMS API."> -->
 
 ## Configuration
 
@@ -69,7 +67,7 @@ You can publish the config file with:
 php artisan vendor:publish --provider="Playground\Cms\Api\ServiceProvider" --tag="playground-config"
 ```
 
-All routes are enabled by default. They may be disabled via enviroment variable or the configuration.
+All routes are enabled by default. They may be disabled via environment variable or the configuration.
 
 See the contents of the published config file: [config/playground-cms-api.php](config/playground-cms-api.php)
 
@@ -86,7 +84,6 @@ you may override the options via system environment variables.
 
 Information on [environment variables is available on the wiki for this package](https://github.com/gammamatrix/playground-cms-api/wiki/Environment-Variables)
 
-
 ## Migrations
 
 This package requires the migrations in [playground-cms](https://github.com/gammamatrix/playground-cms) a Laravel package.
@@ -98,32 +95,31 @@ composer cloc
 ```
 
 ```
-➜  playground-cms-api git:(feature/GH-3) composer cloc
-> cloc --exclude-dir=node_modules,output,vendor .
-     155 text files.
-     106 unique files.
-      50 files ignored.
+➜  playground-cms-api git:(develop) ✗ composer cloc
+     210 text files.
+     203 unique files.
+      49 files ignored.
 
-github.com/AlDanial/cloc v 1.98  T=0.14 s (738.1 files/s, 178457.0 lines/s)
+github.com/AlDanial/cloc v 2.06  T=0.06 s (3375.2 files/s, 519960.9 lines/s)
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
-JSON                             5              0              0          17312
-PHP                             67            605           1024           3462
-YAML                            28              7              2           2824
-XML                              3              0              7            221
-Markdown                         2             49              1            101
+JSON                            79              0              0          18171
+YAML                            30              5              0           6327
+PHP                             80            866           1211           3630
+XML                             10              0              7            853
+Markdown                         3             57              1            130
 INI                              1              3              0             12
 -------------------------------------------------------------------------------
-SUM:                           106            664           1034          23932
+SUM:                           203            931           1219          29123
 -------------------------------------------------------------------------------
 ```
 
 ## PHPStan
 
-Tests at level 9 on:
+Tests at level 10 on:
 - `config/`
-- `database/`
+- `lang/`
 - `routes/`
 - `src/`
 - `tests/Feature/`
@@ -139,12 +135,27 @@ composer analyse
 composer format
 ```
 
-## Tests
+## Testing
 
+Run unit tests:
 ```sh
 composer test
+```
+
+Run unit and feature tests:
+```sh
+composer test-dev
+```
+
+Run unit and feature tests in parallel:
+```sh
+composer test-parallel
 ```
 
 ## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
+
+## License
+
+The MIT License (MIT). Please see [License File](LICENSE.md) for more information.

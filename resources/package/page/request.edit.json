@@ -1,0 +1,22 @@
+{
+    "class": "EditRequest",
+    "config": "playground-cms-api",
+    "fqdn": "Playground/Cms/Api/Http/Requests/Page/Page",
+    "model": "Page",
+    "model_fqdn": "",
+    "module": "CMS",
+    "module_slug": "cms",
+    "name": "Page",
+    "namespace": "Playground/Cms/Api",
+    "organization": "Playground",
+    "package": "playground-cms-api",
+    "abstract": false,
+    "pagination": false,
+    "playground": false,
+    "store": false,
+    "slug": false,
+    "type": "edit",
+    "extends": "FormRequest",
+    "extends_use": "Playground/Cms/Api/Http/Requests/FormRequest",
+    "models": []
+}

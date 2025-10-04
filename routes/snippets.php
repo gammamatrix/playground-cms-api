@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Playground
  */
@@ -62,7 +63,7 @@ Route::group([
     Route::get('/{snippet}', [
         'as' => 'playground.cms.api.snippets.show',
         'uses' => 'SnippetController@show',
-    ])->whereUuid('snippet')->can('detail', 'snippet');
+    ])->whereUuid('snippet')->can('detail', 'snippet')->withTrashed();
 
     Route::get('/{snippet}/revisions', [
         'as' => 'playground.cms.api.snippets.revisions',

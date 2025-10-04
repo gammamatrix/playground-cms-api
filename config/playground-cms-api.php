@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Playground
  */
@@ -90,7 +91,7 @@ return [
     */
 
     'revisions' => [
-        'optional' => (bool) env('PLAYGROUND_CMS_API_ROUTES_OPTIONAL', false),
+        'optional' => (bool) env('PLAYGROUND_CMS_API_REVISIONS_OPTIONAL', false),
         'pages' => (bool) env('PLAYGROUND_CMS_API_REVISIONS_PAGES', true),
         'snippets' => (bool) env('PLAYGROUND_CMS_API_REVISIONS_SNIPPETS', true),
     ],
@@ -104,8 +105,8 @@ return [
     */
 
     'routes' => [
-        'pages' => (bool) env('PLAYGROUND_CMS_API_PAGES', true),
-        'snippets' => (bool) env('PLAYGROUND_CMS_API_SNIPPETS', true),
+        'pages' => (bool) env('PLAYGROUND_CMS_API_ROUTES_PAGES', true),
+        'snippets' => (bool) env('PLAYGROUND_CMS_API_ROUTES_SNIPPETS', true),
     ],
 
     /*

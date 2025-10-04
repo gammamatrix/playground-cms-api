@@ -1,0 +1,22 @@
+{
+    "class": "SnippetRouteTest",
+    "config": "playground-cms-api",
+    "extends": "",
+    "fqdn": "Tests/Feature/Playground/Cms/Api/SnippetRouteTest",
+    "model": "Snippet",
+    "model_fqdn": "",
+    "module": "CMS",
+    "module_slug": "cms",
+    "name": "SnippetRouteTest",
+    "namespace": "Tests/Feature/Playground/Cms/Api",
+    "organization": "Playground",
+    "package": "playground-cms-api",
+    "playground": true,
+    "suite": "feature",
+    "type": "playground-api-controller-model-user",
+    "uses": [],
+    "models": {
+        "Snippet": "resources/configurations/playground-cms/model.snippet.json"
+    },
+    "package_providers": []
+}

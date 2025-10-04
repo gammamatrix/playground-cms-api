@@ -1,0 +1,36 @@
+{
+    "class": "PagePolicy",
+    "config": "playground-cms-api",
+    "fqdn": "Playground/Cms/Api/Policies/Page",
+    "model": "Page",
+    "model_fqdn": "",
+    "module": "CMS",
+    "module_slug": "cms",
+    "name": "Page",
+    "namespace": "Playground/Cms/Api",
+    "organization": "Playground",
+    "package": "playground-cms-api",
+    "withTests": true,
+    "playground": false,
+    "models": [],
+    "uses": [
+        "Playground/Cms/Models/Page",
+        "Playground/Cms/Models/PageRevision",
+        "Illuminate\\Auth\\Access\\Response",
+        "Illuminate\\Contracts\\Auth\\Authenticatable"
+    ],
+    "rolesForAction": [
+        "publisher",
+        "manager",
+        "admin",
+        "root"
+    ],
+    "rolesToView": [
+        "user",
+        "staff",
+        "publisher",
+        "manager",
+        "admin",
+        "root"
+    ]
+}

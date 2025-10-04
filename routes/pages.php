@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Playground
  */
@@ -62,7 +63,7 @@ Route::group([
     Route::get('/{page}', [
         'as' => 'playground.cms.api.pages.show',
         'uses' => 'PageController@show',
-    ])->whereUuid('page')->can('detail', 'page');
+    ])->whereUuid('page')->can('detail', 'page')->withTrashed();
 
     Route::get('/{page}/revisions', [
         'as' => 'playground.cms.api.pages.revisions',

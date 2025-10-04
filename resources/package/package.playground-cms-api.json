@@ -15,23 +15,28 @@
     "withFactories": false,
     "withMigrations": false,
     "withModels": false,
+    "withOpenAPI": true,
     "withPolicies": true,
     "withRequests": true,
     "withRoutes": true,
-    "withSwagger": true,
     "withTests": true,
+    "withTranslations": true,
     "playground": true,
     "revision": true,
+    "docs_name": "Playground: CMS API at Read the Docs: Playground Documentation",
+    "docs_url": "https://gammamatrix-playground.readthedocs.io/en/develop/built-components/cms.html",
     "package_name": "Playground: CMS API",
+    "model_package": "playground-cms",
+    "model_package_name": "Playground: CMS",
     "package_description": "Playground: Provides an API, without a UI for interacting with Playground CMS, a Content Management System for Laravel applications.",
     "package_homepage": "https://github.com/gammamatrix/playground-cms-api",
-    "package_keywords": [
-        "cms",
-        "gammamatrix",
-        "laravel",
-        "playground"
-    ],
     "package_license": "MIT",
+    "packagist": "gammamatrix/playground-cms-api",
+    "postman_collection": "Postman: GammaMatrix Playground Workspace",
+    "postman_url": "https://www.postman.com/gammamatrix/workspace/playground/documentation/1185343-1e4a5656-d4e0-45b2-8f4e-daad7a6ee2b1",
+    "service_provider": "",
+    "type": "playground-api",
+    "version": "74.0.0",
     "package_authors": [
         {
             "name": "Jeremy Postlethwaite",
@@ -39,33 +44,47 @@
             "role": "Developer"
         }
     ],
-    "package_require": {
-        "php": "^8.2",
-        "gammamatrix/playground": "*",
-        "gammamatrix/playground-auth": "*",
-        "gammamatrix/playground-http": "*",
-        "gammamatrix/playground-cms": "*"
-    },
-    "package_require_dev": {
-        "gammamatrix/playground-test": "*",
-        "laravel/sanctum": "^4.0"
-    },
-    "package_suggest": [],
     "package_autoload_psr4": [],
     "package_autoload_dev_psr4": [],
-    "package_providers": [],
+    "package_keywords": [
+        "cms",
+        "gammamatrix",
+        "laravel",
+        "playground"
+    ],
     "package_laravel_providers": [
         "Playground/Cms/Api/ServiceProvider"
     ],
-    "packagist": "gammamatrix/playground-cms-api",
-    "controllers": [],
+    "package_providers": [],
+    "package_require": {
+        "php": "^8.4",
+        "gammamatrix/playground": "*",
+        "gammamatrix/playground-auth": "*",
+        "gammamatrix/playground-http": "*",
+        "gammamatrix/playground-cms": "*",
+        "illuminate/support": "^12.0"
+    },
+    "package_require_dev": {
+        "gammamatrix/playground-test": "*",
+        "illuminate/testing": "^12.0",
+        "laravel/sanctum": "^4.0"
+    },
+    "package_suggest": [],
+    "controllers": [
+        "resources/package/controller.base.json",
+        "resources/package/page/controller.json",
+        "resources/package/snippet/controller.json"
+    ],
     "models": [],
     "policies": [],
-    "requests": [],
-    "routes": [],
+    "requests": [
+        "resources/package/form.request.json"
+    ],
+    "routes": {
+        "pages": "resources/package/page/route.json",
+        "snippets": "resources/package/snippet/route.json"
+    },
     "transformers": [],
-    "uses": [],
-    "service_provider": "",
-    "type": "playground-api",
-    "version": "73.0.0"
+    "translations": [],
+    "uses": []
 }

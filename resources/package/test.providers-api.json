@@ -1,0 +1,28 @@
+{
+    "class": "PackageProviders",
+    "config": "playground-cms-api",
+    "extends": "",
+    "fqdn": "Tests/Unit/Playground/Cms/Api/PackageProviders",
+    "model": "",
+    "model_fqdn": "",
+    "module": "CMS",
+    "module_slug": "cms",
+    "name": "PackageProviders",
+    "namespace": "Tests/Unit/Playground/Cms/Api",
+    "organization": "Playground",
+    "package": "playground-cms-api",
+    "playground": true,
+    "suite": "unit",
+    "type": "providers-api",
+    "uses": [],
+    "models": [],
+    "package_providers": [
+        "\\Playground\\Test\\ServiceProvider::class",
+        "\\Playground\\ServiceProvider::class",
+        "\\Playground\\Auth\\ServiceProvider::class",
+        "\\Playground\\Http\\ServiceProvider::class",
+        "\\Playground\\Cms\\ServiceProvider::class",
+        "\\Playground\\Cms\\Api\\ServiceProvider::class",
+        "\\Laravel\\Sanctum\\SanctumServiceProvider::class"
+    ]
+}

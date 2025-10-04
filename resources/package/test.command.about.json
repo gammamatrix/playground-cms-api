@@ -1,0 +1,20 @@
+{
+    "class": "CommandTest",
+    "config": "playground-cms-api",
+    "extends": "",
+    "fqdn": "Tests/Feature/Playground/Cms/Api/CommandTest",
+    "model": "",
+    "model_fqdn": "",
+    "module": "CMS",
+    "module_slug": "cms",
+    "name": "CMSAPI",
+    "namespace": "Tests/Feature/Playground/Cms/Api",
+    "organization": "Playground",
+    "package": "playground-cms-api",
+    "playground": true,
+    "suite": "feature",
+    "type": "command-about",
+    "uses": [],
+    "models": [],
+    "package_providers": []
+}

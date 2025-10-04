@@ -1,0 +1,23 @@
+{
+    "class": "RequestTestCase",
+    "config": "playground-cms-api",
+    "extends": "RequestCase",
+    "fqdn": "Tests/Unit/Playground/Cms/Api/Http/Requests/RequestTestCase",
+    "model": "",
+    "model_fqdn": "",
+    "module": "CMS",
+    "module_slug": "cms",
+    "name": "RequestTestCase",
+    "namespace": "Tests/Unit/Playground/Cms/Api/Http/Requests",
+    "organization": "Playground",
+    "package": "playground-cms-api",
+    "playground": true,
+    "suite": "unit",
+    "type": "playground-request-test-case",
+    "uses": [
+        "Tests/Unit/Playground/Cms/Api/PackageProviders",
+        "Playground/Test/Unit/Http/Requests/RequestCase"
+    ],
+    "models": [],
+    "package_providers": []
+}

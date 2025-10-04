@@ -1,0 +1,17 @@
+{
+    "class": "SnippetCollection",
+    "config": "playground-cms-api",
+    "fqdn": "Playground/Cms/Api/Http/Resources/SnippetCollection",
+    "module": "CMS",
+    "module_slug": "cms",
+    "name": "SnippetCollection",
+    "namespace": "Playground/Cms/Api",
+    "organization": "Playground",
+    "package": "playground-cms-api",
+    "collection": true,
+    "model": "Snippet",
+    "model_fqdn": "Playground/Cms/Models/Snippet",
+    "model_slug": "snippet",
+    "type": "",
+    "models": []
+}

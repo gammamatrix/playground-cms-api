@@ -1,0 +1,22 @@
+{
+    "class": "PageTestCase",
+    "config": "playground-cms-api",
+    "extends": "TestCase",
+    "fqdn": "Tests/Feature/Playground/Cms/Api/Http/Controllers/PageTestCase",
+    "model": "Page",
+    "model_fqdn": "",
+    "module": "CMS",
+    "module_slug": "cms",
+    "name": "PageTestCase",
+    "namespace": "Tests/Feature/Playground/Cms/Api/Http/Controllers",
+    "organization": "Playground",
+    "package": "playground-cms-api",
+    "playground": true,
+    "suite": "feature",
+    "type": "playground-api-controller-model-case",
+    "uses": [],
+    "models": {
+        "Page": "resources/configurations/playground-cms/model.page.json"
+    },
+    "package_providers": []
+}

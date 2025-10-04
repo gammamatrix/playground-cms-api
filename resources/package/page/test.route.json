@@ -1,0 +1,22 @@
+{
+    "class": "PageRouteTest",
+    "config": "playground-cms-api",
+    "extends": "",
+    "fqdn": "Tests/Feature/Playground/Cms/Api/PageRouteTest",
+    "model": "Page",
+    "model_fqdn": "",
+    "module": "CMS",
+    "module_slug": "cms",
+    "name": "PageRouteTest",
+    "namespace": "Tests/Feature/Playground/Cms/Api",
+    "organization": "Playground",
+    "package": "playground-cms-api",
+    "playground": true,
+    "suite": "feature",
+    "type": "playground-api-controller-model-user",
+    "uses": [],
+    "models": {
+        "Page": "resources/configurations/playground-cms/model.page.json"
+    },
+    "package_providers": []
+}

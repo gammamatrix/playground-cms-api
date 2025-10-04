@@ -1,0 +1,17 @@
+{
+    "class": "PageCollection",
+    "config": "playground-cms-api",
+    "fqdn": "Playground/Cms/Api/Http/Resources/PageCollection",
+    "module": "CMS",
+    "module_slug": "cms",
+    "name": "PageCollection",
+    "namespace": "Playground/Cms/Api",
+    "organization": "Playground",
+    "package": "playground-cms-api",
+    "collection": true,
+    "model": "Page",
+    "model_fqdn": "Playground/Cms/Models/Page",
+    "model_slug": "page",
+    "type": "",
+    "models": []
+}

@@ -1,14 +1,15 @@
 <?php
+
 /**
  * Playground
  */
 
 declare(strict_types=1);
+
 namespace Playground\Cms\Api\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
-use Illuminate\Support\Carbon;
 use Playground\Cms\Api\Http\Requests;
 use Playground\Cms\Api\Http\Resources;
 use Playground\Cms\Models\Page;
@@ -30,7 +31,7 @@ class PageController extends Controller
         'model_slug' => 'page',
         'model_slug_plural' => 'pages',
         'module_label' => 'CMS',
-        'module_label_plural' => 'CMS',
+        'module_label_plural' => 'CMSs',
         'module_route' => 'playground.cms.api',
         'module_slug' => 'cms',
         'privilege' => 'playground-cms-api:page',
@@ -46,14 +47,14 @@ class PageController extends Controller
         Requests\Page\CreateRequest $request
     ): JsonResponse|Resources\Page {
 
-        $validated = $request->validated();
+        $packageInfo = $this->packageInfo();
 
-        $user = $request->user();
+        $validated = $request->validated();
 
         $page = new Page($validated);
 
-        return (new Resources\Page($page))->additional(['meta' => [
-            'info' => $this->packageInfo,
+        return new Resources\Page($page)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request);
     }
 
@@ -66,8 +67,11 @@ class PageController extends Controller
         Page $page,
         Requests\Page\EditRequest $request
     ): JsonResponse|Resources\Page {
-        return (new Resources\Page($page))->additional(['meta' => [
-            'info' => $this->packageInfo,
+
+        $packageInfo = $this->packageInfo();
+
+        return new Resources\Page($page)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request);
     }
 
@@ -108,7 +112,7 @@ class PageController extends Controller
         Requests\Page\LockRequest $request
     ): JsonResponse|Resources\Page {
 
-        $validated = $request->validated();
+        $packageInfo = $this->packageInfo();
 
         $user = $request->user();
 
@@ -120,8 +124,8 @@ class PageController extends Controller
 
         $page->save();
 
-        return (new Resources\Page($page))->additional(['meta' => [
-            'info' => $this->packageInfo,
+        return new Resources\Page($page)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request);
     }
 
@@ -134,11 +138,20 @@ class PageController extends Controller
         Requests\Page\IndexRequest $request
     ): JsonResponse|Resources\PageCollection {
 
-        $user = $request->user();
+        $packageInfo = $this->packageInfo();
 
+        /**
+         * @var array{
+         *     sort: string|array<mixed>,
+         *     filter: array{
+         *         trash: string
+         *     },
+         *     perPage: int
+         * } $validated
+         */
         $validated = $request->validated();
 
-        $query = Page::addSelect(sprintf('%1$s.*', $this->packageInfo['table']));
+        $query = Page::addSelect(sprintf('%1$s.*', $packageInfo->table()));
 
         $query->sort($validated['sort'] ?? null);
 
@@ -172,7 +185,7 @@ class PageController extends Controller
 
         $paginator->appends($validated);
 
-        return (new Resources\PageCollection($paginator))->response($request);
+        return new Resources\PageCollection($paginator)->response($request);
     }
 
     /**
@@ -185,16 +198,16 @@ class PageController extends Controller
         Requests\Page\RestoreRequest $request
     ): JsonResponse|Resources\Page {
 
+        $packageInfo = $this->packageInfo();
+
         $user = $request->user();
 
-        if ($user?->id) {
-            $page->modified_by_id = $user->id;
-        }
+        $page->modified_by_id = $user?->id;
 
         $page->restore();
 
-        return (new Resources\Page($page))->additional(['meta' => [
-            'info' => $this->packageInfo,
+        return new Resources\Page($page)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request);
     }
 
@@ -207,6 +220,9 @@ class PageController extends Controller
         PageRevision $page_revision,
         Requests\Page\RestoreRevisionRequest $request
     ): JsonResponse|Resources\Page {
+
+        $packageInfo = $this->packageInfo();
+
         $validated = $request->validated();
 
         /**
@@ -230,8 +246,8 @@ class PageController extends Controller
 
         $page->save();
 
-        return (new Resources\Page($page))->additional(['meta' => [
-            'info' => $this->packageInfo,
+        return new Resources\Page($page)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request);
     }
 
@@ -244,20 +260,11 @@ class PageController extends Controller
         PageRevision $page_revision,
         Requests\Page\ShowRevisionRequest $request
     ): JsonResponse|Resources\PageRevision {
-        $validated = $request->validated();
 
-        $user = $request->user();
+        $packageInfo = $this->packageInfo();
 
-        $meta = [
-            'session_user_id' => $user?->id,
-            'id' => $page_revision->id,
-            'timestamp' => Carbon::now()->toJson(),
-            'validated' => $validated,
-            'info' => $this->packageInfo,
-        ];
-
-        return (new Resources\PageRevision($page_revision))->additional(['meta' => [
-            'info' => $this->packageInfo,
+        return new Resources\PageRevision($page_revision)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request);
     }
 
@@ -270,8 +277,20 @@ class PageController extends Controller
         Page $page,
         Requests\Page\RevisionsRequest $request
     ): JsonResponse|Resources\PageRevisionCollection {
+
+        $packageInfo = $this->packageInfo();
+
         $user = $request->user();
 
+        /**
+         * @var array{
+         *     sort: string|array<mixed>,
+         *     filter: array{
+         *         trash: string
+         *     },
+         *     perPage: int
+         * } $validated
+         */
         $validated = $request->validated();
 
         $query = $page->revisions();
@@ -307,8 +326,8 @@ class PageController extends Controller
 
         $paginator->appends($validated);
 
-        return (new Resources\PageRevisionCollection($paginator))->additional(['meta' => [
-            'info' => $this->packageInfo,
+        return new Resources\PageRevisionCollection($paginator)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request);
     }
 
@@ -317,7 +336,12 @@ class PageController extends Controller
      */
     public function saveRevision(Page $page): PageRevision
     {
-        $revision = new PageRevision($page->toArray());
+        /**
+         * @var array<string, mixed> $data
+         */
+        $data = $page->toArray();
+
+        $revision = new PageRevision($data);
 
         $revision->created_by_id = $page->created_by_id;
         $revision->modified_by_id = $page->modified_by_id;
@@ -345,8 +369,11 @@ class PageController extends Controller
         Page $page,
         Requests\Page\ShowRequest $request
     ): JsonResponse|Resources\Page {
-        return (new Resources\Page($page))->additional(['meta' => [
-            'info' => $this->packageInfo,
+
+        $packageInfo = $this->packageInfo();
+
+        return new Resources\Page($page)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request);
     }
 
@@ -358,6 +385,9 @@ class PageController extends Controller
     public function store(
         Requests\Page\StoreRequest $request
     ): Response|JsonResponse|Resources\Page {
+
+        $packageInfo = $this->packageInfo();
+
         $validated = $request->validated();
 
         $user = $request->user();
@@ -368,8 +398,8 @@ class PageController extends Controller
 
         $page->save();
 
-        return (new Resources\Page($page))->additional(['meta' => [
-            'info' => $this->packageInfo,
+        return new Resources\Page($page)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request)->setStatusCode(201);
     }
 
@@ -383,20 +413,18 @@ class PageController extends Controller
         Requests\Page\UnlockRequest $request
     ): JsonResponse|Resources\Page {
 
-        $validated = $request->validated();
+        $packageInfo = $this->packageInfo();
 
         $user = $request->user();
 
         $page->locked = false;
 
-        if ($user?->id) {
-            $page->modified_by_id = $user->id;
-        }
+        $page->modified_by_id = $user?->id;
 
         $page->save();
 
-        return (new Resources\Page($page))->additional(['meta' => [
-            'info' => $this->packageInfo,
+        return new Resources\Page($page)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request);
     }
 
@@ -410,20 +438,20 @@ class PageController extends Controller
         Requests\Page\UpdateRequest $request
     ): JsonResponse {
 
+        $packageInfo = $this->packageInfo();
+
         $this->saveRevision($page);
 
         $validated = $request->validated();
 
         $user = $request->user();
 
-        if ($user?->id) {
-            $page->modified_by_id = $user->id;
-        }
+        $page->modified_by_id = $user?->id;
 
         $page->update($validated);
 
-        return (new Resources\Page($page))->additional(['meta' => [
-            'info' => $this->packageInfo,
+        return new Resources\Page($page)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request);
     }
 }

@@ -1,0 +1,36 @@
+{
+    "class": "SnippetPolicy",
+    "config": "playground-cms-api",
+    "fqdn": "Playground/Cms/Api/Policies/Snippet",
+    "model": "Snippet",
+    "model_fqdn": "",
+    "module": "CMS",
+    "module_slug": "cms",
+    "name": "Snippet",
+    "namespace": "Playground/Cms/Api",
+    "organization": "Playground",
+    "package": "playground-cms-api",
+    "withTests": true,
+    "playground": false,
+    "models": [],
+    "uses": [
+        "Playground/Cms/Models/Snippet",
+        "Playground/Cms/Models/SnippetRevision",
+        "Illuminate\\Auth\\Access\\Response",
+        "Illuminate\\Contracts\\Auth\\Authenticatable"
+    ],
+    "rolesForAction": [
+        "publisher",
+        "manager",
+        "admin",
+        "root"
+    ],
+    "rolesToView": [
+        "user",
+        "staff",
+        "publisher",
+        "manager",
+        "admin",
+        "root"
+    ]
+}

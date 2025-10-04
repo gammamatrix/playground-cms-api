@@ -1,0 +1,23 @@
+{
+    "class": "UpdateRequestTest",
+    "config": "playground-cms-api",
+    "extends": "RequestCase",
+    "fqdn": "Tests/Unit/Playground/Cms/Api/UpdateRequestTest",
+    "model": "Snippet",
+    "model_fqdn": "",
+    "module": "CMS",
+    "module_slug": "cms",
+    "name": "UpdateRequestTest",
+    "namespace": "Tests/Unit/Playground/Cms/Api",
+    "organization": "Playground",
+    "package": "playground-cms-api",
+    "playground": true,
+    "suite": "unit",
+    "type": "playground-request-model-update",
+    "uses": [
+        "Tests/Unit/Playground/Cms/Api/PackageProviders",
+        "Playground/Test/Unit/Http/Requests/RequestCase"
+    ],
+    "models": [],
+    "package_providers": []
+}

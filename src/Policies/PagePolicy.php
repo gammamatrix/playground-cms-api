@@ -1,9 +1,11 @@
 <?php
+
 /**
  * Playground
  */
 
 declare(strict_types=1);
+
 namespace Playground\Cms\Api\Policies;
 
 use Illuminate\Auth\Access\Response;

@@ -1,0 +1,20 @@
+{
+    "class": "InstanceTest",
+    "config": "playground-cms-api",
+    "extends": "",
+    "fqdn": "Tests/Unit/Playground/Cms/Api/ServiceProvider/InstanceTest",
+    "model": "",
+    "model_fqdn": "",
+    "module": "CMS",
+    "module_slug": "cms",
+    "name": "InstanceTest",
+    "namespace": "Tests/Unit/Playground/Cms/Api/ServiceProvider",
+    "organization": "Playground",
+    "package": "playground-cms-api",
+    "playground": true,
+    "suite": "unit",
+    "type": "playground-service-provider-policies",
+    "uses": [],
+    "models": [],
+    "package_providers": []
+}

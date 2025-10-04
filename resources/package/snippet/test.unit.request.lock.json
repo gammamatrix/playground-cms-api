@@ -1,0 +1,23 @@
+{
+    "class": "LockRequestTest",
+    "config": "playground-cms-api",
+    "extends": "RequestCase",
+    "fqdn": "Tests/Unit/Playground/Cms/Api/LockRequestTest",
+    "model": "Snippet",
+    "model_fqdn": "",
+    "module": "CMS",
+    "module_slug": "cms",
+    "name": "LockRequestTest",
+    "namespace": "Tests/Unit/Playground/Cms/Api",
+    "organization": "Playground",
+    "package": "playground-cms-api",
+    "playground": true,
+    "suite": "unit",
+    "type": "playground-request-model",
+    "uses": [
+        "Tests/Unit/Playground/Cms/Api/PackageProviders",
+        "Playground/Test/Unit/Http/Requests/RequestCase"
+    ],
+    "models": [],
+    "package_providers": []
+}

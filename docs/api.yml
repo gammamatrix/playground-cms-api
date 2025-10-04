@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: 'Playground CMS API'
   description: 'Playground: Provides an API, without a UI for interacting with Playground CMS, a Content Management System for Laravel applications.'
-  version: ''
+  version: 74.0.0
 externalDocs:
   url: 'https://gammamatrix-playground.readthedocs.io/en/develop/components/cms.html'
   description: 'Read the Docs: Playground CMS Packages'
@@ -67,9 +67,9 @@ components:
   schemas:
     Page:
       $ref: models/page.yml
-    Snippet:
-      $ref: models/snippet.yml
     PageRevision:
       $ref: models/page-revision.yml
+    Snippet:
+      $ref: models/snippet.yml
     SnippetRevision:
       $ref: models/snippet-revision.yml
