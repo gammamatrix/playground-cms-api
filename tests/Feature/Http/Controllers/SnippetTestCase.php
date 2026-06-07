@@ -9,18 +9,20 @@ declare(strict_types=1);
 namespace Tests\Feature\Playground\Cms\Api\Http\Controllers;
 
 use Illuminate\Database\Eloquent\Model;
+use Playground\Cms\Models\Snippet;
+use Playground\Cms\Models\SnippetRevision;
 
 /**
  * \Tests\Feature\Playground\Cms\Api\Http\Controllers\SnippetTestCase
  */
 class SnippetTestCase extends TestCase
 {
-    public string $fqdn = \Playground\Cms\Models\Snippet::class;
+    public string $fqdn = Snippet::class;
 
     /**
      * @var class-string<Model>
      */
-    public string $fqdnRevision = \Playground\Cms\Models\SnippetRevision::class;
+    public string $fqdnRevision = SnippetRevision::class;
 
     public string $revisionId = 'snippet_id';
 

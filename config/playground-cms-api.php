@@ -5,6 +5,14 @@
  */
 
 declare(strict_types=1);
+use Illuminate\Routing\Middleware\SubstituteBindings;
+use Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful;
+use Playground\Cms\Api\Policies\PagePolicy;
+use Playground\Cms\Api\Policies\SnippetPolicy;
+use Playground\Cms\Models\Page;
+use Playground\Cms\Models\PageRevision;
+use Playground\Cms\Models\Snippet;
+use Playground\Cms\Models\SnippetRevision;
 
 /**
  * Playground: CMS API Configuration and Environment Variables
@@ -50,20 +58,20 @@ return [
     'middleware' => [
         'default' => env('PLAYGROUND_CMS_API_MIDDLEWARE_DEFAULT', [
             'web',
-            Illuminate\Routing\Middleware\SubstituteBindings::class,
+            SubstituteBindings::class,
             'auth:sanctum',
-            Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+            EnsureFrontendRequestsAreStateful::class,
         ]),
         'auth' => env('PLAYGROUND_CMS_API_MIDDLEWARE_AUTH', [
             'web',
-            Illuminate\Routing\Middleware\SubstituteBindings::class,
+            SubstituteBindings::class,
             'auth:sanctum',
-            Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+            EnsureFrontendRequestsAreStateful::class,
         ]),
         'guest' => env('PLAYGROUND_CMS_API_MIDDLEWARE_GUEST', [
             'web',
-            Illuminate\Routing\Middleware\SubstituteBindings::class,
-            Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+            SubstituteBindings::class,
+            EnsureFrontendRequestsAreStateful::class,
         ]),
     ],
 
@@ -76,10 +84,10 @@ return [
     */
 
     'policies' => [
-        Playground\Cms\Models\Page::class => Playground\Cms\Api\Policies\PagePolicy::class,
-        Playground\Cms\Models\PageRevision::class => Playground\Cms\Api\Policies\PagePolicy::class,
-        Playground\Cms\Models\Snippet::class => Playground\Cms\Api\Policies\SnippetPolicy::class,
-        Playground\Cms\Models\SnippetRevision::class => Playground\Cms\Api\Policies\SnippetPolicy::class,
+        Page::class => PagePolicy::class,
+        PageRevision::class => PagePolicy::class,
+        Snippet::class => SnippetPolicy::class,
+        SnippetRevision::class => SnippetPolicy::class,
     ],
 
     /*

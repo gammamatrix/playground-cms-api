@@ -9,18 +9,20 @@ declare(strict_types=1);
 namespace Tests\Feature\Playground\Cms\Api\Http\Controllers;
 
 use Illuminate\Database\Eloquent\Model;
+use Playground\Cms\Models\Page;
+use Playground\Cms\Models\PageRevision;
 
 /**
  * \Tests\Feature\Playground\Cms\Api\Http\Controllers\PageTestCase
  */
 class PageTestCase extends TestCase
 {
-    public string $fqdn = \Playground\Cms\Models\Page::class;
+    public string $fqdn = Page::class;
 
     /**
      * @var class-string<Model>
      */
-    public string $fqdnRevision = \Playground\Cms\Models\PageRevision::class;
+    public string $fqdnRevision = PageRevision::class;
 
     public string $revisionId = 'page_id';
 

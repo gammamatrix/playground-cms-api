@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Playground\Cms\Api\Http\Requests\Page;
 
+use Playground\Cms\Api\Http\Requests\Page\LockRequest;
 use Tests\Unit\Playground\Cms\Api\Http\Requests\RequestTestCase;
 
 /**
@@ -15,5 +16,5 @@ use Tests\Unit\Playground\Cms\Api\Http\Requests\RequestTestCase;
  */
 class LockRequestTest extends RequestTestCase
 {
-    protected string $requestClass = \Playground\Cms\Api\Http\Requests\Page\LockRequest::class;
+    protected string $requestClass = LockRequest::class;
 }

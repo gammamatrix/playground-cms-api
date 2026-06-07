@@ -7,6 +7,7 @@
 declare(strict_types=1);
 
 use Illuminate\Support\Facades\Route;
+use Playground\Cms\Models\Page;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,19 +37,19 @@ Route::group([
     Route::get('/', [
         'as' => 'playground.cms.api.pages',
         'uses' => 'PageController@index',
-    ])->can('index', Playground\Cms\Models\Page::class);
+    ])->can('index', Page::class);
 
     Route::post('/index', [
         'as' => 'playground.cms.api.pages.index',
         'uses' => 'PageController@index',
-    ])->can('index', Playground\Cms\Models\Page::class);
+    ])->can('index', Page::class);
 
     // UI
 
     Route::get('/create', [
         'as' => 'playground.cms.api.pages.create',
         'uses' => 'PageController@create',
-    ])->can('create', Playground\Cms\Models\Page::class);
+    ])->can('create', Page::class);
 
     Route::get('/edit/{page}', [
         'as' => 'playground.cms.api.pages.edit',
@@ -109,7 +110,7 @@ Route::group([
     Route::post('/', [
         'as' => 'playground.cms.api.pages.post',
         'uses' => 'PageController@store',
-    ])->can('store', Playground\Cms\Models\Page::class);
+    ])->can('store', Page::class);
 
     // Route::put('/', [
     //     'as' => 'playground.cms.api.pages.put',

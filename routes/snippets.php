@@ -7,6 +7,7 @@
 declare(strict_types=1);
 
 use Illuminate\Support\Facades\Route;
+use Playground\Cms\Models\Snippet;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,19 +37,19 @@ Route::group([
     Route::get('/', [
         'as' => 'playground.cms.api.snippets',
         'uses' => 'SnippetController@index',
-    ])->can('index', Playground\Cms\Models\Snippet::class);
+    ])->can('index', Snippet::class);
 
     Route::post('/index', [
         'as' => 'playground.cms.api.snippets.index',
         'uses' => 'SnippetController@index',
-    ])->can('index', Playground\Cms\Models\Snippet::class);
+    ])->can('index', Snippet::class);
 
     // UI
 
     Route::get('/create', [
         'as' => 'playground.cms.api.snippets.create',
         'uses' => 'SnippetController@create',
-    ])->can('create', Playground\Cms\Models\Snippet::class);
+    ])->can('create', Snippet::class);
 
     Route::get('/edit/{snippet}', [
         'as' => 'playground.cms.api.snippets.edit',
@@ -109,7 +110,7 @@ Route::group([
     Route::post('/', [
         'as' => 'playground.cms.api.snippets.post',
         'uses' => 'SnippetController@store',
-    ])->can('store', Playground\Cms\Models\Snippet::class);
+    ])->can('store', Snippet::class);
 
     // Route::put('/', [
     //     'as' => 'playground.cms.api.snippets.put',
