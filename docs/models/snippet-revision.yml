@@ -30,13 +30,13 @@ properties:
     type: string
     format: uuid
     nullable: true
-  snippet_id:
-    description: 'Foreign key: links a snippet to this snippet revision.'
+  matrix_id:
+    description: 'Foreign key: links a matrix to this snippet revision.'
     type: string
     format: uuid
     nullable: true
-  matrix_id:
-    description: 'Foreign key: links a matrix to this snippet revision.'
+  snippet_id:
+    description: 'Foreign key: links a snippet to this snippet revision.'
     type: string
     format: uuid
     nullable: true
@@ -100,13 +100,13 @@ properties:
     type: string
     format: date-time
     nullable: true
-  resumed_at:
-    description: 'The resumed at date for this snippet revision.'
+  resolved_at:
+    description: 'The resolved at date for this snippet revision.'
     type: string
     format: date-time
     nullable: true
-  resolved_at:
-    description: 'The resolved at date for this snippet revision.'
+  resumed_at:
+    description: 'The resumed at date for this snippet revision.'
     type: string
     format: date-time
     nullable: true

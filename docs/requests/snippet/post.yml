@@ -65,13 +65,13 @@ properties:
     type: string
     format: date-time
     nullable: true
-  resumed_at:
-    description: 'The resumed at date for this snippet.'
+  resolved_at:
+    description: 'The resolved at date for this snippet.'
     type: string
     format: date-time
     nullable: true
-  resolved_at:
-    description: 'The resolved at date for this snippet.'
+  resumed_at:
+    description: 'The resumed at date for this snippet.'
     type: string
     format: date-time
     nullable: true

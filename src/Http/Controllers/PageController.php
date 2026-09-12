@@ -30,6 +30,8 @@ class PageController extends Controller
         'model_route' => 'playground.cms.api.pages',
         'model_slug' => 'page',
         'model_slug_plural' => 'pages',
+        'model_variable' => 'page',
+        'model_variable_plural' => 'pages',
         'module_label' => 'CMS',
         'module_label_plural' => 'CMSs',
         'module_route' => 'playground.cms.api',

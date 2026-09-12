@@ -1,24 +1,23 @@
 {
-    "class": "InstanceTest",
+    "class": "PlaygroundCase",
     "config": "playground-cms-api",
-    "extends": "RequestCase",
-    "fqdn": "Tests/Feature/Playground/Cms/Api/InstanceTest",
+    "extends": "TestCase",
+    "fqdn": "Tests/Feature/Playground/Cms/Api/Http/Controllers/PlaygroundCase",
     "model": "",
     "model_fqdn": "",
     "model_variable": "",
     "model_variable_plural": "",
     "module": "CMS",
     "module_slug": "cms",
-    "name": "FormRequestRequestTest",
-    "namespace": "Tests/Feature/Playground/Cms/Api",
+    "name": "PlaygroundTestCase",
+    "namespace": "Tests/Feature/Playground/Cms/Api/Http/Controllers",
     "organization": "Playground",
     "package": "playground-cms-api",
     "playground": true,
     "suite": "feature",
-    "type": "playground-request-form",
+    "type": "playground-resource-controller-playground-case",
     "uses": [
-        "Tests/Unit/Playground/Cms/Api/PackageProviders",
-        "Playground/Test/Unit/Http/Requests/RequestCase"
+        "Playground/Test/Feature/Http/Controllers/Resource"
     ],
     "models": [],
     "package_providers": []

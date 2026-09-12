@@ -5,8 +5,10 @@
  */
 
 declare(strict_types=1);
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful;
+use Playground\Auth\Policies\Policy;
 use Playground\Cms\Api\Policies\PagePolicy;
 use Playground\Cms\Api\Policies\SnippetPolicy;
 use Playground\Cms\Models\Page;
@@ -16,6 +18,52 @@ use Playground\Cms\Models\SnippetRevision;
 
 /**
  * Playground: CMS API Configuration and Environment Variables
+ *
+ * @return array{
+ *       about: bool,
+ *       load: array{
+ *           policies: bool,
+ *           routes: bool,
+ *           translations: bool
+ *       },
+ *       matrix: array{
+ *           enabled: bool,
+ *       },
+ *       middleware: array{
+ *           default: string|string[],
+ *           auth: string|string[],
+ *           guest: string|string[]
+ *       },
+ *       policies: array<
+ *           class-string<Model>,
+ *           class-string<Policy>
+ *       >,
+ *       revisions: array{
+ *           options: bool,
+ *           pages: bool,
+ *           snippets: bool,
+ *       },
+ *       routes: array{
+ *           pages: bool,
+ *           snippets: bool,
+ *       },
+ *       cache: array{
+ *           enable: bool,
+ *           page: bool,
+ *           page_store: string,
+ *           page_ttl: int,
+ *           snippet: bool,
+ *           snippet_store: string,
+ *           snippet_ttl: int,
+ *       },
+ *       abilities: array<string, string[]>,
+ *       sitemap: array{
+ *            enable: bool,
+ *            guest: bool,
+ *            user: bool,
+ *            view: string
+ *       }
+ *   }
  */
 return [
 
@@ -45,6 +93,18 @@ return [
         'policies' => (bool) env('PLAYGROUND_CMS_API_LOAD_POLICIES', true),
         'routes' => (bool) env('PLAYGROUND_CMS_API_LOAD_ROUTES', true),
         'translations' => (bool) env('PLAYGROUND_CMS_API_LOAD_TRANSLATIONS', true),
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Matrix
+    |--------------------------------------------------------------------------
+    |
+    |
+    */
+
+    'matrix' => [
+        'enabled' => (bool) env('PLAYGROUND_CMS_API_MATRIX_ENABLED', false),
     ],
 
     /*

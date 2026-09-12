@@ -5,6 +5,8 @@
     "fqdn": "Tests/Feature/Playground/Cms/Api/Http/Controllers/TestCase",
     "model": "",
     "model_fqdn": "",
+    "model_variable": "",
+    "model_variable_plural": "",
     "module": "CMS",
     "module_slug": "cms",
     "name": "ControllerTestCase",

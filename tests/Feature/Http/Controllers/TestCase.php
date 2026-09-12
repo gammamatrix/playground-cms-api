@@ -9,7 +9,6 @@ declare(strict_types=1);
 namespace Tests\Feature\Playground\Cms\Api\Http\Controllers;
 
 use Illuminate\Database\Eloquent\Model;
-use Playground\Test\Feature\Http\Controllers\Resource;
 use Tests\Feature\Playground\Cms\Api\TestCase as BaseTestCase;
 
 /**
@@ -17,21 +16,10 @@ use Tests\Feature\Playground\Cms\Api\TestCase as BaseTestCase;
  */
 class TestCase extends BaseTestCase
 {
-    use Resource\Playground\CreateJsonTrait;
-    use Resource\Playground\DestroyJsonTrait;
-    use Resource\Playground\EditJsonTrait;
-    use Resource\Playground\IndexJsonTrait;
-    use Resource\Playground\LockJsonTrait;
-    use Resource\Playground\RestoreJsonTrait;
-    use Resource\Playground\RestoreRevisionJsonTrait;
-    use Resource\Playground\RevisionJsonTrait;
-    use Resource\Playground\RevisionsJsonTrait;
-    use Resource\Playground\ShowJsonTrait;
-    use Resource\Playground\StoreJsonTrait;
-    use Resource\Playground\UnlockJsonTrait;
-    use Resource\Playground\UpdateJsonTrait;
-
-    protected bool $setUpUserForPlayground = true;
+    /**
+     * @var class-string<Model>
+     */
+    public string $fqdn = Model::class;
 
     /**
      * @var array<string, string>
@@ -43,6 +31,8 @@ class TestCase extends BaseTestCase
         'model_route' => '',
         'model_slug' => '',
         'model_slug_plural' => '',
+        'model_variable' => '',
+        'model_variable_plural' => '',
         'module_label' => 'CMS',
         'module_label_plural' => 'CMS',
         'module_route' => 'playground.cms.api',
@@ -51,11 +41,6 @@ class TestCase extends BaseTestCase
         'table' => '',
         'view' => 'playground-cms-api::',
     ];
-
-    /**
-     * @var class-string<Model>
-     */
-    public string $fqdn = Model::class;
 
     /**
      * @var class-string<Model>

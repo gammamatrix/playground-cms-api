@@ -15,7 +15,7 @@ use Playground\Cms\Models\SnippetRevision;
 /**
  * \Tests\Feature\Playground\Cms\Api\Http\Controllers\SnippetTestCase
  */
-class SnippetTestCase extends TestCase
+class SnippetTestCase extends PlaygroundCase
 {
     public string $fqdn = Snippet::class;
 
@@ -64,6 +64,8 @@ class SnippetTestCase extends TestCase
         'model_route' => 'playground.cms.api.snippets',
         'model_slug' => 'snippet',
         'model_slug_plural' => 'snippets',
+        'model_variable' => 'snippet',
+        'model_variable_plural' => 'snippets',
         'module_label' => 'CMS',
         'module_label_plural' => 'CMS',
         'module_route' => 'playground.cms.api',
@@ -95,8 +97,8 @@ class SnippetTestCase extends TestCase
         'postponed_at',
         'published_at',
         'released_at',
-        'resumed_at',
         'resolved_at',
+        'resumed_at',
         'suspended_at',
         'timer_end_at',
         'timer_start_at',

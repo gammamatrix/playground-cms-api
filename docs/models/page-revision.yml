@@ -30,13 +30,13 @@ properties:
     type: string
     format: uuid
     nullable: true
-  page_id:
-    description: 'Foreign key: links a page to this page revision.'
+  matrix_id:
+    description: 'Foreign key: links a matrix to this page revision.'
     type: string
     format: uuid
     nullable: true
-  matrix_id:
-    description: 'Foreign key: links a matrix to this page revision.'
+  page_id:
+    description: 'Foreign key: links a page to this page revision.'
     type: string
     format: uuid
     nullable: true
@@ -100,13 +100,13 @@ properties:
     type: string
     format: date-time
     nullable: true
-  resumed_at:
-    description: 'The resumed at date for this page revision.'
+  resolved_at:
+    description: 'The resolved at date for this page revision.'
     type: string
     format: date-time
     nullable: true
-  resolved_at:
-    description: 'The resolved at date for this page revision.'
+  resumed_at:
+    description: 'The resumed at date for this page revision.'
     type: string
     format: date-time
     nullable: true
