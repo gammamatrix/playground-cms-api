@@ -15,9 +15,9 @@
     "package": "playground-cms-api",
     "playground": true,
     "suite": "feature",
-    "type": "playground-resource-controller-playground-case",
+    "type": "playground-api-controller-playground-case",
     "uses": [
-        "Playground/Test/Feature/Http/Controllers/Resource"
+        "Playground/Test/Feature/Http/Controllers/Api"
     ],
     "models": [],
     "package_providers": []

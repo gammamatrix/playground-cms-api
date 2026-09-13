@@ -17,7 +17,7 @@
     "suite": "feature",
     "type": "playground-api-controller-test-case",
     "uses": [
-        "Playground/Test/Feature/Http/Controllers/Resource",
+        "Playground/Test/Feature/Http/Controllers/Api",
         "Tests/Feature/Playground/Cms/Api/TestCase as BaseTestCase"
     ],
     "models": [],
