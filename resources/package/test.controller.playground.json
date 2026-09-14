@@ -17,7 +17,7 @@
     "suite": "feature",
     "type": "playground-api-controller-playground-case",
     "uses": [
-        "Playground/Test/Feature/Http/Controllers/Api"
+        "Playground/Test/Feature/Http/Controllers/Resource"
     ],
     "models": [],
     "package_providers": []

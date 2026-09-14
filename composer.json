@@ -21,12 +21,10 @@
         "gammamatrix/playground": "*",
         "gammamatrix/playground-auth": "*",
         "gammamatrix/playground-http": "*",
-        "gammamatrix/playground-cms": "*",
-        "illuminate/support": "^13.0"
+        "gammamatrix/playground-cms": "*"
     },
     "require-dev": {
         "gammamatrix/playground-test": "*",
-        "illuminate/testing": "^13.0",
         "laravel/sanctum": "^4.0"
     },
     "autoload": {

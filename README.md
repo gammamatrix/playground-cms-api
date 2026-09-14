@@ -96,22 +96,22 @@ composer cloc
 
 ```
 ➜  playground-cms-api git:(develop) ✗ composer cloc
-     210 text files.
-     203 unique files.
-      49 files ignored.
+     212 text files.
+     205 unique files.                                          
+      90 files ignored.
 
-github.com/AlDanial/cloc v 2.06  T=0.06 s (3375.2 files/s, 519960.9 lines/s)
+github.com/AlDanial/cloc v 2.08  T=0.09 s (2410.4 files/s, 215560.7 lines/s)
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
-JSON                            79              0              0          18171
-YAML                            30              5              0           6327
-PHP                             80            866           1211           3630
-XML                             10              0              7            853
-Markdown                         3             57              1            130
+YAML                            30              4              0           6240
+JSON                            80              0              0           5232
+PHP                             81            873           1270           3676
+XML                             10              0              7            832
+Markdown                         3             55              1            128
 INI                              1              3              0             12
 -------------------------------------------------------------------------------
-SUM:                           203            931           1219          29123
+SUM:                           205            935           1278          16120
 -------------------------------------------------------------------------------
 ```
 
