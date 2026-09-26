@@ -3,7 +3,7 @@
     "config": "playground-cms-api",
     "fqdn": "Playground/Cms/Api/Http/Requests/Snippet/Snippet",
     "model": "Snippet",
-    "model_fqdn": "",
+    "model_fqdn": "Playground/Cms/Models/Snippet",
     "module": "CMS",
     "module_slug": "cms",
     "name": "Snippet",

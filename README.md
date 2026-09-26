@@ -1,23 +1,23 @@
-# Playground: CMS API
+# Playground: CMS
 
 [![Playground CI Workflow](https://github.com/gammamatrix/playground-cms-api/actions/workflows/ci.yml/badge.svg?branch=develop)](https://raw.githubusercontent.com/gammamatrix/playground-cms-api/testing/develop/testdox.txt)
 [![Test Coverage](https://raw.githubusercontent.com/gammamatrix/playground-cms-api/testing/develop/coverage.svg)](tests)
 [![PHPStan Level 10](https://img.shields.io/badge/PHPStan-level%2010-brightgreen)](.github/workflows/ci.yml#L128)
 
-Playground: CMS API
+Playground: CMS
 
-This package provides an API without UI for interacting with the [Playground: CMS](https://github.com/gammamatrix/playground-cms), a model package for Laravel.
+This package provides an API without UI for interacting with the [](https://github.com/gammamatrix/), a model package for Laravel.
 
-If you need a JSON API with a UI, then have a look at [Playground: CMS Resource.](https://github.com/gammamatrix/playground-cms-resource)
+If you need a JSON API with a UI, then have a look at [ Resource.](https://github.com/gammamatrix/-resource)
 
 ## Documentation
 
-Read more on using [Playground: CMS API at Read the Docs: Playground Documentation](https://gammamatrix-playground.readthedocs.io/en/develop/built-components/cms.html)
+Read more on using []()
 
 ### Postman
 
 A postman collection is provided in the repository: [postman-playground-cms-api.json.](postman-playground-cms-api.json)
-- This same collection is viewable on the [Postman: GammaMatrix Playground Workspace.](https://www.postman.com/gammamatrix/workspace/playground/documentation/1185343-1e4a5656-d4e0-45b2-8f4e-daad7a6ee2b1)
+- This same collection is viewable on the [.]()
 
 ### OpenAPI
 
@@ -26,19 +26,19 @@ This application provides OpenAPI documentation: [openapi.yaml](openapi.yaml).
 - Index endpoints support advanced query filtering.
 
 OpenAPI API Documentation is built with npm using Redocly.
-- npm is only needed to generate documentation and is not needed to operate the Playground: CMS API API.
+- npm is only needed to generate documentation and is not needed to operate the Playground: CMS API.
 
 See [package.json](package.json) requirements.
 
 Install npm.
 
-```sh
+```shell
 npm install
 ```
 
 Build the documentation to generate the [openapi.yaml](openapi.yaml) configuration.
 
-```sh
+```shell
 npm run docs
 ```
 
@@ -49,7 +49,7 @@ Documentation
 
 You can install the package via composer:
 
-```bash
+```shell
 composer require gammamatrix/playground-cms-api
 ```
 
@@ -57,13 +57,13 @@ composer require gammamatrix/playground-cms-api
 
 Playground provides information in the `artisan about` command.
 
-<!-- <img src="resources/docs/artisan-about-playground-cms-api.png" alt="screenshot of artisan about command with Playground: CMS API."> -->
+<!-- <img src="resources/docs/artisan-about-playground-cms-api.png" alt="screenshot of artisan about command with Playground: CMS."> -->
 
 ## Configuration
 
 You can publish the config file with:
 
-```bash
+```shell
 php artisan vendor:publish --provider="Playground\Cms\Api\ServiceProvider" --tag="playground-config"
 ```
 
@@ -72,7 +72,7 @@ All routes are enabled by default. They may be disabled via environment variable
 See the contents of the published config file: [config/playground-cms-api.php](config/playground-cms-api.php)
 
 You can publish the routes file with:
-```bash
+```shell
 php artisan vendor:publish --provider="Playground\Cms\Api\ServiceProvider" --tag="playground-routes"
 ```
 - The routes while be published in a folder at `routes/playground-cms-api`
@@ -86,69 +86,51 @@ Information on [environment variables is available on the wiki for this package]
 
 ## Migrations
 
-This package requires the migrations in [playground-cms](https://github.com/gammamatrix/playground-cms) a Laravel package.
+This package requires the migrations in [](https://github.com/gammamatrix/) a Laravel package.
 
 ## Cloc
 
-```sh
+```shell
 composer cloc
 ```
 
-```
-➜  playground-cms-api git:(develop) ✗ composer cloc
-     212 text files.
-     205 unique files.                                          
-      90 files ignored.
-
-github.com/AlDanial/cloc v 2.08  T=0.09 s (2410.4 files/s, 215560.7 lines/s)
--------------------------------------------------------------------------------
-Language                     files          blank        comment           code
--------------------------------------------------------------------------------
-YAML                            30              4              0           6240
-JSON                            80              0              0           5232
-PHP                             81            873           1270           3676
-XML                             10              0              7            832
-Markdown                         3             55              1            128
-INI                              1              3              0             12
--------------------------------------------------------------------------------
-SUM:                           205            935           1278          16120
--------------------------------------------------------------------------------
+```terminaloutput
+REPLACE_CLOC
 ```
 
 ## PHPStan
 
 Tests at level 10 on:
 - `config/`
-- `lang/`
 - `routes/`
 - `src/`
 - `tests/Feature/`
 - `tests/Unit/`
 
-```sh
+```shell
 composer analyse
 ```
 
 ## Coding Standards
 
-```sh
+```shell
 composer format
 ```
 
 ## Testing
 
 Run unit tests:
-```sh
+```shell
 composer test
 ```
 
 Run unit and feature tests:
-```sh
+```shell
 composer test-dev
 ```
 
 Run unit and feature tests in parallel:
-```sh
+```shell
 composer test-parallel
 ```
 

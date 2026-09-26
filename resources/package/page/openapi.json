@@ -5,7 +5,7 @@
     "model": "Page",
     "model_fqdn": "",
     "model_column": "",
-    "model_label": "",
+    "model_label": "Page",
     "model_slug_plural": "",
     "module": "CMS",
     "module_slug": "cms",

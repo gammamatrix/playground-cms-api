@@ -3,7 +3,7 @@
     "config": "playground-cms-api",
     "fqdn": "Playground/Cms/Api/Policies/Page",
     "model": "Page",
-    "model_fqdn": "",
+    "model_fqdn": "Playground/Cms/Models/Page",
     "module": "CMS",
     "module_slug": "cms",
     "name": "Page",
