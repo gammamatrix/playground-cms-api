@@ -1,23 +1,23 @@
-# Playground: CMS
+# Playground: CMS API
 
 [![Playground CI Workflow](https://github.com/gammamatrix/playground-cms-api/actions/workflows/ci.yml/badge.svg?branch=develop)](https://raw.githubusercontent.com/gammamatrix/playground-cms-api/testing/develop/testdox.txt)
 [![Test Coverage](https://raw.githubusercontent.com/gammamatrix/playground-cms-api/testing/develop/coverage.svg)](tests)
 [![PHPStan Level 10](https://img.shields.io/badge/PHPStan-level%2010-brightgreen)](.github/workflows/ci.yml#L128)
 
-Playground: CMS
+Playground: CMS API
 
-This package provides an API without UI for interacting with the [](https://github.com/gammamatrix/), a model package for Laravel.
+This package provides an API without UI for interacting with the [Playground: CMS](https://github.com/gammamatrix/playground-cms), a model package for Laravel.
 
-If you need a JSON API with a UI, then have a look at [ Resource.](https://github.com/gammamatrix/-resource)
+If you need a JSON API with a UI, then have a look at [Playground: CMS Resource.](https://github.com/gammamatrix/playground-cms-resource)
 
 ## Documentation
 
-Read more on using []()
+Read more on using [Playground: CMS API at Read the Docs: Playground Documentation](https://gammamatrix-playground.readthedocs.io/en/develop/built-components/cms.html)
 
 ### Postman
 
 A postman collection is provided in the repository: [postman-playground-cms-api.json.](postman-playground-cms-api.json)
-- This same collection is viewable on the [.]()
+- This same collection is viewable on the [Postman: GammaMatrix Playground Workspace.](https://www.postman.com/gammamatrix/workspace/playground/documentation/1185343-1e4a5656-d4e0-45b2-8f4e-daad7a6ee2b1)
 
 ### OpenAPI
 
@@ -57,7 +57,7 @@ composer require gammamatrix/playground-cms-api
 
 Playground provides information in the `artisan about` command.
 
-<!-- <img src="resources/docs/artisan-about-playground-cms-api.png" alt="screenshot of artisan about command with Playground: CMS."> -->
+<!-- <img src="resources/docs/artisan-about-playground-cms-api.png" alt="screenshot of artisan about command with Playground: CMS API."> -->
 
 ## Configuration
 
@@ -86,7 +86,7 @@ Information on [environment variables is available on the wiki for this package]
 
 ## Migrations
 
-This package requires the migrations in [](https://github.com/gammamatrix/) a Laravel package.
+This package requires the migrations in [playground-cms](https://github.com/gammamatrix/playground-cms) a Laravel package.
 
 ## Cloc
 
@@ -95,13 +95,31 @@ composer cloc
 ```
 
 ```terminaloutput
-REPLACE_CLOC
+➜  playground-cms-api git:(develop) ✗ composer cloc
+     213 text files.
+     205 unique files.                                          
+     135 files ignored.
+
+github.com/AlDanial/cloc v 2.08  T=0.10 s (2135.1 files/s, 200543.6 lines/s)
+-------------------------------------------------------------------------------
+Language                     files          blank        comment           code
+-------------------------------------------------------------------------------
+YAML                            30              4              0           6240
+JSON                            80              0              0           6046
+PHP                             81            873           1270           3721
+XML                             10              0              7            913
+Markdown                         3             54              1            111
+INI                              1              3              0             12
+-------------------------------------------------------------------------------
+SUM:                           205            934           1278          17043
+-------------------------------------------------------------------------------
 ```
 
 ## PHPStan
 
 Tests at level 10 on:
 - `config/`
+- `lang/`
 - `routes/`
 - `src/`
 - `tests/Feature/`
