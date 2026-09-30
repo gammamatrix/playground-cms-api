@@ -34,6 +34,7 @@
     "slug": "snippet",
     "slug_plural": "snippets",
     "model_route": "playground.cms.api.snippets",
+    "model_route_param": "snippet",
     "module_route": "playground.cms.api",
     "model_camel": "snippet",
     "model_camels": "snippets",

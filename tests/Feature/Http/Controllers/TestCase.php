@@ -36,6 +36,7 @@ class TestCase extends BaseTestCase
         'model_label_plural' => '',
         'model_labels' => '',
         'model_route' => '',
+        'model_route_param' => '',
         'model_slug' => '',
         'model_slugs' => '',
         'model_slug_plural' => '',

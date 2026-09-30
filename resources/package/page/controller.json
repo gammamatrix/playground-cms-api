@@ -34,6 +34,7 @@
     "slug": "page",
     "slug_plural": "pages",
     "model_route": "playground.cms.api.pages",
+    "model_route_param": "page",
     "module_route": "playground.cms.api",
     "model_camel": "page",
     "model_camels": "pages",

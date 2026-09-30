@@ -11,6 +11,7 @@
     "model_kebabs": "pages",
     "model_label": "Page",
     "model_labels": "Pages",
+    "model_route_param": "page",
     "model_lower": "page",
     "model_lowers": "pages",
     "model_slug": "page",

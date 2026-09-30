@@ -19,6 +19,7 @@
     "model_column": "page",
     "model_fqdn": "Playground/Cms/Models/Page",
     "model_route": "",
+    "model_route_param": "page",
     "module_route": "",
     "model_slug_plural": "",
     "model_camel": "page",

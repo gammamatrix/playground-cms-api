@@ -19,6 +19,7 @@
     "model_column": "snippet",
     "model_fqdn": "Playground/Cms/Models/Snippet",
     "model_route": "",
+    "model_route_param": "snippet",
     "module_route": "",
     "model_slug_plural": "",
     "model_camel": "snippet",

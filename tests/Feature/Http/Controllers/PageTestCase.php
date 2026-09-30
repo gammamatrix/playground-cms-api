@@ -69,6 +69,7 @@ class PageTestCase extends PlaygroundCase
         'model_label_plural' => 'Pages',
         'model_labels' => 'Pages',
         'model_route' => 'playground.cms.api.pages',
+        'model_route_param' => 'page',
         'model_slug' => 'page',
         'model_slugs' => 'pages',
         'model_slug_plural' => 'pages',

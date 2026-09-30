@@ -32,6 +32,7 @@
     "slug": "",
     "slug_plural": "",
     "model_route": "",
+    "model_route_param": "",
     "module_route": "playground.cms.api",
     "model_camel": "",
     "model_camels": "",

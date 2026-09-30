@@ -11,6 +11,7 @@
     "model_kebabs": "snippets",
     "model_label": "Snippet",
     "model_labels": "Snippets",
+    "model_route_param": "snippet",
     "model_lower": "snippet",
     "model_lowers": "snippets",
     "model_slug": "snippet",

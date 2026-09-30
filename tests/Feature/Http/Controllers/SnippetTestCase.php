@@ -69,6 +69,7 @@ class SnippetTestCase extends PlaygroundCase
         'model_label_plural' => 'Snippets',
         'model_labels' => 'Snippets',
         'model_route' => 'playground.cms.api.snippets',
+        'model_route_param' => 'snippet',
         'model_slug' => 'snippet',
         'model_slugs' => 'snippets',
         'model_slug_plural' => 'snippets',
