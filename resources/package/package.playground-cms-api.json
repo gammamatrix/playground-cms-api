@@ -13,6 +13,7 @@
     "organization": "Playground",
     "organization_email": "jeremy.postlethwaite@gmail.com",
     "package": "playground-cms-api",
+    "recipe": "cms",
     "withBlades": false,
     "withControllers": true,
     "withFactories": false,
