@@ -35,7 +35,12 @@
     "withTests": true,
     "playground": false,
     "models": [],
-    "uses": [],
+    "uses": [
+        "Playground/Cms/Models/Snippet",
+        "Playground/Cms/Models/SnippetRevision",
+        "Illuminate\\Auth\\Access\\Response",
+        "Illuminate\\Contracts\\Auth\\Authenticatable"
+    ],
     "rolesForAction": [
         "publisher",
         "manager",

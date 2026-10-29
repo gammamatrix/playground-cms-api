@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 use Playground\Test\Feature\Http\Controllers\Resource;
 
 /**
- * \Tests\Feature\Playground\Cms\Api\Http\Controllers\TestCase
+ * \Tests\Feature\Playground\Cms\Api\Http\Controllers\RevisionTestCase
  */
 class RevisionTestCase extends PlaygroundCase
 {
