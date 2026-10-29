@@ -15,7 +15,7 @@ use Playground\Cms\Models\SnippetRevision;
 /**
  * \Tests\Feature\Playground\Cms\Api\Http\Controllers\SnippetTestCase
  */
-class SnippetTestCase extends PlaygroundCase
+class SnippetTestCase extends RevisionTestCase
 {
     public string $fqdn = Snippet::class;
 

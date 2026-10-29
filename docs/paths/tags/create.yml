@@ -1,0 +1,21 @@
+get:
+  tags:
+    - Tag
+  summary: 'Create a tag form.'
+  operationId: create_tag
+  responses:
+    200:
+      description: 'The create tag information.'
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: ../../models/tag.yml
+              meta:
+                type: object
+    401:
+      description: Unauthorized
+    403:
+      description: Forbidden

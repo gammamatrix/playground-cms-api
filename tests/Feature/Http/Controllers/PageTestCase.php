@@ -15,7 +15,7 @@ use Playground\Cms\Models\PageRevision;
 /**
  * \Tests\Feature\Playground\Cms\Api\Http\Controllers\PageTestCase
  */
-class PageTestCase extends PlaygroundCase
+class PageTestCase extends RevisionTestCase
 {
     public string $fqdn = Page::class;
 

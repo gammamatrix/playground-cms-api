@@ -35,12 +35,7 @@
     "withTests": true,
     "playground": false,
     "models": [],
-    "uses": [
-        "Playground/Cms/Models/Page",
-        "Playground/Cms/Models/PageRevision",
-        "Illuminate\\Auth\\Access\\Response",
-        "Illuminate\\Contracts\\Auth\\Authenticatable"
-    ],
+    "uses": [],
     "rolesForAction": [
         "publisher",
         "manager",

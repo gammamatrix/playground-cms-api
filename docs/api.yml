@@ -26,6 +26,9 @@ tags:
   -
     name: Snippet
     description: 'Manage snippets in storage.'
+  -
+    name: Tag
+    description: 'Manage tags in storage.'
 paths:
   '/api/cms/pages/{id}':
     $ref: paths/pages/id.yml
@@ -63,6 +66,20 @@ paths:
     $ref: paths/snippets/create.yml
   '/api/cms/snippets/edit/{id}':
     $ref: paths/snippets/edit.yml
+  '/api/cms/tags/{id}':
+    $ref: paths/tags/id.yml
+  /api/cms/tags:
+    $ref: paths/tags/index.yml
+  /api/cms/tags/index:
+    $ref: paths/tags/index-form.yml
+  '/api/cms/tags/lock/{id}':
+    $ref: paths/tags/lock.yml
+  '/api/cms/tags/restore/{id}':
+    $ref: paths/tags/restore.yml
+  /api/cms/tags/create:
+    $ref: paths/tags/create.yml
+  '/api/cms/tags/edit/{id}':
+    $ref: paths/tags/edit.yml
 components:
   schemas:
     Page:
@@ -73,3 +90,5 @@ components:
       $ref: models/snippet.yml
     SnippetRevision:
       $ref: models/snippet-revision.yml
+    Tag:
+      $ref: models/tag.yml

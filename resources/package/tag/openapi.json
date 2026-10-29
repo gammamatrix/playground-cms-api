@@ -1,0 +1,19 @@
+{
+    "class": "",
+    "config": "playground-cms-api",
+    "fqdn": "",
+    "model": "Tag",
+    "model_fqdn": "",
+    "model_column": "",
+    "model_label": "Tag",
+    "model_slug_plural": "",
+    "module": "CMS",
+    "module_slug": "cms",
+    "name": "Tag",
+    "namespace": "Playground/Cms/Api",
+    "organization": "Playground",
+    "package": "playground-cms-api",
+    "models": [],
+    "folder": "",
+    "type": "playground-api"
+}

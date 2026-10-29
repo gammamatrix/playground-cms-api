@@ -1,0 +1,30 @@
+parameters:
+  -
+    in: path
+    name: id
+    required: true
+    description: 'The tag id.'
+    schema:
+      type: string
+      format: uuid
+get:
+  tags:
+    - Tag
+  summary: 'Edit a tag form.'
+  operationId: edit_tag
+  responses:
+    200:
+      description: 'The edit tag information.'
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: ../../models/tag.yml
+              meta:
+                type: object
+    401:
+      description: Unauthorized
+    403:
+      description: Forbidden

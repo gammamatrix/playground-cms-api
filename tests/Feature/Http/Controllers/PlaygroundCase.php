@@ -21,9 +21,6 @@ class PlaygroundCase extends TestCase
     use Resource\Playground\IndexJsonTrait;
     use Resource\Playground\LockJsonTrait;
     use Resource\Playground\RestoreJsonTrait;
-    use Resource\Playground\RestoreRevisionJsonTrait;
-    use Resource\Playground\RevisionJsonTrait;
-    use Resource\Playground\RevisionsJsonTrait;
     use Resource\Playground\ShowJsonTrait;
     use Resource\Playground\StoreJsonTrait;
     use Resource\Playground\UnlockJsonTrait;

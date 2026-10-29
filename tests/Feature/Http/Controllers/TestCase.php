@@ -59,15 +59,6 @@ class TestCase extends BaseTestCase
     ];
 
     /**
-     * @var class-string<Model>
-     */
-    public string $fqdnRevision = Model::class;
-
-    public string $revisionId = 'revision_id';
-
-    public string $revisionRouteParameter = 'revision';
-
-    /**
      * @var array<int, string>
      */
     protected $structure_model = [
@@ -80,24 +71,6 @@ class TestCase extends BaseTestCase
     public function getGetFqdn(): string
     {
         return $this->fqdn;
-    }
-
-    /**
-     * @return class-string<Model>
-     */
-    public function getGetFqdnRevision(): string
-    {
-        return $this->fqdnRevision;
-    }
-
-    public function getRevisionId(): string
-    {
-        return $this->revisionId;
-    }
-
-    public function getRevisionRouteParameter(): string
-    {
-        return $this->revisionRouteParameter;
     }
 
     /**

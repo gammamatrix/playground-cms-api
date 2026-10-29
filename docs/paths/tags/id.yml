@@ -1,0 +1,87 @@
+parameters:
+  -
+    in: path
+    name: id
+    required: true
+    description: 'The tag id.'
+    schema:
+      type: string
+      format: uuid
+get:
+  tags:
+    - Tag
+  summary: 'Get a tag by id.'
+  operationId: get_tag
+  responses:
+    200:
+      description: 'The tag data.'
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: ../../models/tag.yml
+              meta:
+                type: object
+    401:
+      description: Unauthorized
+    403:
+      description: Forbidden
+delete:
+  tags:
+    - Tag
+  summary: 'Delete a tag by id.'
+  operationId: delete_tag
+  responses:
+    204:
+      description: 'The tag has been deleted.'
+    401:
+      description: Unauthorized
+    403:
+      description: Forbidden
+    423:
+      description: 'The tag is locked. Unlock to delete.'
+patch:
+  tags:
+    - Tag
+  summary: 'Patch a tag by id.'
+  operationId: patch_tag
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../../requests/tag/patch.yml
+  responses:
+    200:
+      description: 'The tag has been patched.'
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: ../../models/tag.yml
+              meta:
+                type: object
+    401:
+      description: Unauthorized
+    403:
+      description: Forbidden
+    422:
+      description: 'Validation error'
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              errors:
+                type: object
+                properties:
+                  title:
+                    type: array
+                    items:
+                      type: string
+                      example: 'The title field is required.'
+    423:
+      description: 'The tag is locked. Unlock to patch.'

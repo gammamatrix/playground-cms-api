@@ -11,10 +11,14 @@ use Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful;
 use Playground\Auth\Policies\Policy;
 use Playground\Cms\Api\Policies\PagePolicy;
 use Playground\Cms\Api\Policies\SnippetPolicy;
+use Playground\Cms\Api\Policies\TaggedPolicy;
+use Playground\Cms\Api\Policies\TagPolicy;
 use Playground\Cms\Models\Page;
 use Playground\Cms\Models\PageRevision;
 use Playground\Cms\Models\Snippet;
 use Playground\Cms\Models\SnippetRevision;
+use Playground\Cms\Models\Tag;
+use Playground\Cms\Models\Tagged;
 
 /**
  * Playground: CMS API Configuration and Environment Variables
@@ -46,6 +50,8 @@ use Playground\Cms\Models\SnippetRevision;
  *       routes: array{
  *           pages: bool,
  *           snippets: bool,
+ *           tags: bool,
+ *           tagged: bool,
  *       },
  *       cache: array{
  *           enable: bool,
@@ -148,6 +154,8 @@ return [
         PageRevision::class => PagePolicy::class,
         Snippet::class => SnippetPolicy::class,
         SnippetRevision::class => SnippetPolicy::class,
+        Tag::class => TagPolicy::class,
+        Tagged::class => TaggedPolicy::class,
     ],
 
     /*
@@ -175,6 +183,8 @@ return [
     'routes' => [
         'pages' => (bool) env('PLAYGROUND_CMS_API_ROUTES_PAGES', true),
         'snippets' => (bool) env('PLAYGROUND_CMS_API_ROUTES_SNIPPETS', true),
+        'tags' => (bool) env('PLAYGROUND_CMS_API_ROUTES_TAGS', true),
+        'tagged' => (bool) env('PLAYGROUND_CMS_API_ROUTES_TAGGED', true),
     ],
 
     /*
@@ -192,12 +202,18 @@ return [
         'manager' => [
             'playground-cms-api:page:*',
             'playground-cms-api:snippet:*',
+            'playground-cms-api:tag:*',
+            'playground-cms-api:tagged:*',
         ],
         'user' => [
             'playground-cms-api:page:view',
             'playground-cms-api:page:viewAny',
             'playground-cms-api:snippet:view',
             'playground-cms-api:snippet:viewAny',
+            'playground-cms-api:tag:view',
+            'playground-cms-api:tag:viewAny',
+            'playground-cms-api:tagged:view',
+            'playground-cms-api:tagged:viewAny',
         ],
     ],
 ];
