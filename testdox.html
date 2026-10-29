@@ -128,7 +128,7 @@
     <body>
         <header class="summary">
             <h1>Test Documentation</h1>
-            <p class="counts"><span class="passed">129 passed</span></p>
+            <p class="counts"><span class="passed">179 passed</span></p>
         </header>
         <main>
 
@@ -154,6 +154,13 @@
             </section>
 
             <section class="test-class">
+                <h2>Create Request (Tests\Unit\Playground\Cms\Api\Http\Requests\Tag\CreateRequest)</h2>
+                <ul>
+                    <li class="success">Request instance</li>
+                </ul>
+            </section>
+
+            <section class="test-class">
                 <h2>Destroy Request (Tests\Unit\Playground\Cms\Api\Http\Requests\Page\DestroyRequest)</h2>
                 <ul>
                     <li class="success">Request instance</li>
@@ -162,6 +169,20 @@
 
             <section class="test-class">
                 <h2>Destroy Request (Tests\Unit\Playground\Cms\Api\Http\Requests\Snippet\DestroyRequest)</h2>
+                <ul>
+                    <li class="success">Request instance</li>
+                </ul>
+            </section>
+
+            <section class="test-class">
+                <h2>Destroy Request (Tests\Unit\Playground\Cms\Api\Http\Requests\Tagged\DestroyRequest)</h2>
+                <ul>
+                    <li class="success">Request instance</li>
+                </ul>
+            </section>
+
+            <section class="test-class">
+                <h2>Destroy Request (Tests\Unit\Playground\Cms\Api\Http\Requests\Tag\DestroyRequest)</h2>
                 <ul>
                     <li class="success">Request instance</li>
                 </ul>
@@ -182,6 +203,13 @@
             </section>
 
             <section class="test-class">
+                <h2>Edit Request (Tests\Unit\Playground\Cms\Api\Http\Requests\Tag\EditRequest)</h2>
+                <ul>
+                    <li class="success">Request instance</li>
+                </ul>
+            </section>
+
+            <section class="test-class">
                 <h2>Index Request (Tests\Unit\Playground\Cms\Api\Http\Requests\Page\IndexRequest)</h2>
                 <ul>
                     <li class="success">Request instance</li>
@@ -190,6 +218,13 @@
 
             <section class="test-class">
                 <h2>Index Request (Tests\Unit\Playground\Cms\Api\Http\Requests\Snippet\IndexRequest)</h2>
+                <ul>
+                    <li class="success">Request instance</li>
+                </ul>
+            </section>
+
+            <section class="test-class">
+                <h2>Index Request (Tests\Unit\Playground\Cms\Api\Http\Requests\Tag\IndexRequest)</h2>
                 <ul>
                     <li class="success">Request instance</li>
                 </ul>
@@ -238,19 +273,23 @@
             </section>
 
             <section class="test-class">
+                <h2>Lock Request (Tests\Unit\Playground\Cms\Api\Http\Requests\Tag\LockRequest)</h2>
+                <ul>
+                    <li class="success">Request instance</li>
+                </ul>
+            </section>
+
+            <section class="test-class">
                 <h2>Page Route (Tests\Feature\Playground\Cms\Api\Http\Controllers\Playground\PageRoute)</h2>
                 <ul>
                     <li class="success">Json guest cannot see info</li>
                     <li class="success">Json guest cannot destroy</li>
                     <li class="success">Json guest cannot restore</li>
                     <li class="success">Json guest cannot get index</li>
-                    <li class="success">Json guest cannot get revisions</li>
                     <li class="success">Json guest cannot lock</li>
                     <li class="success">Json guest cannot unlock</li>
                     <li class="success">Json guest cannot get create info</li>
                     <li class="success">Json guest cannot get edit info</li>
-                    <li class="success">Json guest cannot render revision view</li>
-                    <li class="success">Json guest cannot restore revision</li>
                     <li class="success">Json guest cannot store</li>
                     <li class="success">Json guest cannot update</li>
                     <li class="success">Json admin can get index</li>
@@ -258,32 +297,35 @@
                     <li class="success">Json admin can get create info</li>
                     <li class="success">Json admin can get edit info</li>
                     <li class="success">Json destroy as admin and succeed</li>
-                    <li class="success">Json admin can get revisions</li>
                     <li class="success">Json restore as admin and succeed</li>
                     <li class="success">Json update as admin without payload and passes validation</li>
                     <li class="success">Json lock as admin and succeed</li>
                     <li class="success">Json store as admin without payload and fail validation</li>
                     <li class="success">Json unlock as admin and succeed</li>
-                    <li class="success">Json admin can get revision info</li>
                     <li class="success">Json get create info as admin with invalid parameter and fail validation</li>
-                    <li class="success">Json restore revision as admin and succeed</li>
                     <li class="success">Json admin can get index with filters</li>
                     <li class="success">Json edit as admin and fail validation with invalid parameter</li>
                     <li class="success">Json store as admin and succeed</li>
                     <li class="success">Json lock as admin and succeed with no redirect</li>
                     <li class="success">Json destroy as admin and succeed with force delete</li>
                     <li class="success">Json restore as admin and succeed with no redirect</li>
-                    <li class="success">Json admin can get revisions with filters</li>
                     <li class="success">Json unlock as admin and succeed with no redirect</li>
                     <li class="success">Json admin can update</li>
-                    <li class="success">Json restore revision as admin and succeed without redirect</li>
                     <li class="success">Json destroy as admin and succeed with no content</li>
                     <li class="success">Json lock as user and get denied</li>
                     <li class="success">Json restore as user and get denied</li>
                     <li class="success">Json unlock as user and get denied</li>
                     <li class="success">Json destroy as admin and succeed and ignore redirect</li>
-                    <li class="success">Json restore revision as user and get denied</li>
                     <li class="success">Json destroy as user and get denied and no force delete allowed</li>
+                    <li class="success">Json guest cannot get revisions</li>
+                    <li class="success">Json guest cannot render revision view</li>
+                    <li class="success">Json guest cannot restore revision</li>
+                    <li class="success">Json admin can get revisions</li>
+                    <li class="success">Json admin can get revision info</li>
+                    <li class="success">Json restore revision as admin and succeed</li>
+                    <li class="success">Json admin can get revisions with filters</li>
+                    <li class="success">Json restore revision as admin and succeed without redirect</li>
+                    <li class="success">Json restore revision as user and get denied</li>
                 </ul>
             </section>
 
@@ -296,6 +338,20 @@
 
             <section class="test-class">
                 <h2>Policy (Tests\Unit\Playground\Cms\Api\Policies\SnippetPolicy\Policy)</h2>
+                <ul>
+                    <li class="success">Policy instance</li>
+                </ul>
+            </section>
+
+            <section class="test-class">
+                <h2>Policy (Tests\Unit\Playground\Cms\Api\Policies\TaggedPolicy\Policy)</h2>
+                <ul>
+                    <li class="success">Policy instance</li>
+                </ul>
+            </section>
+
+            <section class="test-class">
+                <h2>Policy (Tests\Unit\Playground\Cms\Api\Policies\TagPolicy\Policy)</h2>
                 <ul>
                     <li class="success">Policy instance</li>
                 </ul>
@@ -316,6 +372,13 @@
             </section>
 
             <section class="test-class">
+                <h2>Restore Request (Tests\Unit\Playground\Cms\Api\Http\Requests\Tag\RestoreRequest)</h2>
+                <ul>
+                    <li class="success">Request instance</li>
+                </ul>
+            </section>
+
+            <section class="test-class">
                 <h2>Show Request (Tests\Unit\Playground\Cms\Api\Http\Requests\Page\ShowRequest)</h2>
                 <ul>
                     <li class="success">Request instance</li>
@@ -330,19 +393,23 @@
             </section>
 
             <section class="test-class">
+                <h2>Show Request (Tests\Unit\Playground\Cms\Api\Http\Requests\Tag\ShowRequest)</h2>
+                <ul>
+                    <li class="success">Request instance</li>
+                </ul>
+            </section>
+
+            <section class="test-class">
                 <h2>Snippet Route (Tests\Feature\Playground\Cms\Api\Http\Controllers\Playground\SnippetRoute)</h2>
                 <ul>
                     <li class="success">Json guest cannot see info</li>
                     <li class="success">Json guest cannot destroy</li>
                     <li class="success">Json guest cannot restore</li>
                     <li class="success">Json guest cannot get index</li>
-                    <li class="success">Json guest cannot get revisions</li>
                     <li class="success">Json guest cannot lock</li>
                     <li class="success">Json guest cannot unlock</li>
                     <li class="success">Json guest cannot get create info</li>
                     <li class="success">Json guest cannot get edit info</li>
-                    <li class="success">Json guest cannot render revision view</li>
-                    <li class="success">Json guest cannot restore revision</li>
                     <li class="success">Json guest cannot store</li>
                     <li class="success">Json guest cannot update</li>
                     <li class="success">Json admin can get index</li>
@@ -350,32 +417,35 @@
                     <li class="success">Json admin can get create info</li>
                     <li class="success">Json admin can get edit info</li>
                     <li class="success">Json destroy as admin and succeed</li>
-                    <li class="success">Json admin can get revisions</li>
                     <li class="success">Json restore as admin and succeed</li>
                     <li class="success">Json update as admin without payload and passes validation</li>
                     <li class="success">Json lock as admin and succeed</li>
                     <li class="success">Json store as admin without payload and fail validation</li>
                     <li class="success">Json unlock as admin and succeed</li>
-                    <li class="success">Json admin can get revision info</li>
                     <li class="success">Json get create info as admin with invalid parameter and fail validation</li>
-                    <li class="success">Json restore revision as admin and succeed</li>
                     <li class="success">Json admin can get index with filters</li>
                     <li class="success">Json edit as admin and fail validation with invalid parameter</li>
                     <li class="success">Json store as admin and succeed</li>
                     <li class="success">Json lock as admin and succeed with no redirect</li>
                     <li class="success">Json destroy as admin and succeed with force delete</li>
                     <li class="success">Json restore as admin and succeed with no redirect</li>
-                    <li class="success">Json admin can get revisions with filters</li>
                     <li class="success">Json unlock as admin and succeed with no redirect</li>
                     <li class="success">Json admin can update</li>
-                    <li class="success">Json restore revision as admin and succeed without redirect</li>
                     <li class="success">Json destroy as admin and succeed with no content</li>
                     <li class="success">Json lock as user and get denied</li>
                     <li class="success">Json restore as user and get denied</li>
                     <li class="success">Json unlock as user and get denied</li>
                     <li class="success">Json destroy as admin and succeed and ignore redirect</li>
-                    <li class="success">Json restore revision as user and get denied</li>
                     <li class="success">Json destroy as user and get denied and no force delete allowed</li>
+                    <li class="success">Json guest cannot get revisions</li>
+                    <li class="success">Json guest cannot render revision view</li>
+                    <li class="success">Json guest cannot restore revision</li>
+                    <li class="success">Json admin can get revisions</li>
+                    <li class="success">Json admin can get revision info</li>
+                    <li class="success">Json restore revision as admin and succeed</li>
+                    <li class="success">Json admin can get revisions with filters</li>
+                    <li class="success">Json restore revision as admin and succeed without redirect</li>
+                    <li class="success">Json restore revision as user and get denied</li>
                 </ul>
             </section>
 
@@ -398,6 +468,68 @@
             </section>
 
             <section class="test-class">
+                <h2>Store Request (Tests\Unit\Playground\Cms\Api\Http\Requests\Tagged\StoreRequest)</h2>
+                <ul>
+                    <li class="success">Request instance</li>
+                </ul>
+            </section>
+
+            <section class="test-class">
+                <h2>Store Request (Tests\Unit\Playground\Cms\Api\Http\Requests\Tag\StoreRequest)</h2>
+                <ul>
+                    <li class="success">Request instance</li>
+                </ul>
+            </section>
+
+            <section class="test-class">
+                <h2>Tagged Route (Tests\Feature\Playground\Cms\Api\Http\Controllers\Playground\TaggedRoute)</h2>
+                <ul>
+                    <li class="success">Destroy as admin and succeed</li>
+                </ul>
+            </section>
+
+            <section class="test-class">
+                <h2>Tag Route (Tests\Feature\Playground\Cms\Api\Http\Controllers\Playground\TagRoute)</h2>
+                <ul>
+                    <li class="success">Json guest cannot see info</li>
+                    <li class="success">Json guest cannot destroy</li>
+                    <li class="success">Json guest cannot restore</li>
+                    <li class="success">Json guest cannot get index</li>
+                    <li class="success">Json guest cannot lock</li>
+                    <li class="success">Json guest cannot unlock</li>
+                    <li class="success">Json guest cannot get create info</li>
+                    <li class="success">Json guest cannot get edit info</li>
+                    <li class="success">Json guest cannot store</li>
+                    <li class="success">Json guest cannot update</li>
+                    <li class="success">Json admin can get index</li>
+                    <li class="success">Json show info for admin</li>
+                    <li class="success">Json admin can get create info</li>
+                    <li class="success">Json admin can get edit info</li>
+                    <li class="success">Json destroy as admin and succeed</li>
+                    <li class="success">Json restore as admin and succeed</li>
+                    <li class="success">Json update as admin without payload and passes validation</li>
+                    <li class="success">Json lock as admin and succeed</li>
+                    <li class="success">Json store as admin without payload and fail validation</li>
+                    <li class="success">Json unlock as admin and succeed</li>
+                    <li class="success">Json get create info as admin with invalid parameter and fail validation</li>
+                    <li class="success">Json admin can get index with filters</li>
+                    <li class="success">Json edit as admin and fail validation with invalid parameter</li>
+                    <li class="success">Json store as admin and succeed</li>
+                    <li class="success">Json lock as admin and succeed with no redirect</li>
+                    <li class="success">Json destroy as admin and succeed with force delete</li>
+                    <li class="success">Json restore as admin and succeed with no redirect</li>
+                    <li class="success">Json unlock as admin and succeed with no redirect</li>
+                    <li class="success">Json admin can update</li>
+                    <li class="success">Json destroy as admin and succeed with no content</li>
+                    <li class="success">Json lock as user and get denied</li>
+                    <li class="success">Json restore as user and get denied</li>
+                    <li class="success">Json unlock as user and get denied</li>
+                    <li class="success">Json destroy as admin and succeed and ignore redirect</li>
+                    <li class="success">Json destroy as user and get denied and no force delete allowed</li>
+                </ul>
+            </section>
+
+            <section class="test-class">
                 <h2>Unlock Request (Tests\Unit\Playground\Cms\Api\Http\Requests\Page\UnlockRequest)</h2>
                 <ul>
                     <li class="success">Request instance</li>
@@ -406,6 +538,13 @@
 
             <section class="test-class">
                 <h2>Unlock Request (Tests\Unit\Playground\Cms\Api\Http\Requests\Snippet\UnlockRequest)</h2>
+                <ul>
+                    <li class="success">Request instance</li>
+                </ul>
+            </section>
+
+            <section class="test-class">
+                <h2>Unlock Request (Tests\Unit\Playground\Cms\Api\Http\Requests\Tag\UnlockRequest)</h2>
                 <ul>
                     <li class="success">Request instance</li>
                 </ul>
@@ -426,6 +565,13 @@
                     <li class="success">Request instance</li>
                     <li class="success">Update request rules with optional revisions disabled</li>
                     <li class="success">Update request rules with optional revisions enabled</li>
+                </ul>
+            </section>
+
+            <section class="test-class">
+                <h2>Update Request (Tests\Unit\Playground\Cms\Api\Http\Requests\Tag\UpdateRequest)</h2>
+                <ul>
+                    <li class="success">Request instance</li>
                 </ul>
             </section>
         </main>

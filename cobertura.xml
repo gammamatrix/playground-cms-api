@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage line-rate="1" branch-rate="0" lines-covered="543" lines-valid="543" branches-covered="0" branches-valid="0" complexity="142" version="0.4" timestamp="1791679728">
+<coverage line-rate="0.9622905027933" branch-rate="0" lines-covered="689" lines-valid="716" branches-covered="0" branches-valid="0" complexity="178" version="0.4" timestamp="1793299667">
   <sources>
     <source>/app/src</source>
   </sources>
@@ -10,12 +10,12 @@
           <methods>
             <method name="packageInfo" signature="" line-rate="1" branch-rate="0" complexity="1">
               <lines>
-                <line number="39" hits="38"/>
+                <line number="39" hits="52"/>
               </lines>
             </method>
           </methods>
           <lines>
-            <line number="39" hits="38"/>
+            <line number="39" hits="52"/>
           </lines>
         </class>
       </classes>
@@ -764,46 +764,316 @@
         </class>
       </classes>
     </package>
+    <package name="Http/Controllers/TagController.php" line-rate="1" branch-rate="0" complexity="17">
+      <classes>
+        <class name="Playground\Cms\Api\Http\Controllers\TagController" filename="Http/Controllers/TagController.php" line-rate="1" branch-rate="0" complexity="17">
+          <methods>
+            <method name="create" signature="Requests\Tag\CreateRequest $request" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="67" hits="1"/>
+                <line number="69" hits="1"/>
+                <line number="71" hits="1"/>
+                <line number="73" hits="1"/>
+                <line number="74" hits="1"/>
+                <line number="75" hits="1"/>
+              </lines>
+            </method>
+            <method name="edit" signature="Tag $tag, Requests\Tag\EditRequest $request" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="88" hits="1"/>
+                <line number="90" hits="1"/>
+                <line number="91" hits="1"/>
+                <line number="92" hits="1"/>
+              </lines>
+            </method>
+            <method name="destroy" signature="Tag $tag, Requests\Tag\DestroyRequest $request" line-rate="1" branch-rate="0" complexity="3">
+              <lines>
+                <line number="105" hits="4"/>
+                <line number="107" hits="4"/>
+                <line number="109" hits="4"/>
+                <line number="110" hits="4"/>
+                <line number="113" hits="4"/>
+                <line number="114" hits="3"/>
+                <line number="116" hits="1"/>
+                <line number="119" hits="4"/>
+              </lines>
+            </method>
+            <method name="lock" signature="Tag $tag, Requests\Tag\LockRequest $request" line-rate="1" branch-rate="0" complexity="2">
+              <lines>
+                <line number="132" hits="2"/>
+                <line number="134" hits="2"/>
+                <line number="136" hits="2"/>
+                <line number="137" hits="2"/>
+                <line number="140" hits="2"/>
+                <line number="142" hits="2"/>
+                <line number="144" hits="2"/>
+                <line number="145" hits="2"/>
+                <line number="146" hits="2"/>
+              </lines>
+            </method>
+            <method name="index" signature="Requests\Tag\IndexRequest $request" line-rate="1" branch-rate="0" complexity="5">
+              <lines>
+                <line number="158" hits="2"/>
+                <line number="169" hits="2"/>
+                <line number="171" hits="2"/>
+                <line number="173" hits="2"/>
+                <line number="175" hits="2"/>
+                <line number="177" hits="1"/>
+                <line number="179" hits="1"/>
+                <line number="180" hits="1"/>
+                <line number="181" hits="1"/>
+                <line number="182" hits="1"/>
+                <line number="184" hits="1"/>
+                <line number="185" hits="1"/>
+                <line number="186" hits="1"/>
+                <line number="187" hits="1"/>
+                <line number="189" hits="1"/>
+                <line number="190" hits="1"/>
+                <line number="191" hits="1"/>
+                <line number="192" hits="1"/>
+                <line number="194" hits="1"/>
+                <line number="195" hits="1"/>
+                <line number="196" hits="1"/>
+                <line number="197" hits="1"/>
+                <line number="200" hits="2"/>
+                <line number="201" hits="2"/>
+                <line number="203" hits="2"/>
+                <line number="205" hits="2"/>
+              </lines>
+            </method>
+            <method name="restore" signature="Tag $tag, Requests\Tag\RestoreRequest $request" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="218" hits="2"/>
+                <line number="220" hits="2"/>
+                <line number="222" hits="2"/>
+                <line number="224" hits="2"/>
+                <line number="226" hits="2"/>
+                <line number="227" hits="2"/>
+                <line number="228" hits="2"/>
+              </lines>
+            </method>
+            <method name="show" signature="Tag $tag, Requests\Tag\ShowRequest $request" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="241" hits="1"/>
+                <line number="243" hits="1"/>
+                <line number="244" hits="1"/>
+                <line number="245" hits="1"/>
+              </lines>
+            </method>
+            <method name="store" signature="Requests\Tag\StoreRequest $request" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="257" hits="1"/>
+                <line number="259" hits="1"/>
+                <line number="261" hits="1"/>
+                <line number="263" hits="1"/>
+                <line number="265" hits="1"/>
+                <line number="267" hits="1"/>
+                <line number="269" hits="1"/>
+                <line number="270" hits="1"/>
+                <line number="271" hits="1"/>
+              </lines>
+            </method>
+            <method name="unlock" signature="Tag $tag, Requests\Tag\UnlockRequest $request" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="284" hits="2"/>
+                <line number="286" hits="2"/>
+                <line number="288" hits="2"/>
+                <line number="290" hits="2"/>
+                <line number="292" hits="2"/>
+                <line number="294" hits="2"/>
+                <line number="295" hits="2"/>
+                <line number="296" hits="2"/>
+              </lines>
+            </method>
+            <method name="update" signature="Tag $tag, Requests\Tag\UpdateRequest $request" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="309" hits="2"/>
+                <line number="311" hits="2"/>
+                <line number="313" hits="2"/>
+                <line number="315" hits="2"/>
+                <line number="317" hits="2"/>
+                <line number="319" hits="2"/>
+                <line number="320" hits="2"/>
+                <line number="321" hits="2"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="67" hits="1"/>
+            <line number="69" hits="1"/>
+            <line number="71" hits="1"/>
+            <line number="73" hits="1"/>
+            <line number="74" hits="1"/>
+            <line number="75" hits="1"/>
+            <line number="88" hits="1"/>
+            <line number="90" hits="1"/>
+            <line number="91" hits="1"/>
+            <line number="92" hits="1"/>
+            <line number="105" hits="4"/>
+            <line number="107" hits="4"/>
+            <line number="109" hits="4"/>
+            <line number="110" hits="4"/>
+            <line number="113" hits="4"/>
+            <line number="114" hits="3"/>
+            <line number="116" hits="1"/>
+            <line number="119" hits="4"/>
+            <line number="132" hits="2"/>
+            <line number="134" hits="2"/>
+            <line number="136" hits="2"/>
+            <line number="137" hits="2"/>
+            <line number="140" hits="2"/>
+            <line number="142" hits="2"/>
+            <line number="144" hits="2"/>
+            <line number="145" hits="2"/>
+            <line number="146" hits="2"/>
+            <line number="158" hits="2"/>
+            <line number="169" hits="2"/>
+            <line number="171" hits="2"/>
+            <line number="173" hits="2"/>
+            <line number="175" hits="2"/>
+            <line number="177" hits="1"/>
+            <line number="179" hits="1"/>
+            <line number="180" hits="1"/>
+            <line number="181" hits="1"/>
+            <line number="182" hits="1"/>
+            <line number="184" hits="1"/>
+            <line number="185" hits="1"/>
+            <line number="186" hits="1"/>
+            <line number="187" hits="1"/>
+            <line number="189" hits="1"/>
+            <line number="190" hits="1"/>
+            <line number="191" hits="1"/>
+            <line number="192" hits="1"/>
+            <line number="194" hits="1"/>
+            <line number="195" hits="1"/>
+            <line number="196" hits="1"/>
+            <line number="197" hits="1"/>
+            <line number="200" hits="2"/>
+            <line number="201" hits="2"/>
+            <line number="203" hits="2"/>
+            <line number="205" hits="2"/>
+            <line number="218" hits="2"/>
+            <line number="220" hits="2"/>
+            <line number="222" hits="2"/>
+            <line number="224" hits="2"/>
+            <line number="226" hits="2"/>
+            <line number="227" hits="2"/>
+            <line number="228" hits="2"/>
+            <line number="241" hits="1"/>
+            <line number="243" hits="1"/>
+            <line number="244" hits="1"/>
+            <line number="245" hits="1"/>
+            <line number="257" hits="1"/>
+            <line number="259" hits="1"/>
+            <line number="261" hits="1"/>
+            <line number="263" hits="1"/>
+            <line number="265" hits="1"/>
+            <line number="267" hits="1"/>
+            <line number="269" hits="1"/>
+            <line number="270" hits="1"/>
+            <line number="271" hits="1"/>
+            <line number="284" hits="2"/>
+            <line number="286" hits="2"/>
+            <line number="288" hits="2"/>
+            <line number="290" hits="2"/>
+            <line number="292" hits="2"/>
+            <line number="294" hits="2"/>
+            <line number="295" hits="2"/>
+            <line number="296" hits="2"/>
+            <line number="309" hits="2"/>
+            <line number="311" hits="2"/>
+            <line number="313" hits="2"/>
+            <line number="315" hits="2"/>
+            <line number="317" hits="2"/>
+            <line number="319" hits="2"/>
+            <line number="320" hits="2"/>
+            <line number="321" hits="2"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+    <package name="Http/Controllers/TaggedController.php" line-rate="0.25" branch-rate="0" complexity="2">
+      <classes>
+        <class name="Playground\Cms\Api\Http\Controllers\TaggedController" filename="Http/Controllers/TaggedController.php" line-rate="0.25" branch-rate="0" complexity="2">
+          <methods>
+            <method name="destroy" signature="Tagged $tagged, Requests\Tagged\DestroyRequest $request" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="68" hits="1"/>
+                <line number="70" hits="1"/>
+                <line number="72" hits="1"/>
+              </lines>
+            </method>
+            <method name="store" signature="Requests\Tagged\StoreRequest $request" line-rate="0" branch-rate="0" complexity="1">
+              <lines>
+                <line number="84" hits="0"/>
+                <line number="86" hits="0"/>
+                <line number="88" hits="0"/>
+                <line number="90" hits="0"/>
+                <line number="92" hits="0"/>
+                <line number="94" hits="0"/>
+                <line number="96" hits="0"/>
+                <line number="97" hits="0"/>
+                <line number="98" hits="0"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="68" hits="1"/>
+            <line number="70" hits="1"/>
+            <line number="72" hits="1"/>
+            <line number="84" hits="0"/>
+            <line number="86" hits="0"/>
+            <line number="88" hits="0"/>
+            <line number="90" hits="0"/>
+            <line number="92" hits="0"/>
+            <line number="94" hits="0"/>
+            <line number="96" hits="0"/>
+            <line number="97" hits="0"/>
+            <line number="98" hits="0"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
     <package name="Http/Requests/FormRequest.php" line-rate="1" branch-rate="0" complexity="6">
       <classes>
         <class name="Playground\Cms\Api\Http\Requests\FormRequest" filename="Http/Requests/FormRequest.php" line-rate="1" branch-rate="0" complexity="6">
           <methods>
             <method name="authorize" signature="" line-rate="1" branch-rate="0" complexity="2">
               <lines>
-                <line number="29" hits="38"/>
-                <line number="31" hits="38"/>
+                <line number="29" hits="54"/>
+                <line number="31" hits="54"/>
                 <line number="32" hits="1"/>
-                <line number="35" hits="37"/>
+                <line number="35" hits="53"/>
               </lines>
             </method>
             <method name="rules" signature="" line-rate="1" branch-rate="0" complexity="1">
               <lines>
-                <line number="45" hits="37"/>
+                <line number="45" hits="53"/>
               </lines>
             </method>
             <method name="userHasAdminPrivileges" signature="?Authenticatable $user" line-rate="1" branch-rate="0" complexity="3">
               <lines>
-                <line number="50" hits="11"/>
-                <line number="51" hits="11"/>
-                <line number="52" hits="10"/>
-                <line number="53" hits="9"/>
+                <line number="50" hits="16"/>
+                <line number="51" hits="16"/>
+                <line number="52" hits="15"/>
+                <line number="53" hits="14"/>
                 <line number="56" hits="1"/>
-                <line number="60" hits="11"/>
+                <line number="60" hits="16"/>
               </lines>
             </method>
           </methods>
           <lines>
-            <line number="29" hits="38"/>
-            <line number="31" hits="38"/>
+            <line number="29" hits="54"/>
+            <line number="31" hits="54"/>
             <line number="32" hits="1"/>
-            <line number="35" hits="37"/>
-            <line number="45" hits="37"/>
-            <line number="50" hits="11"/>
-            <line number="51" hits="11"/>
-            <line number="52" hits="10"/>
-            <line number="53" hits="9"/>
+            <line number="35" hits="53"/>
+            <line number="45" hits="53"/>
+            <line number="50" hits="16"/>
+            <line number="51" hits="16"/>
+            <line number="52" hits="15"/>
+            <line number="53" hits="14"/>
             <line number="56" hits="1"/>
-            <line number="60" hits="11"/>
+            <line number="60" hits="16"/>
           </lines>
         </class>
       </classes>
@@ -1192,6 +1462,200 @@
         </class>
       </classes>
     </package>
+    <package name="Http/Requests/Tag/CreateRequest.php" line-rate="0" branch-rate="0" complexity="0">
+      <classes>
+        <class name="Playground\Cms\Api\Http\Requests\Tag\CreateRequest" filename="Http/Requests/Tag/CreateRequest.php" line-rate="0" branch-rate="0" complexity="0">
+          <methods/>
+          <lines/>
+        </class>
+      </classes>
+    </package>
+    <package name="Http/Requests/Tag/DestroyRequest.php" line-rate="1" branch-rate="0" complexity="2">
+      <classes>
+        <class name="Playground\Cms\Api\Http\Requests\Tag\DestroyRequest" filename="Http/Requests/Tag/DestroyRequest.php" line-rate="1" branch-rate="0" complexity="2">
+          <methods>
+            <method name="rules" signature="" line-rate="1" branch-rate="0" complexity="2">
+              <lines>
+                <line number="32" hits="4"/>
+                <line number="34" hits="4"/>
+                <line number="36" hits="4"/>
+                <line number="37" hits="4"/>
+                <line number="40" hits="4"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="32" hits="4"/>
+            <line number="34" hits="4"/>
+            <line number="36" hits="4"/>
+            <line number="37" hits="4"/>
+            <line number="40" hits="4"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+    <package name="Http/Requests/Tag/EditRequest.php" line-rate="0" branch-rate="0" complexity="0">
+      <classes>
+        <class name="Playground\Cms\Api\Http\Requests\Tag\EditRequest" filename="Http/Requests/Tag/EditRequest.php" line-rate="0" branch-rate="0" complexity="0">
+          <methods/>
+          <lines/>
+        </class>
+      </classes>
+    </package>
+    <package name="Http/Requests/Tag/IndexRequest.php" line-rate="0" branch-rate="0" complexity="0">
+      <classes>
+        <class name="Playground\Cms\Api\Http\Requests\Tag\IndexRequest" filename="Http/Requests/Tag/IndexRequest.php" line-rate="0" branch-rate="0" complexity="0">
+          <methods/>
+          <lines/>
+        </class>
+      </classes>
+    </package>
+    <package name="Http/Requests/Tag/LockRequest.php" line-rate="0" branch-rate="0" complexity="0">
+      <classes>
+        <class name="Playground\Cms\Api\Http\Requests\Tag\LockRequest" filename="Http/Requests/Tag/LockRequest.php" line-rate="0" branch-rate="0" complexity="0">
+          <methods/>
+          <lines/>
+        </class>
+      </classes>
+    </package>
+    <package name="Http/Requests/Tag/RestoreRequest.php" line-rate="0" branch-rate="0" complexity="0">
+      <classes>
+        <class name="Playground\Cms\Api\Http\Requests\Tag\RestoreRequest" filename="Http/Requests/Tag/RestoreRequest.php" line-rate="0" branch-rate="0" complexity="0">
+          <methods/>
+          <lines/>
+        </class>
+      </classes>
+    </package>
+    <package name="Http/Requests/Tag/ShowRequest.php" line-rate="0" branch-rate="0" complexity="0">
+      <classes>
+        <class name="Playground\Cms\Api\Http\Requests\Tag\ShowRequest" filename="Http/Requests/Tag/ShowRequest.php" line-rate="0" branch-rate="0" complexity="0">
+          <methods/>
+          <lines/>
+        </class>
+      </classes>
+    </package>
+    <package name="Http/Requests/Tag/StoreRequest.php" line-rate="1" branch-rate="0" complexity="2">
+      <classes>
+        <class name="Playground\Cms\Api\Http\Requests\Tag\StoreRequest" filename="Http/Requests/Tag/StoreRequest.php" line-rate="1" branch-rate="0" complexity="2">
+          <methods>
+            <method name="prepareForValidation" signature="" line-rate="1" branch-rate="0" complexity="2">
+              <lines>
+                <line number="111" hits="2"/>
+                <line number="113" hits="2"/>
+                <line number="115" hits="2"/>
+                <line number="116" hits="2"/>
+                <line number="117" hits="2"/>
+                <line number="118" hits="2"/>
+                <line number="120" hits="2"/>
+                <line number="121" hits="1"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="111" hits="2"/>
+            <line number="113" hits="2"/>
+            <line number="115" hits="2"/>
+            <line number="116" hits="2"/>
+            <line number="117" hits="2"/>
+            <line number="118" hits="2"/>
+            <line number="120" hits="2"/>
+            <line number="121" hits="1"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+    <package name="Http/Requests/Tag/UnlockRequest.php" line-rate="0" branch-rate="0" complexity="0">
+      <classes>
+        <class name="Playground\Cms\Api\Http\Requests\Tag\UnlockRequest" filename="Http/Requests/Tag/UnlockRequest.php" line-rate="0" branch-rate="0" complexity="0">
+          <methods/>
+          <lines/>
+        </class>
+      </classes>
+    </package>
+    <package name="Http/Requests/Tag/UpdateRequest.php" line-rate="1" branch-rate="0" complexity="2">
+      <classes>
+        <class name="Playground\Cms\Api\Http\Requests\Tag\UpdateRequest" filename="Http/Requests/Tag/UpdateRequest.php" line-rate="1" branch-rate="0" complexity="2">
+          <methods>
+            <method name="prepareForValidation" signature="" line-rate="1" branch-rate="0" complexity="2">
+              <lines>
+                <line number="111" hits="2"/>
+                <line number="113" hits="2"/>
+                <line number="115" hits="2"/>
+                <line number="116" hits="2"/>
+                <line number="117" hits="2"/>
+                <line number="118" hits="2"/>
+                <line number="120" hits="2"/>
+                <line number="121" hits="1"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="111" hits="2"/>
+            <line number="113" hits="2"/>
+            <line number="115" hits="2"/>
+            <line number="116" hits="2"/>
+            <line number="117" hits="2"/>
+            <line number="118" hits="2"/>
+            <line number="120" hits="2"/>
+            <line number="121" hits="1"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+    <package name="Http/Requests/Tagged/DestroyRequest.php" line-rate="1" branch-rate="0" complexity="2">
+      <classes>
+        <class name="Playground\Cms\Api\Http\Requests\Tagged\DestroyRequest" filename="Http/Requests/Tagged/DestroyRequest.php" line-rate="1" branch-rate="0" complexity="2">
+          <methods>
+            <method name="rules" signature="" line-rate="1" branch-rate="0" complexity="2">
+              <lines>
+                <line number="32" hits="1"/>
+                <line number="34" hits="1"/>
+                <line number="36" hits="1"/>
+                <line number="37" hits="1"/>
+                <line number="40" hits="1"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="32" hits="1"/>
+            <line number="34" hits="1"/>
+            <line number="36" hits="1"/>
+            <line number="37" hits="1"/>
+            <line number="40" hits="1"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+    <package name="Http/Requests/Tagged/StoreRequest.php" line-rate="0" branch-rate="0" complexity="2">
+      <classes>
+        <class name="Playground\Cms\Api\Http\Requests\Tagged\StoreRequest" filename="Http/Requests/Tagged/StoreRequest.php" line-rate="0" branch-rate="0" complexity="2">
+          <methods>
+            <method name="prepareForValidation" signature="" line-rate="0" branch-rate="0" complexity="2">
+              <lines>
+                <line number="37" hits="0"/>
+                <line number="39" hits="0"/>
+                <line number="41" hits="0"/>
+                <line number="42" hits="0"/>
+                <line number="43" hits="0"/>
+                <line number="44" hits="0"/>
+                <line number="46" hits="0"/>
+                <line number="47" hits="0"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="37" hits="0"/>
+            <line number="39" hits="0"/>
+            <line number="41" hits="0"/>
+            <line number="42" hits="0"/>
+            <line number="43" hits="0"/>
+            <line number="44" hits="0"/>
+            <line number="46" hits="0"/>
+            <line number="47" hits="0"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
     <package name="Http/Resources/Page.php" line-rate="1" branch-rate="0" complexity="1">
       <classes>
         <class name="Playground\Cms\Api\Http\Resources\Page" filename="Http/Resources/Page.php" line-rate="1" branch-rate="0" complexity="1">
@@ -1480,6 +1944,112 @@
         </class>
       </classes>
     </package>
+    <package name="Http/Resources/Tag.php" line-rate="1" branch-rate="0" complexity="1">
+      <classes>
+        <class name="Playground\Cms\Api\Http\Resources\Tag" filename="Http/Resources/Tag.php" line-rate="1" branch-rate="0" complexity="1">
+          <methods>
+            <method name="with" signature="Request $request" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="34" hits="12"/>
+                <line number="39" hits="12"/>
+                <line number="41" hits="12"/>
+                <line number="42" hits="12"/>
+                <line number="43" hits="12"/>
+                <line number="44" hits="12"/>
+                <line number="45" hits="12"/>
+                <line number="46" hits="12"/>
+                <line number="47" hits="12"/>
+                <line number="48" hits="12"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="34" hits="12"/>
+            <line number="39" hits="12"/>
+            <line number="41" hits="12"/>
+            <line number="42" hits="12"/>
+            <line number="43" hits="12"/>
+            <line number="44" hits="12"/>
+            <line number="45" hits="12"/>
+            <line number="46" hits="12"/>
+            <line number="47" hits="12"/>
+            <line number="48" hits="12"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+    <package name="Http/Resources/TagCollection.php" line-rate="1" branch-rate="0" complexity="1">
+      <classes>
+        <class name="Playground\Cms\Api\Http\Resources\TagCollection" filename="Http/Resources/TagCollection.php" line-rate="1" branch-rate="0" complexity="1">
+          <methods>
+            <method name="with" signature="Request $request" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="29" hits="2"/>
+                <line number="30" hits="2"/>
+                <line number="31" hits="2"/>
+                <line number="32" hits="2"/>
+                <line number="33" hits="2"/>
+                <line number="34" hits="2"/>
+                <line number="35" hits="2"/>
+                <line number="36" hits="2"/>
+                <line number="37" hits="2"/>
+                <line number="38" hits="2"/>
+                <line number="39" hits="2"/>
+                <line number="40" hits="2"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="29" hits="2"/>
+            <line number="30" hits="2"/>
+            <line number="31" hits="2"/>
+            <line number="32" hits="2"/>
+            <line number="33" hits="2"/>
+            <line number="34" hits="2"/>
+            <line number="35" hits="2"/>
+            <line number="36" hits="2"/>
+            <line number="37" hits="2"/>
+            <line number="38" hits="2"/>
+            <line number="39" hits="2"/>
+            <line number="40" hits="2"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+    <package name="Http/Resources/Tagged.php" line-rate="0" branch-rate="0" complexity="1">
+      <classes>
+        <class name="Playground\Cms\Api\Http\Resources\Tagged" filename="Http/Resources/Tagged.php" line-rate="0" branch-rate="0" complexity="1">
+          <methods>
+            <method name="with" signature="Request $request" line-rate="0" branch-rate="0" complexity="1">
+              <lines>
+                <line number="34" hits="0"/>
+                <line number="39" hits="0"/>
+                <line number="41" hits="0"/>
+                <line number="42" hits="0"/>
+                <line number="43" hits="0"/>
+                <line number="44" hits="0"/>
+                <line number="45" hits="0"/>
+                <line number="46" hits="0"/>
+                <line number="47" hits="0"/>
+                <line number="48" hits="0"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="34" hits="0"/>
+            <line number="39" hits="0"/>
+            <line number="41" hits="0"/>
+            <line number="42" hits="0"/>
+            <line number="43" hits="0"/>
+            <line number="44" hits="0"/>
+            <line number="45" hits="0"/>
+            <line number="46" hits="0"/>
+            <line number="47" hits="0"/>
+            <line number="48" hits="0"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
     <package name="Policies/PagePolicy.php" line-rate="1" branch-rate="0" complexity="3">
       <classes>
         <class name="Playground\Cms\Api\Policies\PagePolicy" filename="Policies/PagePolicy.php" line-rate="1" branch-rate="0" complexity="3">
@@ -1536,170 +2106,198 @@
         </class>
       </classes>
     </package>
-    <package name="ServiceProvider.php" line-rate="1" branch-rate="0" complexity="43">
+    <package name="Policies/TagPolicy.php" line-rate="0" branch-rate="0" complexity="0">
       <classes>
-        <class name="Playground\Cms\Api\ServiceProvider" filename="ServiceProvider.php" line-rate="1" branch-rate="0" complexity="43">
+        <class name="Playground\Cms\Api\Policies\TagPolicy" filename="Policies/TagPolicy.php" line-rate="0" branch-rate="0" complexity="0">
+          <methods/>
+          <lines/>
+        </class>
+      </classes>
+    </package>
+    <package name="Policies/TaggedPolicy.php" line-rate="0" branch-rate="0" complexity="0">
+      <classes>
+        <class name="Playground\Cms\Api\Policies\TaggedPolicy" filename="Policies/TaggedPolicy.php" line-rate="0" branch-rate="0" complexity="0">
+          <methods/>
+          <lines/>
+        </class>
+      </classes>
+    </package>
+    <package name="ServiceProvider.php" line-rate="1" branch-rate="0" complexity="47">
+      <classes>
+        <class name="Playground\Cms\Api\ServiceProvider" filename="ServiceProvider.php" line-rate="1" branch-rate="0" complexity="47">
           <methods>
             <method name="boot" signature="" line-rate="1" branch-rate="0" complexity="12">
               <lines>
-                <line number="63" hits="127"/>
-                <line number="65" hits="127"/>
-                <line number="67" hits="127"/>
-                <line number="68" hits="127"/>
-                <line number="69" hits="127"/>
-                <line number="70" hits="127"/>
-                <line number="71" hits="127"/>
-                <line number="74" hits="127"/>
-                <line number="75" hits="127"/>
-                <line number="76" hits="127"/>
-                <line number="78" hits="127"/>
-                <line number="79" hits="127"/>
-                <line number="82" hits="127"/>
-                <line number="83" hits="127"/>
-                <line number="84" hits="127"/>
-                <line number="86" hits="127"/>
-                <line number="90" hits="127"/>
-                <line number="92" hits="127"/>
-                <line number="93" hits="127"/>
-                <line number="94" hits="127"/>
-                <line number="97" hits="127"/>
-                <line number="98" hits="127"/>
-                <line number="99" hits="127"/>
-                <line number="102" hits="127"/>
-                <line number="103" hits="127"/>
+                <line number="65" hits="175"/>
+                <line number="67" hits="175"/>
+                <line number="69" hits="175"/>
+                <line number="70" hits="175"/>
+                <line number="71" hits="175"/>
+                <line number="72" hits="175"/>
+                <line number="73" hits="175"/>
+                <line number="76" hits="175"/>
+                <line number="77" hits="175"/>
+                <line number="78" hits="175"/>
+                <line number="80" hits="175"/>
+                <line number="81" hits="175"/>
+                <line number="84" hits="175"/>
+                <line number="85" hits="175"/>
+                <line number="86" hits="175"/>
+                <line number="88" hits="175"/>
+                <line number="92" hits="175"/>
+                <line number="94" hits="175"/>
+                <line number="95" hits="175"/>
+                <line number="96" hits="175"/>
+                <line number="99" hits="175"/>
+                <line number="100" hits="175"/>
+                <line number="101" hits="175"/>
+                <line number="104" hits="175"/>
+                <line number="105" hits="175"/>
               </lines>
             </method>
             <method name="register" signature="" line-rate="1" branch-rate="0" complexity="1">
               <lines>
-                <line number="112" hits="127"/>
-                <line number="113" hits="127"/>
-                <line number="114" hits="127"/>
-                <line number="115" hits="127"/>
+                <line number="114" hits="175"/>
+                <line number="115" hits="175"/>
+                <line number="116" hits="175"/>
+                <line number="117" hits="175"/>
               </lines>
             </method>
             <method name="setPolicies" signature="array $policies" line-rate="1" branch-rate="0" complexity="9">
               <lines>
-                <line number="125" hits="127"/>
-                <line number="126" hits="127"/>
-                <line number="127" hits="1"/>
-                <line number="128" hits="1"/>
+                <line number="127" hits="175"/>
+                <line number="128" hits="175"/>
                 <line number="129" hits="1"/>
                 <line number="130" hits="1"/>
                 <line number="131" hits="1"/>
                 <line number="132" hits="1"/>
+                <line number="133" hits="1"/>
                 <line number="134" hits="1"/>
-                <line number="136" hits="127"/>
-                <line number="137" hits="1"/>
-                <line number="138" hits="1"/>
+                <line number="136" hits="1"/>
+                <line number="138" hits="175"/>
                 <line number="139" hits="1"/>
                 <line number="140" hits="1"/>
                 <line number="141" hits="1"/>
                 <line number="142" hits="1"/>
+                <line number="143" hits="1"/>
                 <line number="144" hits="1"/>
-                <line number="146" hits="127"/>
+                <line number="146" hits="1"/>
+                <line number="148" hits="175"/>
               </lines>
             </method>
-            <method name="routes" signature="array $config" line-rate="1" branch-rate="0" complexity="3">
+            <method name="routes" signature="array $config" line-rate="1" branch-rate="0" complexity="5">
               <lines>
-                <line number="155" hits="127"/>
-                <line number="156" hits="127"/>
-                <line number="158" hits="127"/>
-                <line number="159" hits="127"/>
+                <line number="157" hits="175"/>
+                <line number="158" hits="175"/>
+                <line number="160" hits="175"/>
+                <line number="161" hits="175"/>
+                <line number="163" hits="175"/>
+                <line number="164" hits="175"/>
+                <line number="166" hits="175"/>
+                <line number="167" hits="175"/>
               </lines>
             </method>
-            <method name="about" signature="" line-rate="1" branch-rate="0" complexity="18">
+            <method name="about" signature="" line-rate="1" branch-rate="0" complexity="20">
               <lines>
-                <line number="165" hits="127"/>
-                <line number="166" hits="127"/>
-                <line number="168" hits="127"/>
-                <line number="170" hits="127"/>
-                <line number="172" hits="127"/>
-                <line number="174" hits="127"/>
-                <line number="176" hits="127"/>
-                <line number="178" hits="127"/>
-                <line number="179" hits="127"/>
-                <line number="180" hits="127"/>
-                <line number="182" hits="127"/>
-                <line number="183" hits="127"/>
-                <line number="184" hits="127"/>
-                <line number="186" hits="127"/>
-                <line number="187" hits="127"/>
-                <line number="189" hits="127"/>
-                <line number="190" hits="127"/>
-                <line number="191" hits="127"/>
+                <line number="173" hits="175"/>
+                <line number="174" hits="175"/>
+                <line number="176" hits="175"/>
+                <line number="178" hits="175"/>
+                <line number="180" hits="175"/>
+                <line number="182" hits="175"/>
+                <line number="184" hits="175"/>
+                <line number="186" hits="175"/>
+                <line number="187" hits="175"/>
+                <line number="188" hits="175"/>
+                <line number="190" hits="175"/>
+                <line number="191" hits="175"/>
+                <line number="192" hits="175"/>
+                <line number="194" hits="175"/>
+                <line number="195" hits="175"/>
+                <line number="196" hits="175"/>
+                <line number="197" hits="175"/>
+                <line number="199" hits="175"/>
+                <line number="200" hits="175"/>
+                <line number="201" hits="175"/>
               </lines>
             </method>
           </methods>
           <lines>
-            <line number="63" hits="127"/>
-            <line number="65" hits="127"/>
-            <line number="67" hits="127"/>
-            <line number="68" hits="127"/>
-            <line number="69" hits="127"/>
-            <line number="70" hits="127"/>
-            <line number="71" hits="127"/>
-            <line number="74" hits="127"/>
-            <line number="75" hits="127"/>
-            <line number="76" hits="127"/>
-            <line number="78" hits="127"/>
-            <line number="79" hits="127"/>
-            <line number="82" hits="127"/>
-            <line number="83" hits="127"/>
-            <line number="84" hits="127"/>
-            <line number="86" hits="127"/>
-            <line number="90" hits="127"/>
-            <line number="92" hits="127"/>
-            <line number="93" hits="127"/>
-            <line number="94" hits="127"/>
-            <line number="97" hits="127"/>
-            <line number="98" hits="127"/>
-            <line number="99" hits="127"/>
-            <line number="102" hits="127"/>
-            <line number="103" hits="127"/>
-            <line number="112" hits="127"/>
-            <line number="113" hits="127"/>
-            <line number="114" hits="127"/>
-            <line number="115" hits="127"/>
-            <line number="125" hits="127"/>
-            <line number="126" hits="127"/>
-            <line number="127" hits="1"/>
-            <line number="128" hits="1"/>
+            <line number="65" hits="175"/>
+            <line number="67" hits="175"/>
+            <line number="69" hits="175"/>
+            <line number="70" hits="175"/>
+            <line number="71" hits="175"/>
+            <line number="72" hits="175"/>
+            <line number="73" hits="175"/>
+            <line number="76" hits="175"/>
+            <line number="77" hits="175"/>
+            <line number="78" hits="175"/>
+            <line number="80" hits="175"/>
+            <line number="81" hits="175"/>
+            <line number="84" hits="175"/>
+            <line number="85" hits="175"/>
+            <line number="86" hits="175"/>
+            <line number="88" hits="175"/>
+            <line number="92" hits="175"/>
+            <line number="94" hits="175"/>
+            <line number="95" hits="175"/>
+            <line number="96" hits="175"/>
+            <line number="99" hits="175"/>
+            <line number="100" hits="175"/>
+            <line number="101" hits="175"/>
+            <line number="104" hits="175"/>
+            <line number="105" hits="175"/>
+            <line number="114" hits="175"/>
+            <line number="115" hits="175"/>
+            <line number="116" hits="175"/>
+            <line number="117" hits="175"/>
+            <line number="127" hits="175"/>
+            <line number="128" hits="175"/>
             <line number="129" hits="1"/>
             <line number="130" hits="1"/>
             <line number="131" hits="1"/>
             <line number="132" hits="1"/>
+            <line number="133" hits="1"/>
             <line number="134" hits="1"/>
-            <line number="136" hits="127"/>
-            <line number="137" hits="1"/>
-            <line number="138" hits="1"/>
+            <line number="136" hits="1"/>
+            <line number="138" hits="175"/>
             <line number="139" hits="1"/>
             <line number="140" hits="1"/>
             <line number="141" hits="1"/>
             <line number="142" hits="1"/>
+            <line number="143" hits="1"/>
             <line number="144" hits="1"/>
-            <line number="146" hits="127"/>
-            <line number="155" hits="127"/>
-            <line number="156" hits="127"/>
-            <line number="158" hits="127"/>
-            <line number="159" hits="127"/>
-            <line number="165" hits="127"/>
-            <line number="166" hits="127"/>
-            <line number="168" hits="127"/>
-            <line number="170" hits="127"/>
-            <line number="172" hits="127"/>
-            <line number="174" hits="127"/>
-            <line number="176" hits="127"/>
-            <line number="178" hits="127"/>
-            <line number="179" hits="127"/>
-            <line number="180" hits="127"/>
-            <line number="182" hits="127"/>
-            <line number="183" hits="127"/>
-            <line number="184" hits="127"/>
-            <line number="186" hits="127"/>
-            <line number="187" hits="127"/>
-            <line number="189" hits="127"/>
-            <line number="190" hits="127"/>
-            <line number="191" hits="127"/>
+            <line number="146" hits="1"/>
+            <line number="148" hits="175"/>
+            <line number="157" hits="175"/>
+            <line number="158" hits="175"/>
+            <line number="160" hits="175"/>
+            <line number="161" hits="175"/>
+            <line number="163" hits="175"/>
+            <line number="164" hits="175"/>
+            <line number="166" hits="175"/>
+            <line number="167" hits="175"/>
+            <line number="173" hits="175"/>
+            <line number="174" hits="175"/>
+            <line number="176" hits="175"/>
+            <line number="178" hits="175"/>
+            <line number="180" hits="175"/>
+            <line number="182" hits="175"/>
+            <line number="184" hits="175"/>
+            <line number="186" hits="175"/>
+            <line number="187" hits="175"/>
+            <line number="188" hits="175"/>
+            <line number="190" hits="175"/>
+            <line number="191" hits="175"/>
+            <line number="192" hits="175"/>
+            <line number="194" hits="175"/>
+            <line number="195" hits="175"/>
+            <line number="196" hits="175"/>
+            <line number="197" hits="175"/>
+            <line number="199" hits="175"/>
+            <line number="200" hits="175"/>
+            <line number="201" hits="175"/>
           </lines>
         </class>
       </classes>
