@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Playground\Cms\Api\Http\Controllers;
 
+use Illuminate\Database\Eloquent\Model;
 use Playground\Cms\Models\Tagged;
 
 /**
@@ -15,6 +16,9 @@ use Playground\Cms\Models\Tagged;
  */
 class TaggedTestCase extends TestCase
 {
+    /**
+     * @var class-string<Model>
+     */
     public string $fqdn = Tagged::class;
 
     protected int $status_code_json_guest_create = 401;

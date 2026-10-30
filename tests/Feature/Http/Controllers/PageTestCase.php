@@ -17,6 +17,9 @@ use Playground\Cms\Models\PageRevision;
  */
 class PageTestCase extends RevisionTestCase
 {
+    /**
+     * @var class-string<Model>
+     */
     public string $fqdn = Page::class;
 
     /**

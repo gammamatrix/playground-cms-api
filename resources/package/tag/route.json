@@ -7,7 +7,7 @@
     "module_labels": "CMSs",
     "module_slug": "cms",
     "module_slugs": "cmss",
-    "name": "Tag",
+    "name": "tag",
     "namespace": "Playground/Cms/Api",
     "organization": "Playground",
     "package": "playground-cms-api",
