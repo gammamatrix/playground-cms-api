@@ -55,6 +55,7 @@
     "privilege": "playground-cms-api:tag",
     "route": "playground.cms.api",
     "view": "",
+    "actions": [],
     "implements": [],
     "uses": [],
     "packageInfo": {
